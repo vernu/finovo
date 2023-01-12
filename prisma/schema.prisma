@@ -1,0 +1,89 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgres"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id           Int           @id @default(autoincrement())
+  name         String?       @db.VarChar()
+  email        String?       @unique @db.VarChar()
+  phone        String?       @unique @db.VarChar()
+  transactions Transaction[]
+  // budgets      Budget[]
+  createdAt    DateTime      @default(now())
+  updatedAt    DateTime      @updatedAt
+}
+
+model Category {
+  id           Int           @id @default(autoincrement())
+  name         String?       @db.VarChar()
+  slug         String?       @unique @db.VarChar()
+  transactions Transaction[]
+  // budgets      Budget[]
+  createdAt    DateTime      @default(now())
+  updatedAt    DateTime      @updatedAt
+}
+
+model Currency {
+  id           Int           @id @default(autoincrement())
+  name         String        @db.VarChar()
+  code         String        @unique @db.VarChar()
+  symbol       String?       @db.VarChar()
+  transactions Transaction[]
+  // budgets      Budget[]
+  createdAt    DateTime      @default(now())
+  updatedAt    DateTime      @updatedAt
+}
+
+model Transaction {
+  id          Int       @id @default(autoincrement())
+  amount      Float
+  currency    Currency? @relation(fields: [currencyId], references: [id], onUpdate: Cascade, onDelete: Restrict)
+  currencyId  Int?
+  date        DateTime? @default(now()) @db.Date
+  user        User?     @relation(fields: [userId], references: [id], onUpdate: Cascade, onDelete: Restrict)
+  userId      Int?
+  category    Category? @relation(fields: [categoryId], references: [id], onUpdate: Cascade, onDelete: SetNull)
+  categoryId  Int?
+  description String?
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+}
+
+// model Budget {
+//   id            Int       @id @default(autoincrement())
+//   basis         String    @default("MONTHLY") @db.VarChar()
+//   monthlyBudget Float     @default(0)
+//   yearlyBudget  Float     @default(0)
+//   currency      Currency  @relation(fields: [currencyId], references: [id], onUpdate: Cascade, onDelete: Restrict)
+//   currencyId    Int
+//   category      Category? @relation(fields: [categoryId], references: [id], onUpdate: Cascade, onDelete: SetNull)
+//   categoryId    Int?
+//   remark        String?
+//   user          User?     @relation(fields: [userId], references: [id], onUpdate: Cascade, onDelete: Restrict)
+//   userId        Int?
+//   createdAt     DateTime  @default(now())
+//   updatedAt     DateTime  @updatedAt
+// }
+
+// enum BudgetBasis {
+//   DAILY
+//   MONTHLY
+//   YEARLY
+// }
+
+// model AccountType {
+// }
+
+// model Account {
+// }
+
+// model FileUpload {
+// }
+
+// model FileProcessLog {
+// }
