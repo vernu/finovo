@@ -12,6 +12,7 @@ model User {
   name         String?       @db.VarChar()
   email        String?       @unique @db.VarChar()
   phone        String?       @unique @db.VarChar()
+  password     String?       @db.VarChar()
   transactions Transaction[]
   // budgets      Budget[]
   createdAt    DateTime      @default(now())
