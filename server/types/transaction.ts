@@ -1,5 +1,4 @@
 import {
-  intArg,
   list,
   nullable,
   ObjectDefinitionBlock,
@@ -10,7 +9,7 @@ import {
 export const Currency = objectType({
   name: 'Currency',
   definition(t: ObjectDefinitionBlock<'Currency'>) {
-    t.nonNull.int('id')
+    t.nonNull.string('id')
     t.nonNull.string('code')
     t.nullable.string('name')
     t.nullable.string('symbol')
@@ -20,7 +19,7 @@ export const Currency = objectType({
 export const Transaction = objectType({
   name: 'Transaction',
   definition(t: ObjectDefinitionBlock<'Transaction'>) {
-    t.nonNull.int('id')
+    t.nonNull.string('id')
     t.nonNull.float('amount')
     t.nullable.string('description')
     t.nullable.field('category', {
@@ -61,7 +60,7 @@ export const TransactionListInsight = objectType({
 
 export const TransactionListArgs = {
   period: nullable(stringArg()),
-  categoryIds: nullable(list(intArg())),
+  categoryIds: nullable(list(stringArg())),
   currencyCodes: nullable(list(stringArg())),
   descriptionContains: nullable(stringArg()),
 }

@@ -3,16 +3,16 @@ generator client {
 }
 
 datasource db {
-  provider = "postgres"
+  provider = "cockroachdb"
   url      = env("DATABASE_URL")
 }
 
 model User {
-  id           Int           @id @default(autoincrement())
-  name         String?       @db.VarChar()
-  email        String?       @unique @db.VarChar()
-  phone        String?       @unique @db.VarChar()
-  password     String?       @db.VarChar()
+  id           String        @id @default(cuid())
+  name         String?       @db.String()
+  email        String?       @unique @db.String()
+  phone        String?       @unique @db.String()
+  password     String?       @db.String()
   transactions Transaction[]
   // budgets      Budget[]
   createdAt    DateTime      @default(now())
@@ -20,10 +20,10 @@ model User {
 }
 
 model Category {
-  id           Int           @id @default(autoincrement())
-  name         String?       @db.VarChar()
-  slug         String?       @unique @db.VarChar()
-  type         String?       @db.VarChar() // EXPENSE, INCOME
+  id           String        @id @default(cuid())
+  name         String?       @db.String()
+  slug         String?       @unique @db.String()
+  type         String?       @db.String() // EXPENSE, INCOME
   transactions Transaction[]
   // budgets      Budget[]
   createdAt    DateTime      @default(now())
@@ -31,10 +31,10 @@ model Category {
 }
 
 model Currency {
-  id           Int           @id @default(autoincrement())
-  name         String        @db.VarChar()
-  code         String        @unique @db.VarChar()
-  symbol       String?       @db.VarChar()
+  id           String        @id @default(cuid())
+  name         String        @db.String()
+  code         String        @unique @db.String()
+  symbol       String?       @db.String()
   transactions Transaction[]
   // budgets      Budget[]
   createdAt    DateTime      @default(now())
@@ -42,15 +42,15 @@ model Currency {
 }
 
 model Transaction {
-  id          Int       @id @default(autoincrement())
+  id          String    @id @default(cuid())
   amount      Float
   currency    Currency? @relation(fields: [currencyId], references: [id], onUpdate: Cascade, onDelete: Restrict)
-  currencyId  Int?
+  currencyId  String?
   date        DateTime? @default(now()) @db.Date
   user        User?     @relation(fields: [userId], references: [id], onUpdate: Cascade, onDelete: Restrict)
-  userId      Int?
+  userId      String?
   category    Category? @relation(fields: [categoryId], references: [id], onUpdate: Cascade, onDelete: SetNull)
-  categoryId  Int?
+  categoryId  String?
   description String?
   createdAt   DateTime  @default(now())
   updatedAt   DateTime  @updatedAt

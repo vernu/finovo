@@ -63,7 +63,7 @@ export const extractWhereClauseForTransaction = (filterParams: any) => {
 
   filterParams.categoryIds &&
     (where.categoryId = {
-      in: filterParams.categoryIds?.map((item: any) => parseInt(item)),
+      in: filterParams.categoryIds?.map((item: any) => item),
     })
 
   filterParams.descriptionContains &&

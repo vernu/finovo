@@ -46,7 +46,7 @@ export interface NexusGenScalars {
 export interface NexusGenObjects {
   Category: { // root type
     description?: string | null; // String
-    id: number; // Int!
+    id: string; // String!
     name?: string | null; // String
     slug?: string | null; // String
   }
@@ -56,7 +56,7 @@ export interface NexusGenObjects {
   }
   Currency: { // root type
     code: string; // String!
-    id: number; // Int!
+    id: string; // String!
     name?: string | null; // String
     symbol?: string | null; // String
   }
@@ -73,7 +73,7 @@ export interface NexusGenObjects {
     currency?: NexusGenRootTypes['Currency'] | null; // Currency
     date?: NexusGenScalars['date'] | null; // date
     description?: string | null; // String
-    id: number; // Int!
+    id: string; // String!
   }
   TransactionListInsight: { // root type
     avgAmount?: number | null; // Float
@@ -84,7 +84,7 @@ export interface NexusGenObjects {
   }
   User: { // root type
     email?: string | null; // String
-    id: number; // Int!
+    id: string; // String!
     name?: string | null; // String
   }
 }
@@ -103,7 +103,7 @@ export interface NexusGenFieldTypes {
   Category: { // field return type
     createdAt: NexusGenScalars['date'] | null; // date
     description: string | null; // String
-    id: number; // Int!
+    id: string; // String!
     name: string | null; // String
     slug: string | null; // String
     transactions: Array<NexusGenRootTypes['Transaction'] | null> | null; // [Transaction]
@@ -114,7 +114,7 @@ export interface NexusGenFieldTypes {
   }
   Currency: { // field return type
     code: string; // String!
-    id: number; // Int!
+    id: string; // String!
     name: string | null; // String
     symbol: string | null; // String
   }
@@ -141,7 +141,7 @@ export interface NexusGenFieldTypes {
     currency: NexusGenRootTypes['Currency'] | null; // Currency
     date: NexusGenScalars['date'] | null; // date
     description: string | null; // String
-    id: number; // Int!
+    id: string; // String!
     type: string | null; // String
   }
   TransactionListInsight: { // field return type
@@ -153,7 +153,7 @@ export interface NexusGenFieldTypes {
   }
   User: { // field return type
     email: string | null; // String
-    id: number; // Int!
+    id: string; // String!
     name: string | null; // String
   }
 }
@@ -162,7 +162,7 @@ export interface NexusGenFieldTypeNames {
   Category: { // field return type name
     createdAt: 'date'
     description: 'String'
-    id: 'Int'
+    id: 'String'
     name: 'String'
     slug: 'String'
     transactions: 'Transaction'
@@ -173,7 +173,7 @@ export interface NexusGenFieldTypeNames {
   }
   Currency: { // field return type name
     code: 'String'
-    id: 'Int'
+    id: 'String'
     name: 'String'
     symbol: 'String'
   }
@@ -200,7 +200,7 @@ export interface NexusGenFieldTypeNames {
     currency: 'Currency'
     date: 'date'
     description: 'String'
-    id: 'Int'
+    id: 'String'
     type: 'String'
   }
   TransactionListInsight: { // field return type name
@@ -212,7 +212,7 @@ export interface NexusGenFieldTypeNames {
   }
   User: { // field return type name
     email: 'String'
-    id: 'Int'
+    id: 'String'
     name: 'String'
   }
 }
@@ -237,16 +237,16 @@ export interface NexusGenArgTypes {
       id: number; // Int!
     }
     transaction: { // args
-      id: number; // Int!
+      id: string; // String!
     }
     transactionListInsight: { // args
-      categoryIds?: Array<number | null> | null; // [Int]
+      categoryIds?: Array<string | null> | null; // [String]
       currencyCodes?: Array<string | null> | null; // [String]
       descriptionContains?: string | null; // String
       period?: string | null; // String
     }
     transactions: { // args
-      categoryIds?: Array<number | null> | null; // [Int]
+      categoryIds?: Array<string | null> | null; // [String]
       currencyCodes?: Array<string | null> | null; // [String]
       descriptionContains?: string | null; // String
       period?: string | null; // String

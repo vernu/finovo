@@ -9,7 +9,7 @@ export default function TransactionInsight() {
     query TransactionListInsight(
       $period: String
       $currencyCodes: [String]
-      $categoryIds: [Int]
+      $categoryIds: [String]
       $descriptionContains: String
     ) {
       transactionListInsight(

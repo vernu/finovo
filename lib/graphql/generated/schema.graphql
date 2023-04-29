@@ -5,7 +5,7 @@
 type Category {
   createdAt: date
   description: String
-  id: Int!
+  id: String!
   name: String
   slug: String
   transactions: [Transaction]
@@ -18,7 +18,7 @@ type CreateAccountResponsePayload {
 
 type Currency {
   code: String!
-  id: Int!
+  id: String!
   name: String
   symbol: String
 }
@@ -37,9 +37,9 @@ type Mutation {
 type Query {
   categories: [Category]
   category(id: Int!): Category
-  transaction(id: Int!): Transaction
-  transactionListInsight(categoryIds: [Int], currencyCodes: [String], descriptionContains: String, period: String): TransactionListInsight
-  transactions(categoryIds: [Int], currencyCodes: [String], descriptionContains: String, period: String): [Transaction]
+  transaction(id: String!): Transaction
+  transactionListInsight(categoryIds: [String], currencyCodes: [String], descriptionContains: String, period: String): TransactionListInsight
+  transactions(categoryIds: [String], currencyCodes: [String], descriptionContains: String, period: String): [Transaction]
 }
 
 type Transaction {
@@ -49,7 +49,7 @@ type Transaction {
   currency: Currency
   date: date
   description: String
-  id: Int!
+  id: String!
   type: String
 }
 
@@ -63,7 +63,7 @@ type TransactionListInsight {
 
 type User {
   email: String
-  id: Int!
+  id: String!
   name: String
 }
 

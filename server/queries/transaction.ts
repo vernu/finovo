@@ -1,8 +1,8 @@
 import {
   extendType,
-  intArg,
   nonNull,
   ObjectDefinitionBlock,
+  stringArg,
 } from 'nexus/dist/core'
 import {
   singleTransactionResolver,
@@ -26,7 +26,7 @@ export const TransactionQuery = extendType({
       type: 'Transaction',
       authorize: isLoggedIn,
       args: {
-        id: nonNull(intArg()),
+        id: nonNull(stringArg()),
       },
       resolve: singleTransactionResolver,
     })

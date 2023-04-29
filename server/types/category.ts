@@ -4,7 +4,7 @@ import { Context } from '../shared/context'
 export const Category = objectType({
   name: 'Category',
   definition(t: ObjectDefinitionBlock<'Category'>) {
-    t.nonNull.int('id')
+    t.nonNull.string('id')
     t.nullable.string('name')
     t.nullable.string('slug')
     t.nullable.string('description')
