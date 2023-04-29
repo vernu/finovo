@@ -1,9 +1,10 @@
 -- CreateTable
 CREATE TABLE "User" (
-    "id" SERIAL NOT NULL,
-    "name" VARCHAR,
-    "email" VARCHAR,
-    "phone" VARCHAR,
+    "id" STRING NOT NULL,
+    "name" STRING,
+    "email" STRING,
+    "phone" STRING,
+    "password" STRING,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
 
@@ -12,9 +13,10 @@ CREATE TABLE "User" (
 
 -- CreateTable
 CREATE TABLE "Category" (
-    "id" SERIAL NOT NULL,
-    "name" VARCHAR,
-    "slug" VARCHAR,
+    "id" STRING NOT NULL,
+    "name" STRING,
+    "slug" STRING,
+    "type" STRING,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
 
@@ -23,10 +25,10 @@ CREATE TABLE "Category" (
 
 -- CreateTable
 CREATE TABLE "Currency" (
-    "id" SERIAL NOT NULL,
-    "name" VARCHAR NOT NULL,
-    "code" VARCHAR NOT NULL,
-    "symbol" VARCHAR,
+    "id" STRING NOT NULL,
+    "name" STRING NOT NULL,
+    "code" STRING NOT NULL,
+    "symbol" STRING,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
 
@@ -35,13 +37,13 @@ CREATE TABLE "Currency" (
 
 -- CreateTable
 CREATE TABLE "Transaction" (
-    "id" SERIAL NOT NULL,
-    "amount" DOUBLE PRECISION NOT NULL,
-    "currencyId" INTEGER,
+    "id" STRING NOT NULL,
+    "amount" FLOAT8 NOT NULL,
+    "currencyId" STRING,
     "date" DATE DEFAULT CURRENT_TIMESTAMP,
-    "userId" INTEGER,
-    "categoryId" INTEGER,
-    "description" TEXT,
+    "userId" STRING,
+    "categoryId" STRING,
+    "description" STRING,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
 

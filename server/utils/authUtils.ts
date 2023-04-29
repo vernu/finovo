@@ -1,6 +1,6 @@
 import jwt from 'jsonwebtoken'
 
-export const generateToken = (userId: number) => {
+export const generateToken = (userId: string) => {
   return jwt.sign(
     {
       id: userId,
