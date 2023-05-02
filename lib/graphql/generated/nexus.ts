@@ -123,7 +123,9 @@ export interface NexusGenFieldTypes {
     user: NexusGenRootTypes['User'] | null; // User
   }
   Mutation: { // field return type
+    addTransaction: NexusGenRootTypes['Transaction']; // Transaction!
     createAccount: NexusGenRootTypes['CreateAccountResponsePayload']; // CreateAccountResponsePayload!
+    deleteTransaction: NexusGenRootTypes['Transaction']; // Transaction!
     login: NexusGenRootTypes['LoginResponsePayload']; // LoginResponsePayload!
     loginWithGoogle: NexusGenRootTypes['LoginResponsePayload']; // LoginResponsePayload!
   }
@@ -182,7 +184,9 @@ export interface NexusGenFieldTypeNames {
     user: 'User'
   }
   Mutation: { // field return type name
+    addTransaction: 'Transaction'
     createAccount: 'CreateAccountResponsePayload'
+    deleteTransaction: 'Transaction'
     login: 'LoginResponsePayload'
     loginWithGoogle: 'LoginResponsePayload'
   }
@@ -219,10 +223,20 @@ export interface NexusGenFieldTypeNames {
 
 export interface NexusGenArgTypes {
   Mutation: {
+    addTransaction: { // args
+      amount?: number | null; // Float
+      categoryId?: string | null; // String
+      currencyCode?: string | null; // String
+      date?: string | null; // String
+      description?: string | null; // String
+    }
     createAccount: { // args
       email: string; // String!
       name: string; // String!
       password: string; // String!
+    }
+    deleteTransaction: { // args
+      id: string; // String!
     }
     login: { // args
       email: string; // String!
