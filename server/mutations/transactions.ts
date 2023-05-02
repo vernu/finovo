@@ -1,6 +1,8 @@
-import { extendType } from 'nexus'
-import {} from '../resolvers/auth'
-import { createTransactionResolver } from '../resolvers/transaction'
+import { extendType, nonNull, stringArg } from 'nexus'
+import {
+  createTransactionResolver,
+  deleteTransactionResolver,
+} from '../resolvers/transaction'
 import { CreateTransactionArgs } from '../types'
 
 export const AddTransaction = extendType({
@@ -10,6 +12,19 @@ export const AddTransaction = extendType({
       type: 'Transaction',
       args: CreateTransactionArgs,
       resolve: createTransactionResolver,
+    })
+  },
+})
+
+export const DeleteTransaction = extendType({
+  type: 'Mutation',
+  definition(t) {
+    t.nonNull.field('deleteTransaction', {
+      type: 'Transaction',
+      args: {
+        id: nonNull(stringArg()),
+      },
+      resolve: deleteTransactionResolver,
     })
   },
 })

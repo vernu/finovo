@@ -139,3 +139,32 @@ export const createTransactionResolver = async (
 
   return transaction
 }
+
+export const deleteTransactionResolver = async (
+  _root: any,
+  args: any,
+  ctx: Context
+) => {
+  if (ctx.user === null) {
+    throw new Error('Not Authenticated')
+  }
+
+  const transaction = await ctx.prisma.transaction.findFirst({
+    where: {
+      id: args.id,
+      userId: ctx.user.id,
+    },
+  })
+
+  if (!transaction) {
+    throw new Error('Transaction not found')
+  }
+
+  await ctx.prisma.transaction.delete({
+    where: {
+      id: args.id,
+    },
+  })
+
+  return transaction
+}

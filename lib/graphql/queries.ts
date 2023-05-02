@@ -40,3 +40,10 @@ export const ADD_TRANSACTION_MUTATION = gql`
     }
   }
 `
+export const DELETE_TRANSACTION_MUTATION = gql`
+  mutation DELETE_TRANSACTION_MUTATION($id: String!) {
+    deleteTransaction(id: $id) {
+      id
+    }
+  }
+`

@@ -1,15 +1,22 @@
 import type { NextPage } from 'next'
 import Box from '@mui/material/Box'
-import { DataGrid, GridColDef, GridValueGetterParams } from '@mui/x-data-grid'
+import {
+  DataGrid,
+  GridColDef,
+  GridRenderCellParams,
+  GridValueGetterParams,
+} from '@mui/x-data-grid'
 import { TransactionFilter } from '../../components/transaction/TransactionFilter'
 import { withDashboardLayout } from '../../HOC/withDashboardLayout'
-import { gql, useQuery } from '@apollo/client'
+import { gql, useMutation, useQuery } from '@apollo/client'
 import { useAppSelector } from '../../store/hooks'
 import { selectTransactions } from '../../store/slices/transaction.slice'
 import { debounce } from 'lodash'
 import TransactionInsight from '../../components/transaction/TransactionInsight'
 import { useEffect } from 'react'
 import NewTransactionModal from '../../components/transaction/NewTransactionModal'
+import { Delete } from '@mui/icons-material'
+import { DELETE_TRANSACTION_MUTATION } from '../../lib/graphql/queries'
 
 const Transactions: NextPage = () => {
   const { filters } = useAppSelector(selectTransactions)
@@ -45,6 +52,13 @@ const Transactions: NextPage = () => {
   const transactionListQuery = useQuery(TRANSACTION_LIST_QUERY, {
     variables: filters,
   })
+
+  const [deleteTransaction, { loading, error }] = useMutation(
+    DELETE_TRANSACTION_MUTATION,
+    {
+      refetchQueries: ['transactions', 'transactionListInsight'],
+    }
+  )
 
   const columns: GridColDef[] = [
     {
@@ -88,6 +102,27 @@ const Transactions: NextPage = () => {
       align: 'right',
       valueGetter: (params: GridValueGetterParams) =>
         `${params.row.amount.toLocaleString()} ${params.row.currency?.code}`,
+    },
+    {
+      field: 'actions',
+      headerName: 'Actions',
+      width: 100,
+      editable: false,
+      renderCell: (params: GridRenderCellParams) => {
+        return (
+          <>
+            <Delete
+              onClick={() => {
+                deleteTransaction({
+                  variables: {
+                    id: params.row.id,
+                  },
+                })
+              }}
+            />
+          </>
+        )
+      },
     },
   ]
 
