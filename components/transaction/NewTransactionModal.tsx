@@ -6,10 +6,20 @@ import DialogActions from '@mui/material/DialogActions'
 import DialogContent from '@mui/material/DialogContent'
 import DialogContentText from '@mui/material/DialogContentText'
 import DialogTitle from '@mui/material/DialogTitle'
-import { FormControl, Grid, InputLabel, MenuItem, Select } from '@mui/material'
+import {
+  CircularProgress,
+  FormControl,
+  Grid,
+  InputLabel,
+  MenuItem,
+  Select,
+} from '@mui/material'
 import { toast } from 'react-hot-toast'
-import { useQuery } from '@apollo/client'
-import { ALL_CATEGORIES_QUERY } from '../../lib/graphql/queries'
+import { useMutation, useQuery } from '@apollo/client'
+import {
+  ADD_TRANSACTION_MUTATION,
+  ALL_CATEGORIES_QUERY,
+} from '../../lib/graphql/queries'
 
 export default function NewTransactionModal() {
   const [open, setOpen] = useState(false)
@@ -25,7 +35,11 @@ export default function NewTransactionModal() {
   }
 
   const handleAddTransaction = () => {
-    console.log(formData)
+
+    if (!formData.categoryId) {
+      toast.error('Please select a category')
+      return
+    }
 
     if (transactionType == 'INCOME' && formData.amount <= 0) {
       toast.error('Income should be a positive amount')
@@ -34,6 +48,26 @@ export default function NewTransactionModal() {
       toast.error('Expense ammount should be negative')
       return
     }
+
+    addTransaction({
+      variables: formData,
+      refetchQueries: ['transactions', 'transactionListInsight'],
+    })
+      .then((res) => {
+        toast.success('Transaction added successfully')
+        setOpen(false)
+        // reset form data
+        setFormData({
+          date: new Date().toISOString().split('T')[0],
+          amount: 0,
+          description: '',
+          categoryId: '',
+          currencyCode: 'ETB',
+        })
+      })
+      .catch((err) => {
+        toast.error('Something went wrong')
+      })
   }
 
   const [formData, setFormData] = useState({
@@ -46,6 +80,10 @@ export default function NewTransactionModal() {
 
   const [transactionType, setTransactionType] = useState<'EXPENSE' | 'INCOME'>(
     'INCOME'
+  )
+
+  const [addTransaction, { loading, error }] = useMutation(
+    ADD_TRANSACTION_MUTATION
   )
 
   return (
@@ -166,7 +204,9 @@ export default function NewTransactionModal() {
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose}>Cancel</Button>
-          <Button onClick={handleAddTransaction}>Add</Button>
+          <Button onClick={handleAddTransaction}>
+            {loading ? <CircularProgress size={25} /> : 'Add'}
+          </Button>
         </DialogActions>
       </Dialog>
     </div>

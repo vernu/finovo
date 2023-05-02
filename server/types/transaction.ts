@@ -1,4 +1,5 @@
 import {
+  floatArg,
   list,
   nullable,
   ObjectDefinitionBlock,
@@ -63,4 +64,12 @@ export const TransactionListArgs = {
   categoryIds: nullable(list(stringArg())),
   currencyCodes: nullable(list(stringArg())),
   descriptionContains: nullable(stringArg()),
+}
+
+export const CreateTransactionArgs = {
+  date: stringArg(),
+  amount: floatArg(),
+  description: nullable(stringArg()),
+  categoryId: nullable(stringArg()),
+  currencyCode: nullable(stringArg()),
 }

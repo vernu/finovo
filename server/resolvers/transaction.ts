@@ -84,3 +84,58 @@ export const singleTransactionResolver = async (
   }
   return transaction
 }
+
+export const createTransactionResolver = async (
+  _root: any,
+  args: any,
+  ctx: Context
+) => {
+  if (ctx.user === null) {
+    throw new Error('Not Authenticated')
+  }
+
+  const category = await ctx.prisma.category.findFirst({
+    where: {
+      id: args.categoryId,
+    },
+  })
+
+  if (!category) {
+    throw new Error('Category not found')
+  }
+
+  const currency = await ctx.prisma.currency.findFirst({
+    where: {
+      code: args.currencyCode,
+    },
+  })
+
+  if (!currency) {
+    throw new Error('Currency not found')
+  }
+
+  const transaction = await ctx.prisma.transaction.create({
+    data: {
+      amount: args.amount,
+      description: args.description,
+      date: new Date(args.date),
+      category: {
+        connect: {
+          id: args.categoryId,
+        },
+      },
+      currency: {
+        connect: {
+          code: args.currencyCode,
+        },
+      },
+      user: {
+        connect: {
+          id: ctx.user.id,
+        },
+      },
+    },
+  })
+
+  return transaction
+}

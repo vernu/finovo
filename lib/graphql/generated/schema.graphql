@@ -29,6 +29,7 @@ type LoginResponsePayload {
 }
 
 type Mutation {
+  addTransaction(amount: Float, categoryId: String, currencyCode: String, date: String, description: String): Transaction!
   createAccount(email: String!, name: String!, password: String!): CreateAccountResponsePayload!
   login(email: String!, password: String!): LoginResponsePayload!
   loginWithGoogle(idToken: String!): LoginResponsePayload!
