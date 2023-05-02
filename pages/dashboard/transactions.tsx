@@ -9,7 +9,7 @@ import { selectTransactions } from '../../store/slices/transaction.slice'
 import { debounce } from 'lodash'
 import TransactionInsight from '../../components/transaction/TransactionInsight'
 import { useEffect } from 'react'
-// import NewTransactionModal from '../../components/transaction/NewTransactionModal'
+import NewTransactionModal from '../../components/transaction/NewTransactionModal'
 
 const Transactions: NextPage = () => {
   const { filters } = useAppSelector(selectTransactions)
@@ -95,7 +95,7 @@ const Transactions: NextPage = () => {
     <>
       <TransactionFilter />
       <TransactionInsight />
-      {/* <NewTransactionModal /> */}
+      <NewTransactionModal />
       <Box sx={{ height: 700, width: '100%' }}>
         <DataGrid
           rows={transactionListQuery.data?.transactions || []}
