@@ -73,3 +73,12 @@ export const CreateTransactionArgs = {
   categoryId: nullable(stringArg()),
   currencyCode: nullable(stringArg()),
 }
+
+export const UpdateTransactionArgs = {
+  id: stringArg(),
+  date: stringArg(),
+  amount: floatArg(),
+  description: nullable(stringArg()),
+  categoryId: nullable(stringArg()),
+  currencyCode: nullable(stringArg()),
+}

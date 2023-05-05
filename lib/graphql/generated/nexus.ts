@@ -128,6 +128,7 @@ export interface NexusGenFieldTypes {
     deleteTransaction: NexusGenRootTypes['Transaction']; // Transaction!
     login: NexusGenRootTypes['LoginResponsePayload']; // LoginResponsePayload!
     loginWithGoogle: NexusGenRootTypes['LoginResponsePayload']; // LoginResponsePayload!
+    updateTransaction: NexusGenRootTypes['Transaction']; // Transaction!
   }
   Query: { // field return type
     categories: Array<NexusGenRootTypes['Category'] | null> | null; // [Category]
@@ -189,6 +190,7 @@ export interface NexusGenFieldTypeNames {
     deleteTransaction: 'Transaction'
     login: 'LoginResponsePayload'
     loginWithGoogle: 'LoginResponsePayload'
+    updateTransaction: 'Transaction'
   }
   Query: { // field return type name
     categories: 'Category'
@@ -244,6 +246,14 @@ export interface NexusGenArgTypes {
     }
     loginWithGoogle: { // args
       idToken: string; // String!
+    }
+    updateTransaction: { // args
+      amount?: number | null; // Float
+      categoryId?: string | null; // String
+      currencyCode?: string | null; // String
+      date?: string | null; // String
+      description?: string | null; // String
+      id?: string | null; // String
     }
   }
   Query: {

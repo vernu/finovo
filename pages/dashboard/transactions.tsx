@@ -18,9 +18,10 @@ import {
   DELETE_TRANSACTION_MUTATION,
   TRANSACTION_LIST_QUERY,
 } from '../../lib/graphql/queries'
-import { IconButton } from '@mui/material'
+import { Grid, IconButton } from '@mui/material'
 import { toast } from 'react-hot-toast'
 import { openConfirmModal } from '../../store/slices/confirmModal.slice'
+import EditTransactionModal from '../../components/transaction/EditTransactionModal'
 
 const Transactions: NextPage = () => {
   const { filters } = useAppSelector(selectTransactions)
@@ -59,6 +60,10 @@ const Transactions: NextPage = () => {
         onConfirm: onDelete,
       })
     )
+  }
+
+  const handleEditTransaction = (id: string) => {
+    console.log(id)
   }
 
   const columns: GridColDef[] = [
@@ -112,10 +117,7 @@ const Transactions: NextPage = () => {
       renderCell: (params: GridRenderCellParams) => {
         return (
           <>
-            <IconButton>
-              <Edit />
-            </IconButton>
-
+            <EditTransactionModal transaction={params.row} />
             <IconButton onClick={() => handleDeleteTransaction(params.row.id)}>
               <Delete />
             </IconButton>
@@ -128,8 +130,14 @@ const Transactions: NextPage = () => {
   return (
     <>
       <TransactionFilter />
-      <TransactionInsight />
-      <NewTransactionModal />
+      <Grid container>
+        <Grid item xs={12} md={10}>
+          <TransactionInsight />
+        </Grid>
+        <Grid item xs={12} md={2}>
+          <NewTransactionModal />
+        </Grid>
+      </Grid>
       <Box sx={{ height: 700, width: '100%' }}>
         <DataGrid
           rows={transactionListQuery.data?.transactions || []}

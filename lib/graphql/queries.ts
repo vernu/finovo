@@ -31,6 +31,7 @@ export const TRANSACTION_LIST_QUERY = gql`
         code
       }
       category {
+        id
         name
       }
     }
@@ -72,6 +73,40 @@ export const DELETE_TRANSACTION_MUTATION = gql`
   mutation DELETE_TRANSACTION_MUTATION($id: String!) {
     deleteTransaction(id: $id) {
       id
+    }
+  }
+`
+
+export const UPDATE_TRANSACTION_MUTATION = gql`
+  mutation UPDATE_TRANSACTION_MUTATION(
+    $id: String!
+    $amount: Float!
+    $categoryId: String!
+    $currencyCode: String!
+    $date: String!
+    $description: String
+  ) {
+    updateTransaction(
+      id: $id
+      amount: $amount
+      categoryId: $categoryId
+      currencyCode: $currencyCode
+      date: $date
+      description: $description
+    ) {
+      id
+      amount
+      description
+      category {
+        id
+        name
+      }
+      currency {
+        id
+        code
+      }
+      date
+      createdAt
     }
   }
 `
