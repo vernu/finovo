@@ -9,6 +9,34 @@ export const ALL_CATEGORIES_QUERY = gql`
   }
 `
 
+export const TRANSACTION_LIST_QUERY = gql`
+  query transactions(
+    $period: String
+    $currencyCodes: [String]
+    $categoryIds: [String]
+    $descriptionContains: String
+  ) {
+    transactions(
+      period: $period
+      currencyCodes: $currencyCodes
+      categoryIds: $categoryIds
+      descriptionContains: $descriptionContains
+    ) {
+      id
+      description
+      amount
+      date
+      currency {
+        symbol
+        code
+      }
+      category {
+        name
+      }
+    }
+  }
+`
+
 export const ADD_TRANSACTION_MUTATION = gql`
   mutation ADD_TRANSACTION_MUTATION(
     $amount: Float!
