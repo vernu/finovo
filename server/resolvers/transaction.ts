@@ -168,3 +168,48 @@ export const deleteTransactionResolver = async (
 
   return transaction
 }
+
+export const updateTransactionResolver = async (
+  _root: any,
+  args: any,
+  ctx: Context
+) => {
+  const { prisma } = ctx
+
+  const { id, categoryId, currencyCode, ...rest } = args
+
+  const transaction = await prisma.transaction.findFirst({
+    where: {
+      id,
+    },
+  })
+
+  if (
+    ctx.user === null ||
+    transaction === null ||
+    transaction.userId !== ctx.user.id
+  ) {
+    throw new Error('Not Authenticated')
+  }
+
+  const updatedTransaction = await prisma.transaction.update({
+    where: {
+      id,
+    },
+    data: {
+      ...rest,
+      date: new Date(args.date),
+      category: {
+        connect: {
+          id: categoryId,
+        },
+      },
+      currency: {
+        connect: {
+          code: currencyCode,
+        },
+      },
+    },
+  })
+  return updatedTransaction
+}

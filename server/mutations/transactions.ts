@@ -2,8 +2,9 @@ import { extendType, nonNull, stringArg } from 'nexus'
 import {
   createTransactionResolver,
   deleteTransactionResolver,
+  updateTransactionResolver,
 } from '../resolvers/transaction'
-import { CreateTransactionArgs } from '../types'
+import { CreateTransactionArgs, UpdateTransactionArgs } from '../types'
 
 export const AddTransaction = extendType({
   type: 'Mutation',
@@ -25,6 +26,17 @@ export const DeleteTransaction = extendType({
         id: nonNull(stringArg()),
       },
       resolve: deleteTransactionResolver,
+    })
+  },
+})
+
+export const UpdateTransaction = extendType({
+  type: 'Mutation',
+  definition(t) {
+    t.nonNull.field('updateTransaction', {
+      type: 'Transaction',
+      args: UpdateTransactionArgs,
+      resolve: updateTransactionResolver,
     })
   },
 })

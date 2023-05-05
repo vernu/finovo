@@ -76,3 +76,37 @@ export const DELETE_TRANSACTION_MUTATION = gql`
     }
   }
 `
+
+export const UPDATE_TRANSACTION_MUTATION = gql`
+  mutation UPDATE_TRANSACTION_MUTATION(
+    $id: String!
+    $amount: Float!
+    $categoryId: String!
+    $currencyCode: String!
+    $date: String!
+    $description: String
+  ) {
+    updateTransaction(
+      id: $id
+      amount: $amount
+      categoryId: $categoryId
+      currencyCode: $currencyCode
+      date: $date
+      description: $description
+    ) {
+      id
+      amount
+      description
+      category {
+        id
+        name
+      }
+      currency {
+        id
+        code
+      }
+      date
+      createdAt
+    }
+  }
+`
