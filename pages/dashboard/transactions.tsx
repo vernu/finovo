@@ -8,57 +8,58 @@ import {
 } from '@mui/x-data-grid'
 import { TransactionFilter } from '../../components/transaction/TransactionFilter'
 import { withDashboardLayout } from '../../HOC/withDashboardLayout'
-import { gql, useMutation, useQuery } from '@apollo/client'
-import { useAppSelector } from '../../store/hooks'
+import { useMutation, useQuery } from '@apollo/client'
+import { useAppDispatch, useAppSelector } from '../../store/hooks'
 import { selectTransactions } from '../../store/slices/transaction.slice'
-import { debounce } from 'lodash'
 import TransactionInsight from '../../components/transaction/TransactionInsight'
-import { useEffect } from 'react'
 import NewTransactionModal from '../../components/transaction/NewTransactionModal'
-import { Delete } from '@mui/icons-material'
-import { DELETE_TRANSACTION_MUTATION } from '../../lib/graphql/queries'
+import { Delete, Edit } from '@mui/icons-material'
+import {
+  DELETE_TRANSACTION_MUTATION,
+  TRANSACTION_LIST_QUERY,
+} from '../../lib/graphql/queries'
+import { IconButton } from '@mui/material'
+import { toast } from 'react-hot-toast'
+import { openConfirmModal } from '../../store/slices/confirmModal.slice'
 
 const Transactions: NextPage = () => {
   const { filters } = useAppSelector(selectTransactions)
-
-  const TRANSACTION_LIST_QUERY = gql`
-    query transactions(
-      $period: String
-      $currencyCodes: [String]
-      $categoryIds: [String]
-      $descriptionContains: String
-    ) {
-      transactions(
-        period: $period
-        currencyCodes: $currencyCodes
-        categoryIds: $categoryIds
-        descriptionContains: $descriptionContains
-      ) {
-        id
-        description
-        amount
-        date
-        currency {
-          symbol
-          code
-        }
-        category {
-          name
-        }
-      }
-    }
-  `
 
   const transactionListQuery = useQuery(TRANSACTION_LIST_QUERY, {
     variables: filters,
   })
 
-  const [deleteTransaction, { loading, error }] = useMutation(
-    DELETE_TRANSACTION_MUTATION,
-    {
+  const [deleteTransaction, { loading: deleting, error: deleteError }] =
+    useMutation(DELETE_TRANSACTION_MUTATION, {
       refetchQueries: ['transactions', 'transactionListInsight'],
+    })
+
+  const dispatch = useAppDispatch()
+
+  const handleDeleteTransaction = (id: string) => {
+    const onDelete = () => {
+      toast.promise(
+        deleteTransaction({
+          variables: {
+            id,
+          },
+        }),
+        {
+          loading: 'Deleting transaction...',
+          success: 'Transaction deleted successfully',
+          error: 'Failed to delete transaction',
+        }
+      )
     }
-  )
+
+    dispatch(
+      openConfirmModal({
+        title: 'Delete Transaction',
+        description: 'Are you sure you want to delete this transaction?',
+        onConfirm: onDelete,
+      })
+    )
+  }
 
   const columns: GridColDef[] = [
     {
@@ -111,15 +112,13 @@ const Transactions: NextPage = () => {
       renderCell: (params: GridRenderCellParams) => {
         return (
           <>
-            <Delete
-              onClick={() => {
-                deleteTransaction({
-                  variables: {
-                    id: params.row.id,
-                  },
-                })
-              }}
-            />
+            <IconButton>
+              <Edit />
+            </IconButton>
+
+            <IconButton onClick={() => handleDeleteTransaction(params.row.id)}>
+              <Delete />
+            </IconButton>
           </>
         )
       },
@@ -140,7 +139,7 @@ const Transactions: NextPage = () => {
           // checkboxSelection
           disableSelectionOnClick
           density='compact'
-          experimentalFeatures={{ newEditingApi: true }}
+          // experimentalFeatures={{ newEditingApi: true }}
         />
       </Box>
     </>

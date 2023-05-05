@@ -5,12 +5,14 @@ import { ApolloProvider } from '@apollo/client'
 import { Provider } from 'react-redux'
 import { store } from '../store/store'
 import { Toaster } from 'react-hot-toast'
+import ConfirmModal from '../components/common/ConfirmModal'
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
     <Provider store={store}>
       <ApolloProvider client={apolloClient}>
         <Toaster />
+        <ConfirmModal />
         <Component {...pageProps} />
       </ApolloProvider>
     </Provider>
