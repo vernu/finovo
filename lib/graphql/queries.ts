@@ -31,6 +31,7 @@ export const TRANSACTION_LIST_QUERY = gql`
         code
       }
       category {
+        id
         name
       }
     }
