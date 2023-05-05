@@ -36,11 +36,9 @@ export default function TransactionInsight() {
     <>
       <Grid container spacing={3}>
         <Grid item xs={12} sm={6} md={3}>
-          <Paper>
-            <Typography variant='h6' component='h2'>
-              Total Transactions
-            </Typography>
-            <Typography variant='h5' component='h2'>
+          <Paper variant='outlined'>
+            <Typography variant='body1' component='h2' padding={0.5}>
+              Total Transactions :{' '}
               {transactionInsightQuery.data?.transactionListInsight
                 .totalTransactions ?? '-:-'}
             </Typography>
@@ -48,11 +46,9 @@ export default function TransactionInsight() {
         </Grid>
 
         <Grid item xs={12} sm={6} md={3}>
-          <Paper>
-            <Typography variant='h6' component='h2'>
-              Total Amount
-            </Typography>
-            <Typography variant='h5' component='h2'>
+          <Paper variant='outlined'>
+            <Typography variant='body1' component='h2' padding={0.5}>
+              Total Amount :{' '}
               {transactionInsightQuery.data?.transactionListInsight.totalAmount?.toLocaleString() ??
                 '-:-'}
             </Typography>
