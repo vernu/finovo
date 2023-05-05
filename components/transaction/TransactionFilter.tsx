@@ -97,7 +97,10 @@ export const TransactionFilter = () => {
           {['ETB', 'USD', 'GBP', 'CRYPTO'].map((currency) => (
             <MenuItem key={currency} value={currency}>
               <ListItemIcon>
-                <Checkbox checked={filters.currencyCodes.includes(currency)} />
+                <Checkbox
+                  checked={filters.currencyCodes.includes(currency)}
+                  size='small'
+                />
               </ListItemIcon>
               <ListItemText primary={currency} />
             </MenuItem>
@@ -150,13 +153,13 @@ export const TransactionFilter = () => {
                         (c: any) => c.id
                       )
                     }
-
                     dispatch(
                       updateFilters({
                         categoryIds: ids,
                       })
                     )
                   }}
+                  size='small'
                 />
               </ListItemIcon>
               <ListItemText primary={'All Categories'} />
@@ -167,6 +170,7 @@ export const TransactionFilter = () => {
                 <ListItemIcon>
                   <Checkbox
                     checked={filters.categoryIds.includes(category.id)}
+                    size='small'
                   />
                 </ListItemIcon>
                 <ListItemText primary={category.name} />
