@@ -11,8 +11,8 @@ import { createContext } from '../../../server/shared/context'
 const schema = makeSchema({
   types: [allTypes, allQueries, allMutations],
   outputs: {
-    schema: path.join(process.cwd(), '/lib/graphql/generated/schema.graphql'),
-    typegen: path.join(process.cwd(), '/lib/graphql/generated/nexus.ts'),
+    schema: path.join(process.cwd(), 'src/lib/graphql/generated/schema.graphql'),
+    typegen: path.join(process.cwd(), 'src/lib/graphql/generated/nexus.ts'),
     // typegen: __dirname + '/generated/nexus.ts',
   },
   plugins: [fieldAuthorizePlugin()],
