@@ -32,6 +32,7 @@ type Mutation {
   addTransaction(amount: Float, categoryId: String, currencyCode: String, date: String, description: String): Transaction!
   createAccount(email: String!, name: String!, password: String!): CreateAccountResponsePayload!
   deleteTransaction(id: String!): Transaction!
+  importData(fileCategory: String!): String!
   login(email: String!, password: String!): LoginResponsePayload!
   loginWithGoogle(idToken: String!): LoginResponsePayload!
   updateTransaction(amount: Float, categoryId: String, currencyCode: String, date: String, description: String, id: String): Transaction!
@@ -63,6 +64,9 @@ type TransactionListInsight {
   totalAmount: Float
   totalTransactions: Int!
 }
+
+"""Upload custom scalar type"""
+scalar Upload
 
 type User {
   email: String

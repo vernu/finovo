@@ -12,6 +12,10 @@ declare global {
      * Date custom scalar type
      */
     date<FieldName extends string>(fieldName: FieldName, opts?: core.CommonInputFieldConfig<TypeName, FieldName>): void // "date";
+    /**
+     * Upload custom scalar type
+     */
+    upload<FieldName extends string>(fieldName: FieldName, opts?: core.CommonInputFieldConfig<TypeName, FieldName>): void // "Upload";
   }
 }
 declare global {
@@ -20,6 +24,10 @@ declare global {
      * Date custom scalar type
      */
     date<FieldName extends string>(fieldName: FieldName, ...opts: core.ScalarOutSpread<TypeName, FieldName>): void // "date";
+    /**
+     * Upload custom scalar type
+     */
+    upload<FieldName extends string>(fieldName: FieldName, ...opts: core.ScalarOutSpread<TypeName, FieldName>): void // "Upload";
   }
 }
 
@@ -40,6 +48,7 @@ export interface NexusGenScalars {
   Float: number
   Boolean: boolean
   ID: string
+  Upload: any
   date: any
 }
 
@@ -126,6 +135,7 @@ export interface NexusGenFieldTypes {
     addTransaction: NexusGenRootTypes['Transaction']; // Transaction!
     createAccount: NexusGenRootTypes['CreateAccountResponsePayload']; // CreateAccountResponsePayload!
     deleteTransaction: NexusGenRootTypes['Transaction']; // Transaction!
+    importData: string; // String!
     login: NexusGenRootTypes['LoginResponsePayload']; // LoginResponsePayload!
     loginWithGoogle: NexusGenRootTypes['LoginResponsePayload']; // LoginResponsePayload!
     updateTransaction: NexusGenRootTypes['Transaction']; // Transaction!
@@ -188,6 +198,7 @@ export interface NexusGenFieldTypeNames {
     addTransaction: 'Transaction'
     createAccount: 'CreateAccountResponsePayload'
     deleteTransaction: 'Transaction'
+    importData: 'String'
     login: 'LoginResponsePayload'
     loginWithGoogle: 'LoginResponsePayload'
     updateTransaction: 'Transaction'
@@ -239,6 +250,9 @@ export interface NexusGenArgTypes {
     }
     deleteTransaction: { // args
       id: string; // String!
+    }
+    importData: { // args
+      fileCategory: string; // String!
     }
     login: { // args
       email: string; // String!

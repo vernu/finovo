@@ -18,3 +18,12 @@ export const DateScalar = scalarType({
     return null
   },
 })
+
+export const Upload = scalarType({
+  name: 'Upload',
+  asNexusMethod: 'upload',
+  description: 'Upload custom scalar type',
+  parseValue(value: any) {
+    return value
+  },
+})
