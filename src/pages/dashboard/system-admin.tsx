@@ -2,7 +2,7 @@ import * as React from 'react'
 import Box from '@mui/material/Box'
 import Tabs from '@mui/material/Tabs'
 import Tab from '@mui/material/Tab'
-import { withDashboardLayout } from '../../HOC/withDashboardLayout'
+import withDashboardLayout from '../../HOC/withDashboardLayout'
 
 const SystemAdmin = () => {
   const [value, setValue] = React.useState(0)
