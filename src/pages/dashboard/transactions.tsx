@@ -7,7 +7,6 @@ import {
   GridValueGetterParams,
 } from '@mui/x-data-grid'
 import { TransactionFilter } from '../../components/transaction/TransactionFilter'
-import { withDashboardLayout } from '../../HOC/withDashboardLayout'
 import { useMutation, useQuery } from '@apollo/client'
 import { useAppDispatch, useAppSelector } from '../../store/hooks'
 import { selectTransactions } from '../../store/slices/transaction.slice'
@@ -22,6 +21,7 @@ import { Grid, IconButton } from '@mui/material'
 import { toast } from 'react-hot-toast'
 import { openConfirmModal } from '../../store/slices/confirmModal.slice'
 import EditTransactionModal from '../../components/transaction/EditTransactionModal'
+import withDashboardLayout from '../../HOC/withDashboardLayout'
 
 const Transactions: NextPage = () => {
   const { filters } = useAppSelector(selectTransactions)

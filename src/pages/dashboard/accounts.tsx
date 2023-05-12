@@ -1,5 +1,5 @@
 import React from 'react'
-import { withDashboardLayout } from '../../HOC/withDashboardLayout'
+import withDashboardLayout from '../../HOC/withDashboardLayout'
 
 const Accounts = () => {
   return <div>accounts</div>
