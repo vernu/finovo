@@ -63,7 +63,6 @@ const StyledAccount = styled('div')(({ theme }) => ({
   backgroundColor: alpha(theme.palette.grey[500], 0.12),
 }))
 
-// ----------------------------------------------------------------------
 
 export default function DashboardSideNav({ openNav, onCloseNav }: any) {
   const router = useRouter()

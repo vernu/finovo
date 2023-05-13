@@ -59,7 +59,7 @@ const StyledToolbar = styled(Toolbar)(({ theme }) => ({
   },
 }))
 
-export default function Header({ onOpenNav }: any) {
+export default function DashboardHeader({ onOpenNav }: any) {
   return (
     <StyledRoot>
       <StyledToolbar>
