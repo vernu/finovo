@@ -1,7 +1,11 @@
-import { Box, Container, Grid, Typography } from '@mui/material'
+import HeroSection from '../components/landing/HeroSection'
 import { withDefaultLayout } from '../HOC/withDefaultLayout'
 const LandingPage = () => {
-  return <>landing page</>
+  return (
+    <>
+      <HeroSection />
+    </>
+  )
 }
 
 export default withDefaultLayout(LandingPage)

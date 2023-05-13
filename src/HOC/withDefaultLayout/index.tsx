@@ -1,11 +1,11 @@
 import * as React from 'react'
-import NavBar from '../../components/nav/NavBar'
+import Navbar from '../../components/nav/Navbar'
 
 export function withDefaultLayout(Component: any) {
   const EnhancedComponent = (props: any) => {
     return (
       <>
-        <NavBar />
+        <Navbar />
         <Component {...props} />
       </>
     )

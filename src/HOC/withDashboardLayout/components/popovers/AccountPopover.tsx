@@ -10,20 +10,25 @@ import {
   IconButton,
   Popover,
 } from '@mui/material'
-import { useAppSelector } from '../../../../store/hooks'
+import { useAppDispatch, useAppSelector } from '../../../../store/hooks'
+import Router from 'next/router'
+import { logout } from '../../../../store/slices/auth.slice'
 
 const MENU_OPTIONS = [
   {
     label: 'Home',
     icon: 'eva:home-fill',
+    path: '/',
   },
   {
     label: 'Profile',
     icon: 'eva:person-fill',
+    path: '/dashboard/profile',
   },
   {
     label: 'Settings',
     icon: 'eva:settings-2-fill',
+    path: '/dashboard/settings',
   },
 ]
 
@@ -38,7 +43,15 @@ export default function AccountPopover() {
     setOpen(null)
   }
 
+  const dispatch = useAppDispatch()
+
   const { currentUser } = useAppSelector((state) => state.auth)
+
+  const handleLogout = () => {
+    dispatch(logout())
+    handleClose()
+    Router.push('/')
+  }
 
   return (
     <>
@@ -96,7 +109,13 @@ export default function AccountPopover() {
 
         <Stack sx={{ p: 1 }}>
           {MENU_OPTIONS.map((option) => (
-            <MenuItem key={option.label} onClick={handleClose}>
+            <MenuItem
+              key={option.label}
+              onClick={() => {
+                Router.push(option.path)
+                handleClose()
+              }}
+            >
               {option.label}
             </MenuItem>
           ))}
@@ -104,7 +123,7 @@ export default function AccountPopover() {
 
         <Divider sx={{ borderStyle: 'dashed' }} />
 
-        <MenuItem onClick={handleClose} sx={{ m: 1 }}>
+        <MenuItem onClick={handleLogout} sx={{ m: 1 }}>
           Logout
         </MenuItem>
       </Popover>

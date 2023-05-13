@@ -1,71 +1,123 @@
 import * as React from 'react'
-import AppBar from '@mui/material/AppBar'
-import Box from '@mui/material/Box'
-import Toolbar from '@mui/material/Toolbar'
-import IconButton from '@mui/material/IconButton'
-import Typography from '@mui/material/Typography'
-import Menu from '@mui/material/Menu'
-import MenuIcon from '@mui/icons-material/Menu'
-import Container from '@mui/material/Container'
-import Avatar from '@mui/material/Avatar'
-import Button from '@mui/material/Button'
-import Tooltip from '@mui/material/Tooltip'
-import AdbIcon from '@mui/icons-material/Adb'
-import MenuItem from '@mui/material/MenuItem'
+import {
+  AppBar,
+  Box,
+  Toolbar,
+  IconButton,
+  Typography,
+  Menu,
+  Container,
+  Button,
+  MenuItem,
+} from '@mui/material'
+import { FiMenu } from 'react-icons/fi'
+import { HiArrowSmRight } from 'react-icons/hi'
+import Link from 'next/link'
+import { useAppDispatch, useAppSelector } from '../../store/hooks'
+import { logout } from '../../store/slices/auth.slice'
 
-import Router from 'next/router'
-import LogoToolbar from './LogoToolbar'
+const Logo = () => (
+  <Link href='/' style={{}}>
+    <Box
+      sx={{
+        fontSize: '2xl',
+        fontWeight: 800,
+        textDecoration: 'none',
+        color: 'gray',
+      }}
+    >
+      ❍ Personal Finance App
+    </Box>
+  </Link>
+)
 
-const pages = [
-  {
-    name: 'Login',
-    path: '/login',
-  },
-  {
-    name: 'Register',
-    path: '/register',
-  },
-  {
-    name: 'Dashboard',
-    path: '/dashboard',
-  },
-]
-const settings = ['Profile', 'Account', 'Dashboard', 'Logout']
-
-function NavBar() {
+export default function Navbar() {
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null)
-  const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(
-    null
-  )
-
   const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorElNav(event.currentTarget)
   }
-  const handleOpenUserMenu = (event: React.MouseEvent<HTMLElement>) => {
-    setAnchorElUser(event.currentTarget)
-  }
-
   const handleCloseNavMenu = () => {
     setAnchorElNav(null)
   }
 
-  const handleCloseUserMenu = () => {
-    setAnchorElUser(null)
+  const dispatch = useAppDispatch()
+
+  const { currentUser } = useAppSelector((state) => state.auth)
+
+  const [isAuthenticated, setIsAuthenticated] = React.useState(false)
+
+  const handleLogout = () => {
+    dispatch(logout())
+    handleCloseNavMenu()
   }
 
-  return (
-    <AppBar position='static'>
-      <Container maxWidth='xl'>
-        <Toolbar disableGutters>
-          <LogoToolbar />
+  React.useEffect(() => {
+    setIsAuthenticated(!!currentUser)
+  }, [currentUser])
 
-          <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
-            <IconButton
-              size='large'
-              onClick={handleOpenNavMenu}
-              color='inherit'
+  return (
+    <AppBar
+      position='static'
+      sx={{
+        bgcolor: 'background.paper',
+        py: 1,
+        mb: 0.5,
+      }}
+    >
+      <Container>
+        <Toolbar
+          variant='dense'
+          disableGutters
+          sx={{
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'space-between',
+            color: 'gray',
+          }}
+        >
+          <Logo />
+          <Box sx={{ display: { xs: 'none', md: 'flex' }, gap: 1 }}>
+            {!isAuthenticated ? (
+              <Button
+                component={Link}
+                href={'/login'}
+                onClick={handleCloseNavMenu}
+                sx={{ fontWeight: 500, textTransform: 'none' }}
+              >
+                Login
+              </Button>
+            ) : (
+              <Button
+                onClick={handleLogout}
+                sx={{ fontWeight: 500, textTransform: 'none' }}
+              >
+                Logout
+              </Button>
+            )}
+
+            <Button
+              component={Link}
+              href={isAuthenticated ? '/dashboard' : '/login'}
+              variant='contained'
+              color='primary'
+              sx={{
+                borderRadius: 999,
+                textTransform: 'none',
+              }}
+              endIcon={<HiArrowSmRight size={16} />}
             >
-              <MenuIcon />
+              {isAuthenticated ? 'Go to Dashboard' : 'Get Started'}
+            </Button>
+          </Box>
+          <Box sx={{ display: { xs: 'flex', md: 'none' } }}>
+            <IconButton
+              size='medium'
+              aria-label='account of current user'
+              aria-controls='menu-appbar'
+              aria-haspopup='true'
+              onClick={handleOpenNavMenu}
+            >
+              <FiMenu />
             </IconButton>
             <Menu
               id='menu-appbar'
@@ -84,81 +136,17 @@ function NavBar() {
               sx={{
                 display: { xs: 'block', md: 'none' },
               }}
+              disablePortal={true}
             >
-              {pages.map((page) => (
-                <MenuItem
-                  key={page.name}
-                  onClick={() => {
-                    Router.push(page.path)
-                    handleCloseNavMenu()
-                  }}
-                >
-                  <Typography textAlign='center'>{page.name}</Typography>
+              {isAuthenticated ? (
+                <MenuItem onClick={handleLogout}>
+                  <Typography textAlign='center'>Logout</Typography>
                 </MenuItem>
-              ))}
-            </Menu>
-          </Box>
-          <AdbIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} />
-          <Typography
-            variant='h5'
-            noWrap
-            component='a'
-            href=''
-            sx={{
-              mr: 2,
-              display: { xs: 'flex', md: 'none' },
-              flexGrow: 1,
-              fontFamily: 'monospace',
-              fontWeight: 700,
-              letterSpacing: '.3rem',
-              color: 'inherit',
-              textDecoration: 'none',
-            }}
-          >
-            LOGO
-          </Typography>
-          <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
-            {pages.map((page) => (
-              <Button
-                key={page.name}
-                onClick={() => {
-                  Router.push(page.path)
-                  handleCloseNavMenu()
-                }}
-                sx={{ my: 2, color: 'white', display: 'block' }}
-              >
-                {page.name}
-              </Button>
-            ))}
-          </Box>
-
-          <Box sx={{ flexGrow: 0 }}>
-            <Tooltip title='Open settings'>
-              <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar alt='Remy Sharp' src='/static/images/avatar/2.jpg' />
-              </IconButton>
-            </Tooltip>
-            <Menu
-              sx={{ mt: '45px' }}
-              id='menu-appbar'
-              anchorEl={anchorElUser}
-              anchorOrigin={{
-                vertical: 'top',
-                horizontal: 'right',
-              }}
-              keepMounted
-              transformOrigin={{
-                vertical: 'top',
-                horizontal: 'right',
-              }}
-              open={Boolean(anchorElUser)}
-              onClose={handleCloseUserMenu}
-            >
-              {settings.map((setting) => (
-                <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                  <Typography textAlign='center'>{setting}</Typography>
+              ) : (
+                <MenuItem onClick={handleCloseNavMenu}>
+                  <Typography textAlign='center'>Login</Typography>
                 </MenuItem>
-              ))}
+              )}
             </Menu>
           </Box>
         </Toolbar>
@@ -166,4 +154,3 @@ function NavBar() {
     </AppBar>
   )
 }
-export default NavBar
