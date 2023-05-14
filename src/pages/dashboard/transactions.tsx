@@ -67,15 +67,15 @@ const Transactions: NextPage = () => {
   }
 
   const columns: GridColDef[] = [
-    {
-      field: 'id',
-      headerName: 'ID',
-      width: 60,
-      editable: false,
-      valueGetter: (params: GridValueGetterParams) => {
-        return params.row.id
-      },
-    },
+    // {
+    //   field: 'id',
+    //   headerName: 'ID',
+    //   width: 60,
+    //   editable: false,
+    //   valueGetter: (params: GridValueGetterParams) => {
+    //     return params.row.id
+    //   },
+    // },
     {
       field: 'date',
       headerName: 'Date',
@@ -148,6 +148,7 @@ const Transactions: NextPage = () => {
           disableSelectionOnClick
           density='compact'
           // experimentalFeatures={{ newEditingApi: true }}
+          loading={transactionListQuery.loading || deleting}
         />
       </Box>
     </>

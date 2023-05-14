@@ -1,8 +1,17 @@
 import { styled } from '@mui/material/styles'
-import { Box, Stack, AppBar, Toolbar, IconButton, alpha } from '@mui/material'
+import {
+  Box,
+  Stack,
+  AppBar,
+  Toolbar,
+  IconButton,
+  alpha,
+} from '@mui/material'
 
 import AccountPopover from '../popovers/AccountPopover'
 import { MenuBookRounded } from '@mui/icons-material'
+import { useRouter } from 'next/router'
+import DashboardBreadcrumbs from './DashboardBreadcrumbs'
 
 const NAV_WIDTH = 280
 
@@ -60,6 +69,8 @@ const StyledToolbar = styled(Toolbar)(({ theme }) => ({
 }))
 
 export default function DashboardHeader({ onOpenNav }: any) {
+  const router = useRouter()
+  const { pathname } = router
   return (
     <StyledRoot>
       <StyledToolbar>
@@ -73,6 +84,8 @@ export default function DashboardHeader({ onOpenNav }: any) {
         >
           <MenuBookRounded />
         </IconButton>
+
+        <DashboardBreadcrumbs path={pathname} />
 
         <Box sx={{ flexGrow: 1 }} />
 
