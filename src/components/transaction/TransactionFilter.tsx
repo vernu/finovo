@@ -8,6 +8,7 @@ import {
   Button,
   Checkbox,
   FormLabel,
+  Grid,
   ListItemIcon,
   ListItemText,
   TextField,
@@ -74,136 +75,159 @@ export const TransactionFilter = () => {
         backgroundColor: '#f5f5f5',
       }}
     >
-      <FormControl>
-        <InputLabel>period</InputLabel>
-        <Select
-          value={filters.period}
-          name='period'
-          label='Period'
-          onChange={handleChange}
-          variant='outlined'
-          style={{ minWidth: '200px' }}
-        >
-          {TRANSACTION_PERIOD_FILTER_OPTIONS.map((period) => (
-            <MenuItem key={period.key} value={period.key}>
-              {period.value}
-            </MenuItem>
-          ))}
-        </Select>
-      </FormControl>
-      <FormControl>
-        <InputLabel>Currencies</InputLabel>
-        <Select
-          value={filters.currencyCodes}
-          name='currencyCodes'
-          label='Currencies'
-          multiple
-          variant='outlined'
-          onChange={handleMultiSelectChange}
-          renderValue={(selectedValue) => selectedValue.join(', ')}
-        >
-          {['ETB', 'USD', 'GBP', 'CRYPTO'].map((currency) => (
-            <MenuItem key={currency} value={currency}>
-              <ListItemIcon>
-                <Checkbox
-                  checked={filters.currencyCodes.includes(currency)}
-                  size='small'
-                />
-              </ListItemIcon>
-              <ListItemText primary={currency} />
-            </MenuItem>
-          ))}
-        </Select>
-      </FormControl>
-      {categoriesQuery.data?.categories?.length > 0 && (
-        <FormControl>
-          {/* <FormLabel>Categories</FormLabel> */}
-          <Select
-            label='Categories'
-            name='categoryIds'
-            defaultValue={categoriesQuery.data?.categories?.map(
-              (c: any) => c.id
-            )}
-            value={filters.categoryIds}
-            multiple
-            onChange={handleMultiSelectChange}
-            renderValue={(selectedValue) => {
-              if (selectedValue.length == 0) {
-                return 'No categories selected'
-              } else if (
-                selectedValue.length >= categoriesQuery.data?.categories?.length
-              ) {
-                return 'All categories'
-              } else {
-                return selectedValue.length + ' categories'
-              }
-            }}
-            style={{ minWidth: '200px' }}
-            displayEmpty={false}
-            autoWidth={false}
-            variant='outlined'
-          >
-            <MenuItem value={0}>
-              <ListItemIcon>
-                <Checkbox
-                  checked={
-                    filters.categoryIds.length >=
+      <Grid container spacing={0.5}>
+        <Grid item xs={6} sm={3} md={2}>
+          {' '}
+          <FormControl fullWidth>
+            <InputLabel>period</InputLabel>
+            <Select
+              value={filters.period}
+              name='period'
+              label='Period'
+              onChange={handleChange}
+              variant='outlined'
+            >
+              {TRANSACTION_PERIOD_FILTER_OPTIONS.map((period) => (
+                <MenuItem key={period.key} value={period.key}>
+                  {period.value}
+                </MenuItem>
+              ))}
+            </Select>
+          </FormControl>
+        </Grid>
+        <Grid item xs={6} sm={3} md={2}>
+          <FormControl fullWidth>
+            <InputLabel>Currencies</InputLabel>
+            <Select
+              value={filters.currencyCodes}
+              name='currencyCodes'
+              label='Currencies'
+              multiple
+              variant='outlined'
+              onChange={handleMultiSelectChange}
+              renderValue={(selectedValue) => selectedValue.join(', ')}
+            >
+              {['ETB', 'USD', 'GBP', 'CRYPTO'].map((currency) => (
+                <MenuItem key={currency} value={currency}>
+                  <ListItemIcon>
+                    <Checkbox
+                      checked={filters.currencyCodes.includes(currency)}
+                      size='small'
+                    />
+                  </ListItemIcon>
+                  <ListItemText primary={currency} />
+                </MenuItem>
+              ))}
+            </Select>
+          </FormControl>
+        </Grid>
+        <Grid item xs={6} sm={3} md={2}>
+          {categoriesQuery.data?.categories?.length > 0 && (
+            <FormControl fullWidth>
+              {/* <FormLabel>Categories</FormLabel> */}
+              <Select
+                label='Categories'
+                name='categoryIds'
+                defaultValue={categoriesQuery.data?.categories?.map(
+                  (c: any) => c.id
+                )}
+                value={filters.categoryIds}
+                multiple
+                onChange={handleMultiSelectChange}
+                renderValue={(selectedValue) => {
+                  if (selectedValue.length == 0) {
+                    return 'No categories selected'
+                  } else if (
+                    selectedValue.length >=
                     categoriesQuery.data?.categories?.length
+                  ) {
+                    return 'All categories'
+                  } else {
+                    return selectedValue.length + ' categories'
                   }
-                  onClick={(e) => {
-                    e.stopPropagation()
-                    let ids: number[] = []
-                    if (
-                      filters.categoryIds.length <
-                      categoriesQuery.data?.categories?.length
-                    ) {
-                      ids = categoriesQuery.data?.categories?.map(
-                        (c: any) => c.id
-                      )
-                    }
-                    dispatch(
-                      updateFilters({
-                        categoryIds: ids,
-                      })
-                    )
+                }}
+                displayEmpty={false}
+                autoWidth={false}
+                variant='outlined'
+              >
+                <MenuItem
+                  value={0}
+                  sx={{
+                    maxHeight: '30px',
                   }}
-                  size='small'
-                />
-              </ListItemIcon>
-              <ListItemText primary={'All Categories'} />
-            </MenuItem>
+                >
+                  <ListItemIcon>
+                    <Checkbox
+                      checked={
+                        filters.categoryIds.length >=
+                        categoriesQuery.data?.categories?.length
+                      }
+                      onClick={(e) => {
+                        e.stopPropagation()
+                        let ids: number[] = []
+                        if (
+                          filters.categoryIds.length <
+                          categoriesQuery.data?.categories?.length
+                        ) {
+                          ids = categoriesQuery.data?.categories?.map(
+                            (c: any) => c.id
+                          )
+                        }
+                        dispatch(
+                          updateFilters({
+                            categoryIds: ids,
+                          })
+                        )
+                      }}
+                      size='small'
+                    />
+                  </ListItemIcon>
+                  <ListItemText primary={'All Categories'} />
+                </MenuItem>
 
-            {categoriesQuery.data?.categories?.map((category: any) => (
-              <MenuItem key={category.id} value={category.id}>
-                <ListItemIcon>
-                  <Checkbox
-                    checked={filters.categoryIds.includes(category.id)}
-                    size='small'
-                  />
-                </ListItemIcon>
-                <ListItemText primary={category.name} />
-              </MenuItem>
-            ))}
-          </Select>
-        </FormControl>
-      )}
-      <FormControl>
-        <TextField
-          value={filters.descriptionContains}
-          label='Description contains'
-          name='descriptionContains'
-          variant='outlined'
-          onChange={handleChange}
-        />
-      </FormControl>
-
-      <Button
-        onClick={() => {}}
-        variant='outlined'
-        style={{ margin: '10px', textTransform: 'none' }}
-      >
-        Advanced Filters
-      </Button>
+                {categoriesQuery.data?.categories?.map((category: any) => (
+                  <MenuItem
+                    key={category.id}
+                    value={category.id}
+                    sx={{
+                      maxHeight: '30px',
+                    }}
+                  >
+                    <ListItemIcon>
+                      <Checkbox
+                        checked={filters.categoryIds.includes(category.id)}
+                        size='small'
+                      />
+                    </ListItemIcon>
+                    <ListItemText primary={category.name} />
+                  </MenuItem>
+                ))}
+              </Select>
+            </FormControl>
+          )}
+        </Grid>
+        <Grid item xs={6} sm={3} md={2}>
+          <FormControl fullWidth>
+            <TextField
+              value={filters.descriptionContains}
+              label='Description contains'
+              name='descriptionContains'
+              variant='outlined'
+              onChange={handleChange}
+            />
+          </FormControl>
+        </Grid>
+        <Grid item xs={6} sm={3} md={2}>
+          <Button
+            fullWidth
+            onClick={() => {}}
+            variant='outlined'
+            style={{ margin: '10px', textTransform: 'none' }}
+          >
+            Advanced Filters
+          </Button>
+        </Grid>
+      </Grid>
     </Box>
   )
 }

@@ -112,8 +112,13 @@ const Transactions: NextPage = () => {
     {
       field: 'actions',
       headerName: 'Actions',
-      width: 100,
+      minWidth: 100,
       editable: false,
+      filterable: false,
+      sortable: false,
+      headerAlign: 'right',
+      align: 'right',
+      flex: 1,  
       renderCell: (params: GridRenderCellParams) => {
         return (
           <>
@@ -138,7 +143,7 @@ const Transactions: NextPage = () => {
           <NewTransactionModal />
         </Grid>
       </Grid>
-      <Box sx={{ height: 700, width: '100%' }}>
+      <Box sx={{ height: 500, width: '100%' }}>
         <DataGrid
           rows={transactionListQuery.data?.transactions || []}
           columns={columns}

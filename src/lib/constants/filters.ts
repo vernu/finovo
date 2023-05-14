@@ -1,6 +1,6 @@
 export const TRANSACTION_PERIOD_FILTER_OPTIONS = [
   {
-    key: '',
+    key: 'ALL_TIME',
     value: 'All Time',
   },
   {
