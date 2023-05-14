@@ -15,21 +15,7 @@ import { HiArrowSmRight } from 'react-icons/hi'
 import Link from 'next/link'
 import { useAppDispatch, useAppSelector } from '../../store/hooks'
 import { logout } from '../../store/slices/auth.slice'
-
-const Logo = () => (
-  <Link href='/' style={{}}>
-    <Box
-      sx={{
-        fontSize: '2xl',
-        fontWeight: 800,
-        textDecoration: 'none',
-        color: 'gray',
-      }}
-    >
-      ❍ Personal Finance App
-    </Box>
-  </Link>
-)
+import { Logo } from './Logo'
 
 export default function Navbar() {
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null)

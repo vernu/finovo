@@ -15,6 +15,7 @@ import useResponsive from '../../../../hooks/useResponsive'
 import SvgColor from './SvgColor'
 import { useRouter } from 'next/router'
 import { useAppSelector } from '../../../../store/hooks'
+import { Logo } from '../../../../components/nav/Logo'
 
 const icon = (icon: string) => (
   <SvgColor src={icon} sx={{ width: 1, height: 1 }} />
@@ -63,7 +64,6 @@ const StyledAccount = styled('div')(({ theme }) => ({
   backgroundColor: alpha(theme.palette.grey[500], 0.12),
 }))
 
-
 export default function DashboardSideNav({ openNav, onCloseNav }: any) {
   const router = useRouter()
   const { pathname } = router
@@ -91,8 +91,7 @@ export default function DashboardSideNav({ openNav, onCloseNav }: any) {
       }}
     >
       <Box sx={{ px: 2.5, py: 3, display: 'inline-flex' }}>
-        {/* <Logo /> */}
-        logo
+        <Logo />
       </Box>
 
       <Box sx={{ mb: 5, mx: 2.5 }}>
