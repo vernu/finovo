@@ -9,14 +9,14 @@ import { HiArrowSmRight } from 'react-icons/hi'
 
 function HeroSection() {
   return (
-    <Box component='section' py={{ xs: 3, md: 12 }}>
+    <Box component='section' py={{ xs: 4, md: 16 }}>
       <Container>
         <Grid container alignItems='center'>
           <Grid item xs={12} lg={5}>
-            <Typography variant='h3' my={1}>
-              Manage you finances with ease
+            <Typography variant='h3' my={1} color='gray'>
+              Manage your personal finance with ease
             </Typography>
-            <Typography variant='body2' color='text' mb={2}>
+            <Typography variant='body2' color='text' mb={2} textAlign='justify'>
               Budget, track and manage your finances with ease in one place.
               With our app, you can manage your finances in one place. You can
               also import and export your data with ease.
@@ -61,9 +61,9 @@ function HeroSection() {
                   </Icon>
                 </Box>
                 <Typography variant='body2' color='text' pl={2}>
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                  Create budgets and track your expenses
                   <br />
-                  Quisquam, voluptatibus.
+                  Budget on monthly or annual basis
                 </Typography>
               </Box>
               <Box display='flex' alignItems='center' p={2}>
@@ -85,9 +85,9 @@ function HeroSection() {
                   </Icon>
                 </Box>
                 <Typography variant='body2' color='text' pl={2}>
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                  Add recurring expenses and incomes only once
                   <br />
-                  Quisquam, voluptatibus.
+                  Let the app do the work for you
                 </Typography>
               </Box>
               <Box display='flex' alignItems='center' p={2}>
@@ -110,9 +110,9 @@ function HeroSection() {
                   </Icon>
                 </Box>
                 <Typography variant='body2' color='text' pl={2}>
-                  adipisicing elit.
+                  Import and export your data
                   <br />
-                  Lorem ipsum dolor sit amet consectetur
+                  CSV and Google Spreadsheet support
                 </Typography>
               </Box>
             </Stack>
