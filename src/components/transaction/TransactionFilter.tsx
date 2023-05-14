@@ -4,6 +4,8 @@ import FormControl from '@mui/material/FormControl'
 import Select from '@mui/material/Select'
 import { useEffect } from 'react'
 import {
+  Box,
+  Button,
   Checkbox,
   FormLabel,
   ListItemIcon,
@@ -64,8 +66,14 @@ export const TransactionFilter = () => {
   }
 
   return (
-    <div>
-      TransactionFilter <br />
+    <Box
+      sx={{
+        borderRadius: '10px',
+        marginBottom: '2px',
+        padding: '2px',
+        backgroundColor: '#f5f5f5',
+      }}
+    >
       <FormControl>
         <InputLabel>period</InputLabel>
         <Select
@@ -73,7 +81,7 @@ export const TransactionFilter = () => {
           name='period'
           label='Period'
           onChange={handleChange}
-          variant='filled'
+          variant='outlined'
           style={{ minWidth: '200px' }}
         >
           {TRANSACTION_PERIOD_FILTER_OPTIONS.map((period) => (
@@ -90,7 +98,7 @@ export const TransactionFilter = () => {
           name='currencyCodes'
           label='Currencies'
           multiple
-          variant='filled'
+          variant='outlined'
           onChange={handleMultiSelectChange}
           renderValue={(selectedValue) => selectedValue.join(', ')}
         >
@@ -133,7 +141,7 @@ export const TransactionFilter = () => {
             style={{ minWidth: '200px' }}
             displayEmpty={false}
             autoWidth={false}
-            variant='filled'
+            variant='outlined'
           >
             <MenuItem value={0}>
               <ListItemIcon>
@@ -184,10 +192,18 @@ export const TransactionFilter = () => {
           value={filters.descriptionContains}
           label='Description contains'
           name='descriptionContains'
-          variant='filled'
+          variant='outlined'
           onChange={handleChange}
         />
       </FormControl>
-    </div>
+
+      <Button
+        onClick={() => {}}
+        variant='outlined'
+        style={{ margin: '10px', textTransform: 'none' }}
+      >
+        Advanced Filters
+      </Button>
+    </Box>
   )
 }
