@@ -70,9 +70,10 @@ export const TransactionFilter = () => {
     <Box
       sx={{
         borderRadius: '10px',
-        marginBottom: '2px',
-        padding: '2px',
+        marginBottom: '5px',
+        padding: '3px',
         backgroundColor: '#f5f5f5',
+        border: '0.1px dashed black',
       }}
     >
       <Grid container spacing={0.5}>
