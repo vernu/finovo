@@ -30,7 +30,7 @@ const seedCurrencies = async () => {
     },
     {
       name: 'Cryptocurrency (USD Equivalent)',
-      code: 'CRYPTO',
+      code: 'Crypto',
       symbol: '₿',
     },
   ]

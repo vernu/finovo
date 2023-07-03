@@ -108,7 +108,7 @@ export const TransactionFilter = () => {
               onChange={handleMultiSelectChange}
               renderValue={(selectedValue) => selectedValue.join(', ')}
             >
-              {['ETB', 'USD', 'GBP', 'CRYPTO'].map((currency) => (
+              {['ETB', 'USD', 'GBP', 'Crypto'].map((currency) => (
                 <MenuItem key={currency} value={currency}>
                   <ListItemIcon>
                     <Checkbox
