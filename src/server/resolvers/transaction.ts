@@ -33,7 +33,6 @@ export const transactionListInsightResolver = async (
   if (ctx.user === null) {
     throw new Error('Not Authenticated')
   }
-  console.log(args)
   const filters = extractWhereClauseForTransaction(args)
 
   const currencyCodes = args.currencyCodes
