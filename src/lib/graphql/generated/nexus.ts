@@ -84,11 +84,16 @@ export interface NexusGenObjects {
     description?: string | null; // String
     id: string; // String!
   }
-  TransactionListInsight: { // root type
+  TransactionListCurrencyInsight: { // root type
     avgAmount?: number | null; // Float
+    currencyCode: string; // String!
     maxAmount?: number | null; // Float
     minAmount?: number | null; // Float
     totalAmount?: number | null; // Float
+    totalTransactions: number; // Int!
+  }
+  TransactionListInsight: { // root type
+    currencies: Array<NexusGenRootTypes['TransactionListCurrencyInsight'] | null>; // [TransactionListCurrencyInsight]!
     totalTransactions: number; // Int!
   }
   User: { // root type
@@ -157,11 +162,16 @@ export interface NexusGenFieldTypes {
     id: string; // String!
     type: string | null; // String
   }
-  TransactionListInsight: { // field return type
+  TransactionListCurrencyInsight: { // field return type
     avgAmount: number | null; // Float
+    currencyCode: string; // String!
     maxAmount: number | null; // Float
     minAmount: number | null; // Float
     totalAmount: number | null; // Float
+    totalTransactions: number; // Int!
+  }
+  TransactionListInsight: { // field return type
+    currencies: Array<NexusGenRootTypes['TransactionListCurrencyInsight'] | null>; // [TransactionListCurrencyInsight]!
     totalTransactions: number; // Int!
   }
   User: { // field return type
@@ -220,11 +230,16 @@ export interface NexusGenFieldTypeNames {
     id: 'String'
     type: 'String'
   }
-  TransactionListInsight: { // field return type name
+  TransactionListCurrencyInsight: { // field return type name
     avgAmount: 'Float'
+    currencyCode: 'String'
     maxAmount: 'Float'
     minAmount: 'Float'
     totalAmount: 'Float'
+    totalTransactions: 'Int'
+  }
+  TransactionListInsight: { // field return type name
+    currencies: 'TransactionListCurrencyInsight'
     totalTransactions: 'Int'
   }
   User: { // field return type name

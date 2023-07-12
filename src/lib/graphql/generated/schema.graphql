@@ -57,11 +57,17 @@ type Transaction {
   type: String
 }
 
-type TransactionListInsight {
+type TransactionListCurrencyInsight {
   avgAmount: Float
+  currencyCode: String!
   maxAmount: Float
   minAmount: Float
   totalAmount: Float
+  totalTransactions: Int!
+}
+
+type TransactionListInsight {
+  currencies: [TransactionListCurrencyInsight]!
   totalTransactions: Int!
 }
 

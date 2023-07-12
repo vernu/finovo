@@ -47,15 +47,25 @@ export const Transaction = objectType({
     })
   },
 })
-
-export const TransactionListInsight = objectType({
-  name: 'TransactionListInsight',
-  definition(t: ObjectDefinitionBlock<'TransactionListInsight'>) {
+export const TransactionListCurrencyInsight = objectType({
+  name: 'TransactionListCurrencyInsight',
+  definition(t: ObjectDefinitionBlock<'TransactionListCurrencyInsight'>) {
+    t.nonNull.string('currencyCode')
     t.nullable.float('totalAmount')
     t.nonNull.int('totalTransactions')
     t.nullable.float('maxAmount')
     t.nullable.float('minAmount')
     t.nullable.float('avgAmount')
+  },
+})
+
+export const TransactionListInsight = objectType({
+  name: 'TransactionListInsight',
+  definition(t: ObjectDefinitionBlock<'TransactionListInsight'>) {
+    t.nonNull.int('totalTransactions')
+    t.nonNull.list.field('currencies', {
+      type: 'TransactionListCurrencyInsight',
+    })
   },
 })
 

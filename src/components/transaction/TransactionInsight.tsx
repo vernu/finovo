@@ -18,11 +18,15 @@ export default function TransactionInsight() {
         categoryIds: $categoryIds
         descriptionContains: $descriptionContains
       ) {
-        totalAmount
         totalTransactions
-        maxAmount
-        minAmount
-        avgAmount
+        currencies{
+          currencyCode
+          totalAmount
+          totalTransactions
+          maxAmount
+          minAmount
+          avgAmount
+        }
       }
     }
   `
@@ -41,9 +45,15 @@ export default function TransactionInsight() {
               {transactionInsightQuery.data?.transactionListInsight
                 .totalTransactions ?? '-:-'}{' '}
               {/* TODO: Display transactions per currency */}
-              transactions | ETB{' '}
-              {transactionInsightQuery.data?.transactionListInsight.totalAmount?.toLocaleString() ??
-                '-:-'}
+              transactions
+              {transactionInsightQuery.data?.transactionListInsight?.currencies?.map(
+                (i: any) => (
+                  <span key={i.currencyCode}>
+                    {' | '}
+                    {i.currencyCode} {i.totalAmount.toLocaleString()}
+                  </span>
+                )
+              ) ?? '-:-'}
             </Typography>
           </Paper>
         </Grid>

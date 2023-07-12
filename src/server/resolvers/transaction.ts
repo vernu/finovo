@@ -33,36 +33,54 @@ export const transactionListInsightResolver = async (
   if (ctx.user === null) {
     throw new Error('Not Authenticated')
   }
+  console.log(args)
   const filters = extractWhereClauseForTransaction(args)
-  let aggregation = await ctx.prisma.transaction.aggregate({
-    where: {
-      ...filters,
-      userId: ctx.user.id,
-    },
-    _sum: {
-      amount: true,
-    },
-    _count: {
-      amount: true,
-    },
-    _max: {
-      amount: true,
-    },
-    _min: {
-      amount: true,
-    },
-    _avg: {
-      amount: true,
-    },
-  })
 
-  return {
-    totalAmount: aggregation._sum.amount,
-    totalTransactions: aggregation._count.amount,
-    maxAmount: aggregation._max.amount,
-    minAmount: aggregation._min.amount,
-    avgAmount: aggregation._avg.amount,
+  const currencyCodes = args.currencyCodes
+
+
+  let result: any = {
+    totalTransactions: 0,
+    currencies: [],
   }
+
+  for (let currencyCode of currencyCodes) {
+    const aggregation = await ctx.prisma.transaction.aggregate({
+      where: {
+        ...filters,
+        userId: ctx.user.id,
+        currency: {
+          code: currencyCode,
+        },
+      },
+      _sum: {
+        amount: true,
+      },
+      _count: {
+        amount: true,
+      },
+      _max: {
+        amount: true,
+      },
+      _min: {
+        amount: true,
+      },
+      _avg: {
+        amount: true,
+      },
+    })
+    result.currencies.push({
+      currencyCode,
+      totalAmount: aggregation._sum.amount,
+      totalTransactions: aggregation._count.amount,
+      maxAmount: aggregation._max.amount,
+      minAmount: aggregation._min.amount,
+      avgAmount: aggregation._avg.amount,
+    })
+    result.totalTransactions += aggregation._count.amount
+  }
+
+  return result
 }
 
 export const singleTransactionResolver = async (
