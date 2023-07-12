@@ -49,7 +49,7 @@ export default function TransactionInsight() {
                 (i: any) => (
                   <span key={i.currencyCode}>
                     {' | '}
-                    {i.currencyCode} {i.totalAmount.toLocaleString()}
+                    {i.currencyCode} {i.totalAmount?.toLocaleString()}
                   </span>
                 )
               ) ?? '-:-'}
