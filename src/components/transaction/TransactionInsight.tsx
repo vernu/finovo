@@ -44,7 +44,6 @@ export default function TransactionInsight() {
             <Typography variant='body1' component='h2' padding={0.5}>
               {transactionInsightQuery.data?.transactionListInsight
                 .totalTransactions ?? '-:-'}{' '}
-              {/* TODO: Display transactions per currency */}
               transactions
               {transactionInsightQuery.data?.transactionListInsight?.currencies?.map(
                 (i: any) => (
