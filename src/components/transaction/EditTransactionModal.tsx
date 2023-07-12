@@ -156,11 +156,13 @@ export default function EditTransactionModal({
             </Grid>
             <Grid item xs={12}>
               <TextField
-                variant='standard'
+                variant='outlined'
                 name='description'
                 label='Description'
                 type='text'
                 fullWidth
+                multiline
+                rows={2}
                 defaultValue={formData.description}
                 InputLabelProps={{
                   shrink: true,
