@@ -35,20 +35,13 @@ export default function TransactionInsight() {
   return (
     <>
       <Grid container spacing={3}>
-        <Grid item xs={12} sm={6} md={3}>
+        <Grid item xs={12} sm={6}>
           <Paper variant='outlined'>
             <Typography variant='body1' component='h2' padding={0.5}>
-              Total Transactions :{' '}
               {transactionInsightQuery.data?.transactionListInsight
-                .totalTransactions ?? '-:-'}
-            </Typography>
-          </Paper>
-        </Grid>
-
-        <Grid item xs={12} sm={6} md={3}>
-          <Paper variant='outlined'>
-            <Typography variant='body1' component='h2' padding={0.5}>
-              Total Amount :{' '}
+                .totalTransactions ?? '-:-'}{' '}
+              {/* TODO: Display transactions per currency */}
+              transactions | ETB{' '}
               {transactionInsightQuery.data?.transactionListInsight.totalAmount?.toLocaleString() ??
                 '-:-'}
             </Typography>
