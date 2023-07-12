@@ -1,36 +1,11 @@
-import { gql, useQuery } from '@apollo/client'
+import { useQuery } from '@apollo/client'
 import { Grid, Paper, Typography } from '@mui/material'
 import React from 'react'
 import { useSelector } from 'react-redux'
+import { TRANSACTION_INSIGHT_QUERY } from '../../lib/graphql/queries'
 import { selectTransactions } from '../../store/slices/transaction.slice'
 
 export default function TransactionInsight() {
-  const TRANSACTION_INSIGHT_QUERY = gql`
-    query TransactionListInsight(
-      $period: String
-      $currencyCodes: [String]
-      $categoryIds: [String]
-      $descriptionContains: String
-    ) {
-      transactionListInsight(
-        period: $period
-        currencyCodes: $currencyCodes
-        categoryIds: $categoryIds
-        descriptionContains: $descriptionContains
-      ) {
-        totalTransactions
-        currencies{
-          currencyCode
-          totalAmount
-          totalTransactions
-          maxAmount
-          minAmount
-          avgAmount
-        }
-      }
-    }
-  `
-
   const { filters } = useSelector(selectTransactions)
   const transactionInsightQuery = useQuery(TRANSACTION_INSIGHT_QUERY, {
     variables: filters,

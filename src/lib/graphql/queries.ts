@@ -51,6 +51,32 @@ export const TRANSACTION_LIST_QUERY = gql`
   }
 `
 
+export const TRANSACTION_INSIGHT_QUERY = gql`
+query TransactionListInsight(
+  $period: String
+  $currencyCodes: [String]
+  $categoryIds: [String]
+  $descriptionContains: String
+) {
+  transactionListInsight(
+    period: $period
+    currencyCodes: $currencyCodes
+    categoryIds: $categoryIds
+    descriptionContains: $descriptionContains
+  ) {
+    totalTransactions
+    currencies{
+      currencyCode
+      totalAmount
+      totalTransactions
+      maxAmount
+      minAmount
+      avgAmount
+    }
+  }
+}
+`
+
 export const ADD_TRANSACTION_MUTATION = gql`
   mutation ADD_TRANSACTION_MUTATION(
     $amount: Float!
