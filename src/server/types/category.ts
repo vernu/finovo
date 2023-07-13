@@ -7,6 +7,7 @@ export const Category = objectType({
     t.nonNull.string('id')
     t.nullable.string('name')
     t.nullable.string('slug')
+    t.nullable.string('type')
     t.nullable.string('description')
     t.nullable.list.field('transactions', {
       type: 'Transaction',

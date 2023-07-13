@@ -9,6 +9,7 @@ type Category {
   name: String
   slug: String
   transactions: [Transaction]
+  type: String
 }
 
 type CreateAccountResponsePayload {

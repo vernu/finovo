@@ -58,6 +58,7 @@ export interface NexusGenObjects {
     id: string; // String!
     name?: string | null; // String
     slug?: string | null; // String
+    type?: string | null; // String
   }
   CreateAccountResponsePayload: { // root type
     token?: string | null; // String
@@ -121,6 +122,7 @@ export interface NexusGenFieldTypes {
     name: string | null; // String
     slug: string | null; // String
     transactions: Array<NexusGenRootTypes['Transaction'] | null> | null; // [Transaction]
+    type: string | null; // String
   }
   CreateAccountResponsePayload: { // field return type
     token: string | null; // String
@@ -189,6 +191,7 @@ export interface NexusGenFieldTypeNames {
     name: 'String'
     slug: 'String'
     transactions: 'Transaction'
+    type: 'String'
   }
   CreateAccountResponsePayload: { // field return type name
     token: 'String'
