@@ -20,19 +20,12 @@ import {
   updateFilters,
 } from '../../store/slices/transaction.slice'
 import { TRANSACTION_PERIOD_FILTER_OPTIONS } from '../../lib/constants/filters'
+import { ALL_CATEGORIES_QUERY } from '../../lib/graphql/queries'
 
 export const TransactionFilter = () => {
   const { filters } = useAppSelector(selectTransactions)
   const dispatch = useAppDispatch()
 
-  const ALL_CATEGORIES_QUERY = gql`
-    query {
-      categories {
-        id
-        name
-      }
-    }
-  `
   const categoriesQuery = useQuery(ALL_CATEGORIES_QUERY)
 
   useEffect(() => {
@@ -200,7 +193,17 @@ export const TransactionFilter = () => {
                         size='small'
                       />
                     </ListItemIcon>
-                    <ListItemText primary={category.name} />
+                    <ListItemText
+                      primary={category.name}
+                      style={{
+                        color:
+                          category.type === 'INCOME'
+                            ? '#2a2'
+                            : category.type === 'EXPENSE'
+                            ? 'red'
+                            : 'black',
+                      }}
+                    />
                   </MenuItem>
                 ))}
               </Select>

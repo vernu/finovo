@@ -18,6 +18,7 @@ export const ALL_CATEGORIES_QUERY = gql`
     categories {
       id
       name
+      type
     }
   }
 `

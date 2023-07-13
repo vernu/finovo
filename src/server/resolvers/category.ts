@@ -9,6 +9,7 @@ export const categoryListResolver = async (
   let categories = await ctx.prisma.category.findMany({})
 
   const sortedCategories = sortCategories(categories)
+  console.log(sortedCategories)
   return sortedCategories
 }
 
