@@ -147,7 +147,7 @@ export const TransactionFilter = () => {
                 <MenuItem
                   value={0}
                   sx={{
-                    maxHeight: '30px',
+                    maxHeight: '22px',
                   }}
                 >
                   <ListItemIcon>
@@ -184,7 +184,7 @@ export const TransactionFilter = () => {
                     key={category.id}
                     value={category.id}
                     sx={{
-                      maxHeight: '30px',
+                      maxHeight: '22px',
                     }}
                   >
                     <ListItemIcon>
