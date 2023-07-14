@@ -66,6 +66,13 @@ const Transactions: NextPage = () => {
     console.log(id)
   }
 
+  const formatAmount = (num: number): string => {
+    return new Intl.NumberFormat('en-US', {
+      minimumFractionDigits: 2,
+      maximumFractionDigits: 2,
+    }).format(num)
+  }
+
   const columns: GridColDef[] = [
     // {
     //   field: 'id',
@@ -107,7 +114,7 @@ const Transactions: NextPage = () => {
       editable: false,
       align: 'right',
       valueGetter: (params: GridValueGetterParams) =>
-        `${params.row.amount.toLocaleString()} ${params.row.currency?.code}`,
+        `${params.row.currency?.symbol} ${formatAmount(params.row.amount)}`,
     },
     {
       field: 'actions',
@@ -118,7 +125,7 @@ const Transactions: NextPage = () => {
       sortable: false,
       headerAlign: 'right',
       align: 'right',
-      flex: 1,  
+      flex: 1,
       renderCell: (params: GridRenderCellParams) => {
         return (
           <>
