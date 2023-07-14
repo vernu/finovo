@@ -104,7 +104,7 @@ const Transactions: NextPage = () => {
     {
       field: 'amount',
       headerName: 'Amount',
-      width: 100,
+      width: 120,
       editable: false,
       align: 'right',
       valueGetter: (params: GridValueGetterParams) =>
