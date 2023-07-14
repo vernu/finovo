@@ -22,6 +22,7 @@ import { toast } from 'react-hot-toast'
 import { openConfirmModal } from '../../store/slices/confirmModal.slice'
 import EditTransactionModal from '../../components/transaction/EditTransactionModal'
 import withDashboardLayout from '../../HOC/withDashboardLayout'
+import { formatAmount } from '../../lib/utils/stringFormattingUtils'
 
 const Transactions: NextPage = () => {
   const { filters } = useAppSelector(selectTransactions)
@@ -64,13 +65,6 @@ const Transactions: NextPage = () => {
 
   const handleEditTransaction = (id: string) => {
     console.log(id)
-  }
-
-  const formatAmount = (num: number): string => {
-    return new Intl.NumberFormat('en-US', {
-      minimumFractionDigits: 2,
-      maximumFractionDigits: 2,
-    }).format(num)
   }
 
   const columns: GridColDef[] = [
