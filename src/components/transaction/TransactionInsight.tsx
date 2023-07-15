@@ -19,7 +19,7 @@ export default function TransactionInsight() {
             <Typography variant='body1' component='h2' padding={0.5}>
               {transactionInsightQuery.data?.transactionListInsight
                 .totalTransactions ?? '-:-'}{' '}
-              transactions
+              txs
               {transactionInsightQuery.data?.transactionListInsight?.currencies?.map(
                 (i: any) => (
                   <span key={i.currencyCode}>
