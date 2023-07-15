@@ -72,7 +72,7 @@ export const TransactionFilter = () => {
       <Grid container spacing={0.5}>
         <Grid item xs={6} sm={3} md={2}>
           {' '}
-          <FormControl fullWidth>
+          <FormControl fullWidth size='small' margin='dense'>
             <InputLabel>period</InputLabel>
             <Select
               value={filters.period}
@@ -90,7 +90,7 @@ export const TransactionFilter = () => {
           </FormControl>
         </Grid>
         <Grid item xs={6} sm={3} md={2}>
-          <FormControl fullWidth>
+          <FormControl fullWidth size='small' margin='dense'>
             <InputLabel>Currencies</InputLabel>
             <Select
               value={filters.currencyCodes}
@@ -117,7 +117,7 @@ export const TransactionFilter = () => {
         </Grid>
         <Grid item xs={6} sm={3} md={2}>
           {categoriesQuery.data?.categories?.length > 0 && (
-            <FormControl fullWidth>
+            <FormControl fullWidth size='small' margin='dense'>
               {/* <FormLabel>Categories</FormLabel> */}
               <Select
                 label='Categories'
@@ -211,8 +211,9 @@ export const TransactionFilter = () => {
           )}
         </Grid>
         <Grid item xs={6} sm={3} md={2}>
-          <FormControl fullWidth>
+          <FormControl fullWidth size='small' margin='dense'>
             <TextField
+              size='small'
               value={filters.descriptionContains}
               label='Description contains'
               name='descriptionContains'
@@ -224,6 +225,7 @@ export const TransactionFilter = () => {
         <Grid item xs={6} sm={3} md={2}>
           <Button
             fullWidth
+            size='small'
             onClick={() => {}}
             variant='outlined'
             style={{ margin: '10px', textTransform: 'none' }}
