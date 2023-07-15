@@ -22,7 +22,7 @@ import {
 import {
   removeAccessToken,
   removeCurrentUser,
-} from '../../lib/utils/localStorageUtils'
+} from '../../utils/localStorageUtils'
 import { toast } from 'react-hot-toast'
 import Router from 'next/router'
 import { updateAuthState } from '../../store/slices/auth.slice'

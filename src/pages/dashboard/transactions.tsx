@@ -22,7 +22,7 @@ import { toast } from 'react-hot-toast'
 import { openConfirmModal } from '../../store/slices/confirmModal.slice'
 import EditTransactionModal from '../../components/transaction/EditTransactionModal'
 import withDashboardLayout from '../../HOC/withDashboardLayout'
-import { formatAmount } from '../../lib/utils/stringFormattingUtils'
+import { formatAmount } from '../../utils/stringFormattingUtils'
 
 const Transactions: NextPage = () => {
   const { filters } = useAppSelector(selectTransactions)

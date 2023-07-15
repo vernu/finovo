@@ -9,7 +9,7 @@ import {
   removeCurrentUser,
   setAccessToken,
   setCurrentUser,
-} from '../../lib/utils/localStorageUtils'
+} from '../../utils/localStorageUtils'
 
 interface AuthState {
   accessToken: string | null | undefined
