@@ -1,3 +1,4 @@
+import { useMutation } from '@apollo/client'
 import {
   TableRow,
   TableCell,
@@ -8,6 +9,11 @@ import {
   Switch,
 } from '@mui/material'
 import { useState } from 'react'
+import { toast } from 'react-hot-toast'
+import {
+  ADD_CATEGORY_MUTATION,
+  UPDATE_CATEGORY_MUTATION,
+} from '../../lib/graphql/queries'
 
 export const CategoryRow = ({ category }: any) => {
   const [isEditing, setIsEditing] = useState(!category.id || false)
@@ -26,13 +32,44 @@ export const CategoryRow = ({ category }: any) => {
       padding: '10px 5px',
     },
   }
+  const [addCategory, { loading, error }] = useMutation(ADD_CATEGORY_MUTATION)
+  const [updateCategory] = useMutation(UPDATE_CATEGORY_MUTATION)
 
   const handleSave = async () => {
+    console.log(formValue)
     if (!formValue.id) {
-      // create category
+      handleCreateCategory()
     } else {
-      // update category
+      handleUpdateCategory()
     }
+  }
+
+  const handleCreateCategory = () => {
+    addCategory({
+      variables: formValue,
+      refetchQueries: ['categories'],
+    })
+      .then((res) => {
+        toast.success('Category added successfully')
+        // reset form data
+      })
+      .catch((err) => {
+        toast.error(err.message)
+      })
+  }
+
+  const handleUpdateCategory = () => {
+    updateCategory({
+      variables: formValue,
+      refetchQueries: ['categories'],
+    })
+      .then((res) => {
+        toast.success('Category updated successfully')
+        setIsEditing(false)
+      })
+      .catch((err) => {
+        toast.error(err.message)
+      })
   }
 
   return (
@@ -43,7 +80,7 @@ export const CategoryRow = ({ category }: any) => {
             <TextField
               variant='outlined'
               name='emoji'
-              value={formValue.emoji ?? '🤗'}
+              value={formValue.emoji}
               size='small'
               margin='none'
               onChange={handleChange}
@@ -51,7 +88,7 @@ export const CategoryRow = ({ category }: any) => {
             />
           </FormControl>
         ) : (
-          category.emoji ?? '🤗'
+          category.emoji
         )}
       </TableCell>
       <TableCell>
@@ -103,7 +140,7 @@ export const CategoryRow = ({ category }: any) => {
           <FormControl variant='standard' size='small' margin='none'>
             <TextField
               variant='outlined'
-              name='name'
+              name='description'
               value={formValue.description}
               size='small'
               onChange={handleChange}

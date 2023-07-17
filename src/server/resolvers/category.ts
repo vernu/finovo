@@ -47,7 +47,7 @@ export const createCategoryResolver = async (
       emoji: args.emoji || null,
       name: args.name,
       description: args.description,
-      active: args.active || true,
+      active: args.active ?? true,
       type: args.type || null,
       user: {
         connect: {
