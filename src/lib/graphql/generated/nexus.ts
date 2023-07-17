@@ -54,7 +54,9 @@ export interface NexusGenScalars {
 
 export interface NexusGenObjects {
   Category: { // root type
+    active?: boolean | null; // Boolean
     description?: string | null; // String
+    emoji?: string | null; // String
     id: string; // String!
     name?: string | null; // String
     slug?: string | null; // String
@@ -116,8 +118,10 @@ export type NexusGenAllTypes = NexusGenRootTypes & NexusGenScalars
 
 export interface NexusGenFieldTypes {
   Category: { // field return type
+    active: boolean | null; // Boolean
     createdAt: NexusGenScalars['date'] | null; // date
     description: string | null; // String
+    emoji: string | null; // String
     id: string; // String!
     name: string | null; // String
     slug: string | null; // String
@@ -187,8 +191,10 @@ export interface NexusGenFieldTypes {
 
 export interface NexusGenFieldTypeNames {
   Category: { // field return type name
+    active: 'Boolean'
     createdAt: 'date'
     description: 'String'
+    emoji: 'String'
     id: 'String'
     name: 'String'
     slug: 'String'

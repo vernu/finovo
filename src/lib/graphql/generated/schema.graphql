@@ -3,8 +3,10 @@
 
 
 type Category {
+  active: Boolean
   createdAt: date
   description: String
+  emoji: String
   id: String!
   name: String
   slug: String

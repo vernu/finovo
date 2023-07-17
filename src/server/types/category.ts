@@ -15,6 +15,8 @@ export const Category = objectType({
     t.nullable.string('slug')
     t.nullable.string('type')
     t.nullable.string('description')
+    t.nullable.string('emoji')
+    t.nullable.boolean('active')
     t.nullable.list.field('transactions', {
       type: 'Transaction',
       resolve: async (parent: any, _args: any, ctx: Context) => {

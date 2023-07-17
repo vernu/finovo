@@ -44,10 +44,10 @@ export const createCategoryResolver = async (
 
   const category = await ctx.prisma.category.create({
     data: {
-      // emoji: args.emoji || null,
+      emoji: args.emoji || null,
       name: args.name,
-      // description: args.description,
-      // active: args.active || true,
+      description: args.description,
+      active: args.active || true,
       type: args.type || null,
       user: {
         connect: {
@@ -67,7 +67,7 @@ export const updateCategoryResolver = async (
 ) => {
   const { prisma } = ctx
 
-  const { id, name, type, description, active, ...rest } = args
+  const { id, name, type, description, emoji, active, ...rest } = args
 
   const category = await prisma.category.findFirst({
     where: {
@@ -88,11 +88,11 @@ export const updateCategoryResolver = async (
       id,
     },
     data: {
-      // emoji,
+      emoji,
       name,
       type: type || null,
-      // description,
-      // active,
+      description,
+      active,
     },
   })
   return updatedCategory
