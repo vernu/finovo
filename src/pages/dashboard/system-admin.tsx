@@ -1,27 +1,13 @@
-import * as React from 'react'
-import Box from '@mui/material/Box'
-import Tabs from '@mui/material/Tabs'
-import Tab from '@mui/material/Tab'
+import React from 'react'
+import SystemAdmin from '../../features/SystemAdmin/SystemAdmin'
 import withDashboardLayout from '../../HOC/withDashboardLayout'
 
-const SystemAdmin = () => {
-  const [value, setValue] = React.useState(0)
-
-  const handleChange = (event: React.SyntheticEvent, newValue: number) => {
-    setValue(newValue)
-  }
-
+const SystemAdminPage = () => {
   return (
     <>
-      <Box sx={{ width: '100%', bgcolor: 'background.paper' }}>
-        <Tabs value={value} onChange={handleChange} centered>
-          <Tab label='Item One' />
-          <Tab label='Item Two' />
-          <Tab label='Item Three' />
-        </Tabs>
-      </Box>
+      <SystemAdmin />
     </>
   )
 }
 
-export default withDashboardLayout(SystemAdmin)
+export default withDashboardLayout(SystemAdminPage)
