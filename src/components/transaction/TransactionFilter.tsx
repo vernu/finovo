@@ -65,8 +65,8 @@ export const TransactionFilter = () => {
         borderRadius: '10px',
         marginBottom: '5px',
         padding: '3px',
-        backgroundColor: '#f5f5f5',
-        border: '0.1px dashed black',
+        borderWidth: '1px',
+        borderColor: 'primary.main',
       }}
     >
       <Grid container spacing={0.5}>
@@ -201,7 +201,7 @@ export const TransactionFilter = () => {
                             ? '#2a2'
                             : category.type === 'EXPENSE'
                             ? 'red'
-                            : 'black',
+                            : '',
                       }}
                     />
                   </MenuItem>

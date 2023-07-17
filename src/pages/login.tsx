@@ -1,4 +1,4 @@
-import { Divider, Grid, Stack, Typography } from '@mui/material'
+import { Divider, Grid, Stack } from '@mui/material'
 import LoginForm from '../components/auth/LoginForm'
 import { withDefaultLayout } from '../HOC/withDefaultLayout'
 const Login = () => {
@@ -9,9 +9,6 @@ const Login = () => {
         direction='column'
         justifyContent='flex-end'
         sx={{ minHeight: '100vh' }}
-        style={{
-          background: '#EEF2F6',
-        }}
       >
         <Grid item xs={12}>
           <Grid
@@ -27,9 +24,10 @@ const Login = () => {
               md={6}
               lg={4}
               style={{
-                background: '#FFFFFF',
+                background: '#FFFFFF22',
                 padding: '16px',
                 borderRadius: '10px',
+                border: '1px solid #5555555',
               }}
             >
               <Grid

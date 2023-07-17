@@ -97,11 +97,13 @@ const LoginForm = ({ ...others }) => {
             onClick={handleLoginWithGoogle}
             size='large'
             variant='outlined'
-            sx={{
-              color: 'grey.700',
-              backgroundColor: theme.palette.grey[50],
-              borderColor: theme.palette.grey[50],
-            }}
+            sx={
+              {
+                // color: 'grey.700',
+                // backgroundColor: theme.palette.grey[50],
+                // borderColor: theme.palette.grey[50],
+              }
+            }
           >
             <Box sx={{ mr: { xs: 1, sm: 2, width: 20 } }}>
               <img
@@ -153,7 +155,6 @@ const LoginForm = ({ ...others }) => {
             name='email'
             onChange={handleChange}
             label='Email'
-            inputProps={{}}
           />
         </FormControl>
 
@@ -181,7 +182,6 @@ const LoginForm = ({ ...others }) => {
               </InputAdornment>
             }
             label='Password'
-            inputProps={{}}
           />
         </FormControl>
         <Stack

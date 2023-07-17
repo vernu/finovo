@@ -1,15 +1,8 @@
 import { styled } from '@mui/material/styles'
-import {
-  Box,
-  Stack,
-  AppBar,
-  Toolbar,
-  IconButton,
-  alpha,
-} from '@mui/material'
+import { Box, Stack, AppBar, Toolbar, IconButton, alpha } from '@mui/material'
 
 import AccountPopover from '../popovers/AccountPopover'
-import { MenuBookRounded } from '@mui/icons-material'
+import MenuBookRounded from '@mui/icons-material/MenuBookRounded'
 import { useRouter } from 'next/router'
 import DashboardBreadcrumbs from './DashboardBreadcrumbs'
 

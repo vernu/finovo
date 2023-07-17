@@ -6,15 +6,32 @@ import { Provider } from 'react-redux'
 import { store } from '../store/store'
 import { Toaster } from 'react-hot-toast'
 import ConfirmModal from '../components/common/ConfirmModal'
+import { ThemeProvider, createTheme } from '@mui/material/styles'
+import CssBaseline from '@mui/material/CssBaseline'
 
 function MyApp({ Component, pageProps }: AppProps) {
+  const darkTheme = createTheme({
+    palette: {
+      mode: 'dark',
+      primary: {
+        main: '#00FF00',
+      },
+      secondary: {
+        main: '#FF0000',
+      },
+    },
+  })
+
   return (
     <Provider store={store}>
-      <ApolloProvider client={apolloClient}>
-        <Toaster />
-        <ConfirmModal />
-        <Component {...pageProps} />
-      </ApolloProvider>
+      <ThemeProvider theme={darkTheme}>
+        <CssBaseline />
+        <ApolloProvider client={apolloClient}>
+          <Toaster />
+          <ConfirmModal />
+          <Component {...pageProps} />
+        </ApolloProvider>
+      </ThemeProvider>{' '}
     </Provider>
   )
 }
