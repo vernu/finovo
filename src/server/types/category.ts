@@ -1,4 +1,10 @@
-import { ObjectDefinitionBlock, objectType } from 'nexus/dist/core'
+import {
+  booleanArg,
+  nullable,
+  ObjectDefinitionBlock,
+  objectType,
+  stringArg,
+} from 'nexus/dist/core'
 import { Context } from '../shared/context'
 
 export const Category = objectType({
@@ -26,3 +32,11 @@ export const Category = objectType({
     })
   },
 })
+
+export const CreateCategoryArgs = {
+  name: stringArg(),
+  emoji: nullable(stringArg()),
+  description: nullable(stringArg()),
+  type: nullable(stringArg()),
+  active: nullable(booleanArg()),
+}

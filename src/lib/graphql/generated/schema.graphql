@@ -30,6 +30,7 @@ type LoginResponsePayload {
 }
 
 type Mutation {
+  addCategory(active: Boolean, description: String, emoji: String, name: String, type: String): Category!
   addTransaction(amount: Float, categoryId: String, currencyCode: String, date: String, description: String): Transaction!
   createAccount(email: String!, name: String!, password: String!): CreateAccountResponsePayload!
   deleteTransaction(id: String!): Transaction!
