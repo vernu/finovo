@@ -83,6 +83,16 @@ export const updateCategoryResolver = async (
     throw new Error('Not Authenticated')
   }
 
+  const existingCategory = await ctx.prisma.category.findFirst({
+    where: {
+      name: args.name,
+      userId: ctx.user.id,
+    },
+  })
+  if (existingCategory && existingCategory.id !== id) {
+    throw new Error('Category already exists')
+  }
+
   const updatedCategory = await prisma.category.update({
     where: {
       id,
