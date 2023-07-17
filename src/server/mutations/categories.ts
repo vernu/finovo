@@ -1,6 +1,9 @@
 import { isLoggedIn } from './../shared/authorize'
-import { CreateCategoryArgs } from './../types/category'
-import { createCategoryResolver } from './../resolvers/category'
+import { CreateCategoryArgs, UpdateCategoryArgs } from './../types/category'
+import {
+  createCategoryResolver,
+  updateCategoryResolver,
+} from './../resolvers/category'
 import { extendType } from 'nexus'
 
 export const AddCategory = extendType({
@@ -11,6 +14,17 @@ export const AddCategory = extendType({
       args: CreateCategoryArgs,
       authorize: isLoggedIn,
       resolve: createCategoryResolver,
+    })
+  },
+})
+
+export const UpdateCategory = extendType({
+  type: 'Mutation',
+  definition(t) {
+    t.nonNull.field('updateCategory', {
+      type: 'Category',
+      args: UpdateCategoryArgs,
+      resolve: updateCategoryResolver,
     })
   },
 })

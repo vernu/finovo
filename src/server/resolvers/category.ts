@@ -59,3 +59,41 @@ export const createCategoryResolver = async (
 
   return category
 }
+
+export const updateCategoryResolver = async (
+  _root: any,
+  args: any,
+  ctx: Context
+) => {
+  const { prisma } = ctx
+
+  const { id, name, type, description, active, ...rest } = args
+
+  const category = await prisma.category.findFirst({
+    where: {
+      id,
+    },
+  })
+
+  if (
+    ctx.user === null ||
+    category === null ||
+    category.userId !== ctx.user.id
+  ) {
+    throw new Error('Not Authenticated')
+  }
+
+  const updatedCategory = await prisma.category.update({
+    where: {
+      id,
+    },
+    data: {
+      // emoji,
+      name,
+      type: type || null,
+      // description,
+      // active,
+    },
+  })
+  return updatedCategory
+}

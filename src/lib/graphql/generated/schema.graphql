@@ -37,6 +37,7 @@ type Mutation {
   importData(fileCategory: String!): String!
   login(email: String!, password: String!): LoginResponsePayload!
   loginWithGoogle(idToken: String!): LoginResponsePayload!
+  updateCategory(active: Boolean, description: String, emoji: String, id: String, name: String, type: String): Category!
   updateTransaction(amount: Float, categoryId: String, currencyCode: String, date: String, description: String, id: String): Transaction!
 }
 

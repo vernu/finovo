@@ -146,6 +146,7 @@ export interface NexusGenFieldTypes {
     importData: string; // String!
     login: NexusGenRootTypes['LoginResponsePayload']; // LoginResponsePayload!
     loginWithGoogle: NexusGenRootTypes['LoginResponsePayload']; // LoginResponsePayload!
+    updateCategory: NexusGenRootTypes['Category']; // Category!
     updateTransaction: NexusGenRootTypes['Transaction']; // Transaction!
   }
   Query: { // field return type
@@ -216,6 +217,7 @@ export interface NexusGenFieldTypeNames {
     importData: 'String'
     login: 'LoginResponsePayload'
     loginWithGoogle: 'LoginResponsePayload'
+    updateCategory: 'Category'
     updateTransaction: 'Transaction'
   }
   Query: { // field return type name
@@ -287,6 +289,14 @@ export interface NexusGenArgTypes {
     }
     loginWithGoogle: { // args
       idToken: string; // String!
+    }
+    updateCategory: { // args
+      active?: boolean | null; // Boolean
+      description?: string | null; // String
+      emoji?: string | null; // String
+      id?: string | null; // String
+      name?: string | null; // String
+      type?: string | null; // String
     }
     updateTransaction: { // args
       amount?: number | null; // Float

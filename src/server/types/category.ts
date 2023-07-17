@@ -40,3 +40,12 @@ export const CreateCategoryArgs = {
   type: nullable(stringArg()),
   active: nullable(booleanArg()),
 }
+
+export const UpdateCategoryArgs = {
+  id: stringArg(),
+  name: stringArg(),
+  emoji: nullable(stringArg()),
+  description: nullable(stringArg()),
+  type: nullable(stringArg()),
+  active: nullable(booleanArg()),
+}
