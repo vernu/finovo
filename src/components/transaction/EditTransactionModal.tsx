@@ -80,7 +80,7 @@ export default function EditTransactionModal({
       <Dialog open={open} onClose={handleClose}>
         <DialogTitle>Edit Transaction</DialogTitle>
         <DialogContent>
-          <Grid container spacing={2} marginTop={2}>
+          <Grid container spacing={1} rowSpacing={2} marginTop={2}>
             <Grid item xs={6} md={4}>
               <FormControl fullWidth>
                 <InputLabel id='categorySelectLabel'>Category</InputLabel>
@@ -88,7 +88,8 @@ export default function EditTransactionModal({
                   fullWidth
                   labelId='categorySelectLabel'
                   id='category'
-                  variant='standard'
+                  variant='outlined'
+                  size='small'
                   value={formData.categoryId}
                   onChange={(e) => {
                     setFormData({ ...formData, categoryId: e.target.value })
@@ -110,7 +111,8 @@ export default function EditTransactionModal({
                   fullWidth
                   labelId='currencySelectLabel'
                   id='currency'
-                  variant='standard'
+                  variant='outlined'
+                  size='small'
                   value={formData.currencyCode}
                   onChange={(e) => {
                     setFormData({ ...formData, currencyCode: e.target.value })
@@ -126,7 +128,8 @@ export default function EditTransactionModal({
             <Grid item xs={6} md={2}>
               <TextField
                 id='amount'
-                variant='standard'
+                variant='outlined'
+                size='small'
                 name='amount'
                 label='Amount'
                 type='number'
@@ -141,7 +144,8 @@ export default function EditTransactionModal({
             </Grid>
             <Grid item xs={6} md={3}>
               <TextField
-                variant='standard'
+                variant='outlined'
+                size='small'
                 name='date'
                 label='Date'
                 type='date'
@@ -157,6 +161,7 @@ export default function EditTransactionModal({
             <Grid item xs={12}>
               <TextField
                 variant='outlined'
+                size='small'
                 name='description'
                 label='Description'
                 type='text'

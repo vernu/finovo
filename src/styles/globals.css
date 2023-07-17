@@ -24,3 +24,20 @@ a {
     background: black;
   }
 } */
+
+
+/* Hide the outer spin button */
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+  appearance: none;
+  margin: 0;
+}
+
+/* Optional: Style the input field */
+input[type="number"] {
+  -moz-appearance: textfield; /* Firefox */
+  appearance: textfield;
+  border: none;
+  padding: 0.5em;
+  font-size: 1em;
+}

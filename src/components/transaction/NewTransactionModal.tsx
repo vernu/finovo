@@ -35,17 +35,8 @@ export default function NewTransactionModal() {
   }
 
   const handleAddTransaction = () => {
-
     if (!formData.categoryId) {
       toast.error('Please select a category')
-      return
-    }
-
-    if (transactionType == 'INCOME' && formData.amount <= 0) {
-      toast.error('Income should be a positive amount')
-      return
-    } else if (transactionType == 'EXPENSE' && formData.amount >= 0) {
-      toast.error('Expense ammount should be negative')
       return
     }
 
@@ -78,10 +69,6 @@ export default function NewTransactionModal() {
     currencyCode: 'ETB',
   })
 
-  const [transactionType, setTransactionType] = useState<'EXPENSE' | 'INCOME'>(
-    'INCOME'
-  )
-
   const [addTransaction, { loading, error }] = useMutation(
     ADD_TRANSACTION_MUTATION
   )
@@ -98,19 +85,7 @@ export default function NewTransactionModal() {
             Fill out the form below to create a new transaction
           </DialogContentText>
 
-          <Button
-            variant={transactionType === 'EXPENSE' ? 'outlined' : 'text'}
-            onClick={() => setTransactionType('EXPENSE')}
-          >
-            Expense
-          </Button>
-          <Button
-            variant={transactionType === 'INCOME' ? 'outlined' : 'text'}
-            onClick={() => setTransactionType('INCOME')}
-          >
-            Income
-          </Button>
-          <Grid container spacing={2} marginTop={2}>
+          <Grid container spacing={1} rowSpacing={2} marginTop={2}>
             <Grid item xs={6} md={4}>
               <FormControl fullWidth>
                 <InputLabel id='categorySelectLabel'>Category</InputLabel>
@@ -118,7 +93,8 @@ export default function NewTransactionModal() {
                   fullWidth
                   labelId='categorySelectLabel'
                   id='category'
-                  variant='standard'
+                  variant='outlined'
+                  size='small'
                   value={formData.categoryId}
                   onChange={(e) => {
                     setFormData({ ...formData, categoryId: e.target.value })
@@ -140,7 +116,8 @@ export default function NewTransactionModal() {
                   fullWidth
                   labelId='currencySelectLabel'
                   id='currency'
-                  variant='standard'
+                  variant='outlined'
+                  size='small'
                   value={formData.currencyCode}
                   onChange={(e) => {
                     setFormData({ ...formData, currencyCode: e.target.value })
@@ -156,7 +133,8 @@ export default function NewTransactionModal() {
             <Grid item xs={6} md={2}>
               <TextField
                 id='amount'
-                variant='standard'
+                variant='outlined'
+                size='small'
                 name='amount'
                 label='Amount'
                 type='number'
@@ -171,7 +149,8 @@ export default function NewTransactionModal() {
             </Grid>
             <Grid item xs={6} md={3}>
               <TextField
-                variant='standard'
+                variant='outlined'
+                size='small'
                 name='date'
                 label='Date'
                 type='date'
