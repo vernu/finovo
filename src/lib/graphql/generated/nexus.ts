@@ -54,7 +54,9 @@ export interface NexusGenScalars {
 
 export interface NexusGenObjects {
   Category: { // root type
+    active?: boolean | null; // Boolean
     description?: string | null; // String
+    emoji?: string | null; // String
     id: string; // String!
     name?: string | null; // String
     slug?: string | null; // String
@@ -116,8 +118,10 @@ export type NexusGenAllTypes = NexusGenRootTypes & NexusGenScalars
 
 export interface NexusGenFieldTypes {
   Category: { // field return type
+    active: boolean | null; // Boolean
     createdAt: NexusGenScalars['date'] | null; // date
     description: string | null; // String
+    emoji: string | null; // String
     id: string; // String!
     name: string | null; // String
     slug: string | null; // String
@@ -139,12 +143,14 @@ export interface NexusGenFieldTypes {
     user: NexusGenRootTypes['User'] | null; // User
   }
   Mutation: { // field return type
+    addCategory: NexusGenRootTypes['Category']; // Category!
     addTransaction: NexusGenRootTypes['Transaction']; // Transaction!
     createAccount: NexusGenRootTypes['CreateAccountResponsePayload']; // CreateAccountResponsePayload!
     deleteTransaction: NexusGenRootTypes['Transaction']; // Transaction!
     importData: string; // String!
     login: NexusGenRootTypes['LoginResponsePayload']; // LoginResponsePayload!
     loginWithGoogle: NexusGenRootTypes['LoginResponsePayload']; // LoginResponsePayload!
+    updateCategory: NexusGenRootTypes['Category']; // Category!
     updateTransaction: NexusGenRootTypes['Transaction']; // Transaction!
   }
   Query: { // field return type
@@ -185,8 +191,10 @@ export interface NexusGenFieldTypes {
 
 export interface NexusGenFieldTypeNames {
   Category: { // field return type name
+    active: 'Boolean'
     createdAt: 'date'
     description: 'String'
+    emoji: 'String'
     id: 'String'
     name: 'String'
     slug: 'String'
@@ -208,12 +216,14 @@ export interface NexusGenFieldTypeNames {
     user: 'User'
   }
   Mutation: { // field return type name
+    addCategory: 'Category'
     addTransaction: 'Transaction'
     createAccount: 'CreateAccountResponsePayload'
     deleteTransaction: 'Transaction'
     importData: 'String'
     login: 'LoginResponsePayload'
     loginWithGoogle: 'LoginResponsePayload'
+    updateCategory: 'Category'
     updateTransaction: 'Transaction'
   }
   Query: { // field return type name
@@ -254,6 +264,13 @@ export interface NexusGenFieldTypeNames {
 
 export interface NexusGenArgTypes {
   Mutation: {
+    addCategory: { // args
+      active?: boolean | null; // Boolean
+      description?: string | null; // String
+      emoji?: string | null; // String
+      name?: string | null; // String
+      type?: string | null; // String
+    }
     addTransaction: { // args
       amount?: number | null; // Float
       categoryId?: string | null; // String
@@ -278,6 +295,14 @@ export interface NexusGenArgTypes {
     }
     loginWithGoogle: { // args
       idToken: string; // String!
+    }
+    updateCategory: { // args
+      active?: boolean | null; // Boolean
+      description?: string | null; // String
+      emoji?: string | null; // String
+      id?: string | null; // String
+      name?: string | null; // String
+      type?: string | null; // String
     }
     updateTransaction: { // args
       amount?: number | null; // Float

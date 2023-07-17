@@ -19,6 +19,63 @@ export const ALL_CATEGORIES_QUERY = gql`
       id
       name
       type
+      emoji
+      description
+      active
+    }
+  }
+`
+
+export const ADD_CATEGORY_MUTATION = gql`
+  mutation ADD_CATEGORY_MUTATION(
+    $name: String!
+    $emoji: String
+    $description: String
+    $type: String
+    $active: Boolean
+  ) {
+    addCategory(
+      name: $name
+      emoji: $emoji
+      description: $description
+      type: $type
+      active: $active
+    ) {
+      id
+      name
+      emoji
+      description
+      type
+      active
+      createdAt
+    }
+  }
+`
+
+export const UPDATE_CATEGORY_MUTATION = gql`
+  mutation UPDATE_CATEGORY_MUTATION(
+    $id: String!
+    $name: String!
+    $emoji: String
+    $description: String
+    $type: String
+    $active: Boolean
+  ) {
+    updateCategory(
+      id: $id
+      name: $name
+      emoji: $emoji
+      description: $description
+      type: $type
+      active: $active
+    ) {
+      id
+      name
+      emoji
+      description
+      type
+      active
+      createdAt
     }
   }
 `

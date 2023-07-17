@@ -36,9 +36,10 @@ const navItems = [
     path: '/dashboard/budgeting',
   },
   {
-    title: 'Accounts',
-    path: '/dashboard/accounts',
+    title: 'Categories',
+    path: '/dashboard/categories',
   },
+
   {
     title: 'Import Data',
     path: '/dashboard/import-data',

@@ -1,4 +1,10 @@
-import { ObjectDefinitionBlock, objectType } from 'nexus/dist/core'
+import {
+  booleanArg,
+  nullable,
+  ObjectDefinitionBlock,
+  objectType,
+  stringArg,
+} from 'nexus/dist/core'
 import { Context } from '../shared/context'
 
 export const Category = objectType({
@@ -9,6 +15,8 @@ export const Category = objectType({
     t.nullable.string('slug')
     t.nullable.string('type')
     t.nullable.string('description')
+    t.nullable.string('emoji')
+    t.nullable.boolean('active')
     t.nullable.list.field('transactions', {
       type: 'Transaction',
       resolve: async (parent: any, _args: any, ctx: Context) => {
@@ -26,3 +34,20 @@ export const Category = objectType({
     })
   },
 })
+
+export const CreateCategoryArgs = {
+  name: stringArg(),
+  emoji: nullable(stringArg()),
+  description: nullable(stringArg()),
+  type: nullable(stringArg()),
+  active: nullable(booleanArg()),
+}
+
+export const UpdateCategoryArgs = {
+  id: stringArg(),
+  name: stringArg(),
+  emoji: nullable(stringArg()),
+  description: nullable(stringArg()),
+  type: nullable(stringArg()),
+  active: nullable(booleanArg()),
+}
