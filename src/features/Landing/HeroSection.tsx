@@ -1,4 +1,9 @@
-import { Login, Mediation, SettingsOverscan, Token } from '@mui/icons-material'
+import {
+  ImportExport,
+  Login,
+  Money,
+  RotateLeftTwoTone,
+} from '@mui/icons-material'
 import { Box, Button, Typography } from '@mui/material'
 import Container from '@mui/material/Container'
 import Grid from '@mui/material/Grid'
@@ -6,7 +11,6 @@ import Icon from '@mui/material/Icon'
 import Stack from '@mui/material/Stack'
 import Image from 'next/image'
 import Link from 'next/link'
-import { HiArrowSmRight } from 'react-icons/hi'
 
 function HeroSection() {
   return (
@@ -78,79 +82,45 @@ function HeroSection() {
             sx={{ ml: { xs: -2, lg: 'auto' }, mt: { xs: 6, lg: 0 } }}
           >
             <Stack>
-              <Box display='flex' alignItems='center' p={2}>
-                <Box
-                  sx={{
-                    width: '3rem',
-                    height: '3rem',
-                    background: '#eeeeee',
-                    color: 'white',
-                    coloredShadow: 'info',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    borderRadius: 'xl',
-                  }}
-                >
-                  <Icon fontSize='small'>
-                    <Mediation />
-                  </Icon>
+              {[
+                {
+                  icon: <Money />,
+                  title: 'Create budgets and track your expenses',
+                  description: 'Budget on monthly or annual basis',
+                },
+                {
+                  icon: <RotateLeftTwoTone />,
+                  title: 'Add recurring expenses and incomes only once',
+                  description: 'Let the app do the work for you',
+                },
+                {
+                  icon: <ImportExport />,
+                  title: 'Import and export your data',
+                  description: 'CSV and Google Spreadsheet support',
+                },
+              ].map((item) => (
+                <Box display='flex' alignItems='center' p={2} key={item.title}>
+                  <Box
+                    sx={{
+                      width: '3rem',
+                      height: '3rem',
+                      color: 'white',
+                      coloredShadow: 'info',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      borderRadius: 'xl',
+                    }}
+                  >
+                    <Icon fontSize='small'>{item.icon}</Icon>
+                  </Box>
+                  <Typography variant='body2' color='text' pl={2}>
+                    {item.title}
+                    <br />
+                    {item.description}
+                  </Typography>
                 </Box>
-                <Typography variant='body2' color='text' pl={2}>
-                  Create budgets and track your expenses
-                  <br />
-                  Budget on monthly or annual basis
-                </Typography>
-              </Box>
-              <Box display='flex' alignItems='center' p={2}>
-                <Box
-                  sx={{
-                    width: '3rem',
-                    height: '3rem',
-                    background: '#eeeeee',
-                    color: 'white',
-                    coloredShadow: 'info',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    borderRadius: 'xl',
-                  }}
-                >
-                  <Icon fontSize='small'>
-                    <SettingsOverscan />
-                  </Icon>
-                </Box>
-                <Typography variant='body2' color='text' pl={2}>
-                  Add recurring expenses and incomes only once
-                  <br />
-                  Let the app do the work for you
-                </Typography>
-              </Box>
-              <Box display='flex' alignItems='center' p={2}>
-                <Box
-                  sx={{
-                    width: '3rem',
-                    height: '3rem',
-                    variant: 'gradient',
-                    background: '#eeeeee',
-                    color: 'white',
-                    coloredShadow: 'info',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    borderRadius: 'xl',
-                  }}
-                >
-                  <Icon fontSize='small'>
-                    <Token />
-                  </Icon>
-                </Box>
-                <Typography variant='body2' color='text' pl={2}>
-                  Import and export your data
-                  <br />
-                  CSV and Google Spreadsheet support
-                </Typography>
-              </Box>
+              ))}
             </Stack>
           </Grid>
         </Grid>
