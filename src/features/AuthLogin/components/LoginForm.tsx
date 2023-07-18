@@ -22,16 +22,16 @@ import {
 import {
   removeAccessToken,
   removeCurrentUser,
-} from '../../utils/localStorageUtils'
+} from '../../../utils/localStorageUtils'
 import { toast } from 'react-hot-toast'
 import Router from 'next/router'
-import { updateAuthState } from '../../store/slices/auth.slice'
+import { updateAuthState } from '../../../store/slices/auth.slice'
 import { useMutation } from '@apollo/client'
-import { LOGIN_MUTATION } from '../../lib/graphql/queries'
-import { useAppDispatch } from '../../store/hooks'
+import { LOGIN_MUTATION } from '../../../lib/graphql/queries'
+import { useAppDispatch } from '../../../store/hooks'
 import { Visibility, VisibilityOff } from '@mui/icons-material'
 
-const LoginForm = ({ ...others }) => {
+const LoginForm = () => {
   const theme = useTheme()
   const matchDownSM = useMediaQuery(theme.breakpoints.down('md'))
 

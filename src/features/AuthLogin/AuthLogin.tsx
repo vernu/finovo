@@ -1,7 +1,7 @@
 import { Divider, Grid, Stack } from '@mui/material'
-import LoginForm from '../features/AuthLogin/components/LoginForm'
-import { withDefaultLayout } from '../HOC/withDefaultLayout'
-const Login = () => {
+import LoginForm from './components/LoginForm'
+
+const AuthLogin = () => {
   return (
     <>
       <Grid
@@ -39,7 +39,6 @@ const Login = () => {
                 <Grid item xs={12}>
                   <Grid
                     container
-                    // direction={matchDownSM ? 'column-reverse' : 'row'}
                     direction={'row'}
                     alignItems='center'
                     justifyContent='center'
@@ -74,12 +73,9 @@ const Login = () => {
             </Grid>
           </Grid>
         </Grid>
-        <Grid item xs={12} sx={{ m: 3, mt: 1 }}>
-          {/* <AuthFooter /> */}
-        </Grid>
       </Grid>
     </>
   )
 }
 
-export default withDefaultLayout(Login)
+export default AuthLogin
