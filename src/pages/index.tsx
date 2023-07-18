@@ -1,11 +1,10 @@
-import HeroSection from '../components/landing/HeroSection'
+import Landing from '../features/Landing/Landing'
 import { withDefaultLayout } from '../HOC/withDefaultLayout'
-const LandingPage = () => {
-  return (
-    <>
-      <HeroSection />
-    </>
-  )
-}
+
+const LandingPage = () => (
+  <>
+    <Landing />
+  </>
+)
 
 export default withDefaultLayout(LandingPage)
