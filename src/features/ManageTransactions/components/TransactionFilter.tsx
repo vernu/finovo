@@ -14,13 +14,13 @@ import {
   TextField,
 } from '@mui/material'
 import { gql, useQuery } from '@apollo/client'
-import { useAppDispatch, useAppSelector } from '../../store/hooks'
+import { useAppDispatch, useAppSelector } from '../../../store/hooks'
 import {
   selectTransactions,
   updateFilters,
-} from '../../store/slices/transaction.slice'
-import { TRANSACTION_PERIOD_FILTER_OPTIONS } from '../../lib/constants/filters'
-import { ALL_CATEGORIES_QUERY } from '../../lib/graphql/queries'
+} from '../../../store/slices/transaction.slice'
+import { TRANSACTION_PERIOD_FILTER_OPTIONS } from '../../../lib/constants/filters'
+import { ALL_CATEGORIES_QUERY } from '../../../lib/graphql/queries'
 
 export const TransactionFilter = () => {
   const { filters } = useAppSelector(selectTransactions)

@@ -19,7 +19,7 @@ import { useMutation, useQuery } from '@apollo/client'
 import {
   ADD_TRANSACTION_MUTATION,
   ALL_CATEGORIES_QUERY,
-} from '../../lib/graphql/queries'
+} from '../../../lib/graphql/queries'
 
 export default function NewTransactionModal() {
   const [open, setOpen] = useState(false)

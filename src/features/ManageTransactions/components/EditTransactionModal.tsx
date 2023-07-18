@@ -19,7 +19,7 @@ import { useMutation, useQuery } from '@apollo/client'
 import {
   ALL_CATEGORIES_QUERY,
   UPDATE_TRANSACTION_MUTATION,
-} from '../../lib/graphql/queries'
+} from '../../../lib/graphql/queries'
 import { Edit } from '@mui/icons-material'
 
 export interface EditTransactionModalProps {
