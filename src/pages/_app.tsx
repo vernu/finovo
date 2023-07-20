@@ -8,11 +8,14 @@ import { Toaster } from 'react-hot-toast'
 import ConfirmModal from '../components/common/ConfirmModal'
 import { ThemeProvider, createTheme } from '@mui/material/styles'
 import CssBaseline from '@mui/material/CssBaseline'
+import useAppTheme from '../hooks/useAppTheme'
+import { PaletteMode } from '@mui/material'
 
 function MyApp({ Component, pageProps }: AppProps) {
+  const { appTheme, setAppTheme } = useAppTheme()
   const darkTheme = createTheme({
     palette: {
-      mode: 'dark',
+      mode: appTheme as PaletteMode,
       primary: {
         main: '#00FF00',
       },
