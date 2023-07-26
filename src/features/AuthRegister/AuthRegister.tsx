@@ -1,8 +1,8 @@
 import { Divider, Grid, Stack } from '@mui/material'
 import Link from 'next/link'
-import LoginForm from './components/LoginForm'
+import RegisterForm from './components/RegisterForm'
 
-const AuthLogin = () => {
+const AuthRegister = () => {
   return (
     <>
       <Grid
@@ -54,7 +54,7 @@ const AuthLogin = () => {
                   </Grid>
                 </Grid>
                 <Grid item xs={12}>
-                  <LoginForm />
+                  <RegisterForm />
                 </Grid>
                 <Grid item xs={12}>
                   <Divider />
@@ -67,9 +67,7 @@ const AuthLogin = () => {
                     alignItems='center'
                     xs={12}
                   >
-                    <Link href='/register' passHref>
-                      Don&apos;t have an account?
-                    </Link>
+                    <Link href='/login' passHref>Login Instead?</Link>
                   </Grid>
                 </Grid>
               </Grid>
@@ -81,4 +79,4 @@ const AuthLogin = () => {
   )
 }
 
-export default AuthLogin
+export default AuthRegister

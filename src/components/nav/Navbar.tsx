@@ -83,7 +83,7 @@ export default function Navbar() {
 
             <Button
               component={Link}
-              href={isAuthenticated ? '/dashboard' : '/login'}
+              href={isAuthenticated ? '/dashboard' : '/register'}
               variant='contained'
               color='primary'
               sx={{

@@ -50,7 +50,7 @@ function HeroSection() {
                 <Box>
                   <Button
                     component={Link}
-                    href='/login'
+                    href='/register'
                     variant='contained'
                     color='primary'
                     sx={{

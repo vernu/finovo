@@ -13,6 +13,19 @@ export const LOGIN_MUTATION = gql`
   }
 `
 
+export const REGISTER_USER_MUTATION = gql`
+  mutation Register($name: String!, $email: String!, $password: String!) {
+    createAccount(name: $name, email: $email, password: $password) {
+      user {
+        id
+        name
+        email
+      }
+      token
+    }
+  }
+`
+
 export const ALL_CATEGORIES_QUERY = gql`
   query ALL_CATEGORIES_QUERY {
     categories {
