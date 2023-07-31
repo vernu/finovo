@@ -17,6 +17,7 @@ model User {
   createdAt    DateTime      @default(now())
   updatedAt    DateTime      @updatedAt
   categories   Category[]
+  budgets      Budget[]
 }
 
 model Category {
@@ -32,6 +33,7 @@ model Category {
   userId       String        @db.Uuid()
   createdAt    DateTime      @default(now())
   updatedAt    DateTime      @updatedAt
+  budgets      Budget[]
 
   @@index([userId])
   @@index([slug])
@@ -46,6 +48,7 @@ model Currency {
   transactions Transaction[]
   createdAt    DateTime      @default(now())
   updatedAt    DateTime      @updatedAt
+  budgets      Budget[]
 
   @@index([code])
 }
@@ -70,4 +73,25 @@ model Transaction {
   @@index(date)
   @@index(description)
   @@index([currencyId, userId, categoryId, date, description])
+}
+
+model Budget {
+  id            String    @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid() 
+  year          Int
+  budgetBasis   String?   @default("MONTHLY") @db.VarChar(10) // MONTHLY, YEARLY
+  monthlyBudget Float     @default(0)
+  yearlyBudget  Float     @default(0)
+  currency      Currency? @relation(fields: [currencyId], references: [id], onUpdate: Cascade, onDelete: Restrict)
+  currencyId    String?   @db.Uuid()
+  category      Category? @relation(fields: [categoryId], references: [id], onUpdate: Cascade, onDelete: Restrict)
+  categoryId    String?   @db.Uuid()
+  user          User?     @relation(fields: [userId], references: [id], onUpdate: Cascade, onDelete: Restrict)
+  userId        String?   @db.Uuid()
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([year, currencyId, categoryId, userId])
+  @@index([userId])
+  @@index([year, currencyId, categoryId, userId])
 }

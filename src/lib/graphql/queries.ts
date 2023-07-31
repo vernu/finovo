@@ -220,3 +220,100 @@ export const UPDATE_TRANSACTION_MUTATION = gql`
     }
   }
 `
+
+export const BUDGET_LIST_QUERY = gql`
+  query budgets(
+    $year: Int
+  ) {
+    budgets(
+      year: $year
+    ) {
+      id
+      year
+      budgetBasis
+      monthlyBudget
+      yearlyBudget
+      currency {
+        symbol
+        code
+      }
+      category {
+        id
+        name
+      }
+    }
+  }
+`
+
+export const ADD_BUDGET_MUTATION = gql`
+mutation AddBudget(
+  $year: Int
+  $categoryId: String
+  $currencyCode: String
+  $budgetBasis: String
+  $monthlyBudget: Float
+  $yearlyBudget: Float
+) {
+  addBudget(
+    year: $year
+    categoryId: $categoryId
+    currencyCode: $currencyCode
+    budgetBasis: $budgetBasis
+    monthlyBudget: $monthlyBudget
+    yearlyBudget: $yearlyBudget
+  ) {
+    year
+    budgetBasis
+    yearlyBudget
+    monthlyBudget
+    category {
+      name
+    }
+    currency {
+      code
+    }
+  }
+}
+`
+
+export const UPDATE_BUDGET_MUTATION = gql`
+mutation UpdateBudget(
+  $id: String
+  $year: Int
+  $categoryId: String
+  $currencyCode: String
+  $budgetBasis: String
+  $monthlyBudget: Float
+  $yearlyBudget: Float
+) {
+  updateBudget(
+    id: $id
+    year: $year
+    categoryId: $categoryId
+    currencyCode: $currencyCode
+    budgetBasis: $budgetBasis
+    monthlyBudget: $monthlyBudget
+    yearlyBudget: $yearlyBudget
+  ) {
+    year
+    budgetBasis
+    yearlyBudget
+    monthlyBudget
+    category {
+      id
+      name
+    }
+    currency {
+      code
+    }
+  }
+}
+`
+
+export const DELETE_BUDGET_MUTATION = gql`
+  mutation deleteBudget($id: String!) {
+    deleteBudget(id: $id) {
+      id
+    }
+  }
+`
