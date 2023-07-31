@@ -2,6 +2,19 @@
 ### Do not make changes to this file directly
 
 
+type Budget {
+  budgetBasis: String
+  category: Category
+  createdAt: date
+  currency: Currency
+  id: String!
+  monthlyBudget: Float
+  updatedAt: date
+  user: User
+  year: Int!
+  yearlyBudget: Float
+}
+
 type Category {
   active: Boolean
   createdAt: date
@@ -32,18 +45,22 @@ type LoginResponsePayload {
 }
 
 type Mutation {
+  addBudget(budgetBasis: String, categoryId: String, currencyCode: String, monthlyBudget: Float, year: Int, yearlyBudget: Float): Budget!
   addCategory(active: Boolean, description: String, emoji: String, name: String, type: String): Category!
   addTransaction(amount: Float, categoryId: String, currencyCode: String, date: String, description: String): Transaction!
   createAccount(email: String!, name: String!, password: String!): CreateAccountResponsePayload!
+  deleteBudget(id: String): Budget!
   deleteTransaction(id: String!): Transaction!
   importData(fileCategory: String!): String!
   login(email: String!, password: String!): LoginResponsePayload!
   loginWithGoogle(idToken: String!): LoginResponsePayload!
+  updateBudget(budgetBasis: String, categoryId: String, currencyCode: String, id: String, monthlyBudget: Float, year: Int, yearlyBudget: Float): Budget!
   updateCategory(active: Boolean, description: String, emoji: String, id: String, name: String, type: String): Category!
   updateTransaction(amount: Float, categoryId: String, currencyCode: String, date: String, description: String, id: String): Transaction!
 }
 
 type Query {
+  budgets(year: Int): [Budget]
   categories: [Category]
   category(id: Int!): Category
   transaction(id: String!): Transaction

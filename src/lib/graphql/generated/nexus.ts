@@ -53,6 +53,18 @@ export interface NexusGenScalars {
 }
 
 export interface NexusGenObjects {
+  Budget: { // root type
+    budgetBasis?: string | null; // String
+    category?: NexusGenRootTypes['Category'] | null; // Category
+    createdAt?: NexusGenScalars['date'] | null; // date
+    currency?: NexusGenRootTypes['Currency'] | null; // Currency
+    id: string; // String!
+    monthlyBudget?: number | null; // Float
+    updatedAt?: NexusGenScalars['date'] | null; // date
+    user?: NexusGenRootTypes['User'] | null; // User
+    year: number; // Int!
+    yearlyBudget?: number | null; // Float
+  }
   Category: { // root type
     active?: boolean | null; // Boolean
     description?: string | null; // String
@@ -117,6 +129,18 @@ export type NexusGenRootTypes = NexusGenObjects
 export type NexusGenAllTypes = NexusGenRootTypes & NexusGenScalars
 
 export interface NexusGenFieldTypes {
+  Budget: { // field return type
+    budgetBasis: string | null; // String
+    category: NexusGenRootTypes['Category'] | null; // Category
+    createdAt: NexusGenScalars['date'] | null; // date
+    currency: NexusGenRootTypes['Currency'] | null; // Currency
+    id: string; // String!
+    monthlyBudget: number | null; // Float
+    updatedAt: NexusGenScalars['date'] | null; // date
+    user: NexusGenRootTypes['User'] | null; // User
+    year: number; // Int!
+    yearlyBudget: number | null; // Float
+  }
   Category: { // field return type
     active: boolean | null; // Boolean
     createdAt: NexusGenScalars['date'] | null; // date
@@ -143,17 +167,21 @@ export interface NexusGenFieldTypes {
     user: NexusGenRootTypes['User'] | null; // User
   }
   Mutation: { // field return type
+    addBudget: NexusGenRootTypes['Budget']; // Budget!
     addCategory: NexusGenRootTypes['Category']; // Category!
     addTransaction: NexusGenRootTypes['Transaction']; // Transaction!
     createAccount: NexusGenRootTypes['CreateAccountResponsePayload']; // CreateAccountResponsePayload!
+    deleteBudget: NexusGenRootTypes['Budget']; // Budget!
     deleteTransaction: NexusGenRootTypes['Transaction']; // Transaction!
     importData: string; // String!
     login: NexusGenRootTypes['LoginResponsePayload']; // LoginResponsePayload!
     loginWithGoogle: NexusGenRootTypes['LoginResponsePayload']; // LoginResponsePayload!
+    updateBudget: NexusGenRootTypes['Budget']; // Budget!
     updateCategory: NexusGenRootTypes['Category']; // Category!
     updateTransaction: NexusGenRootTypes['Transaction']; // Transaction!
   }
   Query: { // field return type
+    budgets: Array<NexusGenRootTypes['Budget'] | null> | null; // [Budget]
     categories: Array<NexusGenRootTypes['Category'] | null> | null; // [Category]
     category: NexusGenRootTypes['Category'] | null; // Category
     transaction: NexusGenRootTypes['Transaction'] | null; // Transaction
@@ -190,6 +218,18 @@ export interface NexusGenFieldTypes {
 }
 
 export interface NexusGenFieldTypeNames {
+  Budget: { // field return type name
+    budgetBasis: 'String'
+    category: 'Category'
+    createdAt: 'date'
+    currency: 'Currency'
+    id: 'String'
+    monthlyBudget: 'Float'
+    updatedAt: 'date'
+    user: 'User'
+    year: 'Int'
+    yearlyBudget: 'Float'
+  }
   Category: { // field return type name
     active: 'Boolean'
     createdAt: 'date'
@@ -216,17 +256,21 @@ export interface NexusGenFieldTypeNames {
     user: 'User'
   }
   Mutation: { // field return type name
+    addBudget: 'Budget'
     addCategory: 'Category'
     addTransaction: 'Transaction'
     createAccount: 'CreateAccountResponsePayload'
+    deleteBudget: 'Budget'
     deleteTransaction: 'Transaction'
     importData: 'String'
     login: 'LoginResponsePayload'
     loginWithGoogle: 'LoginResponsePayload'
+    updateBudget: 'Budget'
     updateCategory: 'Category'
     updateTransaction: 'Transaction'
   }
   Query: { // field return type name
+    budgets: 'Budget'
     categories: 'Category'
     category: 'Category'
     transaction: 'Transaction'
@@ -264,6 +308,14 @@ export interface NexusGenFieldTypeNames {
 
 export interface NexusGenArgTypes {
   Mutation: {
+    addBudget: { // args
+      budgetBasis?: string | null; // String
+      categoryId?: string | null; // String
+      currencyCode?: string | null; // String
+      monthlyBudget?: number | null; // Float
+      year?: number | null; // Int
+      yearlyBudget?: number | null; // Float
+    }
     addCategory: { // args
       active?: boolean | null; // Boolean
       description?: string | null; // String
@@ -283,6 +335,9 @@ export interface NexusGenArgTypes {
       name: string; // String!
       password: string; // String!
     }
+    deleteBudget: { // args
+      id?: string | null; // String
+    }
     deleteTransaction: { // args
       id: string; // String!
     }
@@ -295,6 +350,15 @@ export interface NexusGenArgTypes {
     }
     loginWithGoogle: { // args
       idToken: string; // String!
+    }
+    updateBudget: { // args
+      budgetBasis?: string | null; // String
+      categoryId?: string | null; // String
+      currencyCode?: string | null; // String
+      id?: string | null; // String
+      monthlyBudget?: number | null; // Float
+      year?: number | null; // Int
+      yearlyBudget?: number | null; // Float
     }
     updateCategory: { // args
       active?: boolean | null; // Boolean
@@ -314,6 +378,9 @@ export interface NexusGenArgTypes {
     }
   }
   Query: {
+    budgets: { // args
+      year?: number | null; // Int
+    }
     category: { // args
       id: number; // Int!
     }
