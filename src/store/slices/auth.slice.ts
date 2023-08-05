@@ -1,3 +1,4 @@
+import Router from 'next/router'
 import { createSlice, isAnyOf } from '@reduxjs/toolkit'
 import type { PayloadAction } from '@reduxjs/toolkit'
 
@@ -30,6 +31,7 @@ export const authSlice = createSlice({
       removeCurrentUser()
       state.accessToken = null
       state.currentUser = null
+      Router.push('/login')
     },
     updateAuthState: (state, action: PayloadAction<any>) => {
       const { accessToken, currentUser } = action.payload
