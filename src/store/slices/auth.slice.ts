@@ -1,3 +1,4 @@
+import { toast } from 'react-hot-toast';
 import Router from 'next/router'
 import { createSlice, isAnyOf } from '@reduxjs/toolkit'
 import type { PayloadAction } from '@reduxjs/toolkit'
@@ -32,6 +33,7 @@ export const authSlice = createSlice({
       state.accessToken = null
       state.currentUser = null
       Router.push('/login')
+      toast.success('Logged out successfully')
     },
     updateAuthState: (state, action: PayloadAction<any>) => {
       const { accessToken, currentUser } = action.payload
