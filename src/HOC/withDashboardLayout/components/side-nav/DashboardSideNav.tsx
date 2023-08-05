@@ -14,8 +14,9 @@ import NavSection from './nav-section/NavSection'
 import useResponsive from '../../../../hooks/useResponsive'
 import SvgColor from './SvgColor'
 import { useRouter } from 'next/router'
-import { useAppSelector } from '../../../../store/hooks'
+import { useAppDispatch, useAppSelector } from '../../../../store/hooks'
 import { Logo } from '../../../../components/nav/Logo'
+import { logout } from '../../../../store/slices/auth.slice'
 
 const icon = (icon: string) => (
   <SvgColor src={icon} sx={{ width: 1, height: 1 }} />
@@ -73,6 +74,11 @@ export default function DashboardSideNav({ openNav, onCloseNav }: any) {
 
   const isDesktop = useResponsive('up', 'lg', null)
 
+  const dispatch = useAppDispatch()
+  const handleLogout = () => {
+    dispatch(logout())
+  }
+
   useEffect(() => {
     if (openNav) {
       onCloseNav()
@@ -123,7 +129,9 @@ export default function DashboardSideNav({ openNav, onCloseNav }: any) {
           spacing={3}
           sx={{ pt: 5, borderRadius: 2, position: 'relative' }}
         >
-          <Button variant='outlined'>Sign out</Button>
+          <Button variant='outlined' onClick={handleLogout}>
+            Logout
+          </Button>
         </Stack>
       </Box>
     </Box>
