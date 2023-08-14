@@ -4,13 +4,17 @@ import {
   deleteTransactionResolver,
   updateTransactionResolver,
 } from '../resolvers/transaction'
-import { CreateTransactionArgs, UpdateTransactionArgs } from '../types'
+import {
+  CreateTransactionArgs,
+  Transaction,
+  UpdateTransactionArgs,
+} from '../types'
 
 export const AddTransaction = extendType({
   type: 'Mutation',
   definition(t) {
     t.nonNull.field('addTransaction', {
-      type: 'Transaction',
+      type: Transaction,
       args: CreateTransactionArgs,
       resolve: createTransactionResolver,
     })
@@ -21,7 +25,7 @@ export const DeleteTransaction = extendType({
   type: 'Mutation',
   definition(t) {
     t.nonNull.field('deleteTransaction', {
-      type: 'Transaction',
+      type: Transaction,
       args: {
         id: nonNull(stringArg()),
       },
@@ -34,7 +38,7 @@ export const UpdateTransaction = extendType({
   type: 'Mutation',
   definition(t) {
     t.nonNull.field('updateTransaction', {
-      type: 'Transaction',
+      type: Transaction,
       args: UpdateTransactionArgs,
       resolve: updateTransactionResolver,
     })

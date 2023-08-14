@@ -9,21 +9,25 @@ import {
   transactionListInsightResolver,
   transactionListResolver,
 } from '../resolvers/transaction'
-import { TransactionListArgs } from '../types'
+import {
+  Transaction,
+  TransactionListArgs,
+  TransactionListInsight,
+} from '../types'
 import { isLoggedIn } from '../shared/authorize'
 
 export const TransactionQuery = extendType({
   type: 'Query',
   definition(t: ObjectDefinitionBlock<'Query'>) {
     t.list.field('transactions', {
-      type: 'Transaction',
+      type: Transaction,
       authorize: isLoggedIn,
       args: TransactionListArgs,
       resolve: transactionListResolver,
     })
 
     t.field('transaction', {
-      type: 'Transaction',
+      type: Transaction,
       authorize: isLoggedIn,
       args: {
         id: nonNull(stringArg()),
@@ -33,7 +37,7 @@ export const TransactionQuery = extendType({
 
     t.field('transactionListInsight', {
       args: TransactionListArgs,
-      type: 'TransactionListInsight',
+      type: TransactionListInsight,
       authorize: isLoggedIn,
       resolve: transactionListInsightResolver,
     })

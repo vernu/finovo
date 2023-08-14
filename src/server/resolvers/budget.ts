@@ -2,7 +2,7 @@ import { Context } from '../shared/context'
 
 export const budgetListResolver = async (
   _parent: any,
-  args: any,
+  args: { year?: number | null },
   ctx: Context
 ) => {
   if (ctx.user === null) {

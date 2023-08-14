@@ -1,12 +1,11 @@
 import { Context } from '../shared/context'
 import * as bcrypt from 'bcrypt'
-import { CreateAccountArgs } from '../types'
 import { generateToken } from '../utils/authUtils'
 import axios from 'axios'
 
 export const createAccountResolver = async (
   _root: any,
-  args: any,
+  args: { password: string; name: string; email: string },
   ctx: Context
 ) => {
   const hashedPassword = await bcrypt.hash(args.password, 10)
@@ -25,7 +24,7 @@ export const createAccountResolver = async (
 
 export const loginUserResolver = async (
   _root: any,
-  args: any,
+  args: { email: string; password: string },
   ctx: Context
 ) => {
   const user = await ctx.prisma.user.findUnique({

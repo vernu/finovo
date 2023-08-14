@@ -4,13 +4,19 @@ import {
   loginUserResolver,
   loginWithGoogleResolver,
 } from '../resolvers/auth'
-import { CreateAccountArgs, LoginArgs, LoginWithGoogleArgs } from '../types'
+import {
+  CreateAccountArgs,
+  CreateAccountResponsePayload,
+  LoginArgs,
+  LoginResponsePayload,
+  LoginWithGoogleArgs,
+} from '../types'
 
 export const CreateAccount = extendType({
   type: 'Mutation',
   definition(t) {
     t.nonNull.field('createAccount', {
-      type: 'CreateAccountResponsePayload',
+      type: CreateAccountResponsePayload,
       args: CreateAccountArgs,
       resolve: createAccountResolver,
     })
@@ -21,7 +27,7 @@ export const Login = extendType({
   type: 'Mutation',
   definition(t) {
     t.nonNull.field('login', {
-      type: 'LoginResponsePayload',
+      type: LoginResponsePayload,
       args: LoginArgs,
       resolve: loginUserResolver,
     })
@@ -32,7 +38,7 @@ export const LoginWithGoogle = extendType({
   type: 'Mutation',
   definition(t) {
     t.nonNull.field('loginWithGoogle', {
-      type: 'LoginResponsePayload',
+      type: LoginResponsePayload,
       args: LoginWithGoogleArgs,
       resolve: loginWithGoogleResolver,
     })

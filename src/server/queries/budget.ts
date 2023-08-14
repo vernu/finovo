@@ -1,5 +1,5 @@
 import { budgetListResolver } from './../resolvers/budget'
-import { BudgetListArgs } from './../types/budget'
+import { Budget, BudgetListArgs } from './../types/budget'
 import {
   extendType,
   nonNull,
@@ -13,7 +13,7 @@ export const BudgetQuery = extendType({
   type: 'Query',
   definition(t: ObjectDefinitionBlock<'Query'>) {
     t.list.field('budgets', {
-      type: 'Budget',
+      type: Budget,
       authorize: isLoggedIn,
       args: BudgetListArgs,
       resolve: budgetListResolver,
@@ -30,11 +30,7 @@ export const BudgetQuery = extendType({
   },
 })
 
-
-
 export const CompareBudgetWithActuals = extendType({
   type: 'Query',
-  definition(t: ObjectDefinitionBlock<'Query'>) {
-    
-  }
+  definition(t: ObjectDefinitionBlock<'Query'>) {},
 })

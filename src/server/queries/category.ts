@@ -8,22 +8,22 @@ import {
   categoryListResolver,
   singleCategoryResolver,
 } from '../resolvers/category'
+import { Category } from '../types'
 
 export const CategoryQuery = extendType({
   type: 'Query',
   definition(t: ObjectDefinitionBlock<'Query'>) {
     t.list.field('categories', {
-      type: 'Category',
+      type: Category,
       resolve: categoryListResolver,
     })
 
     t.field('category', {
-      type: 'Category',
+      type: Category,
       args: {
         id: nonNull(intArg()),
       },
       resolve: singleCategoryResolver,
     })
   },
-  
 })
