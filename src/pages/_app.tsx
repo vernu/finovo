@@ -10,6 +10,7 @@ import { ThemeProvider, createTheme } from '@mui/material/styles'
 import CssBaseline from '@mui/material/CssBaseline'
 import useAppTheme from '../hooks/useAppTheme'
 import { PaletteMode } from '@mui/material'
+import Analytics from '../features/Analytics/Analytics'
 
 function MyApp({ Component, pageProps }: AppProps) {
   const { appTheme, setAppTheme } = useAppTheme()
@@ -30,6 +31,7 @@ function MyApp({ Component, pageProps }: AppProps) {
       <ThemeProvider theme={darkTheme}>
         <CssBaseline />
         <ApolloProvider client={apolloClient}>
+          <Analytics />
           <Toaster />
           <ConfirmModal />
           <Component {...pageProps} />
