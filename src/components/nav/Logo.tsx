@@ -11,7 +11,7 @@ export const Logo = () => (
         color: 'gray',
       }}
     >
-      ❍ Personal Finance App
+      ❍ Finovo
     </Box>
   </Link>
 )
