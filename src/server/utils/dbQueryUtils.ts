@@ -69,6 +69,7 @@ export const extractWhereClauseForTransaction = (filterParams: any) => {
   filterParams.descriptionContains &&
     (where.description = {
       contains: filterParams.descriptionContains,
+      mode: 'insensitive', 
     })
 
   return where
