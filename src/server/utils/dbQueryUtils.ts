@@ -31,8 +31,23 @@ export const extractWhereClauseForTransaction = (filterParams: any) => {
     LAST_30_DAYS: {
       gte: new Date(new Date().setDate(new Date().getDate() - 30)),
     },
+    LAST_45_DAYS: {
+      gte: new Date(new Date().setDate(new Date().getDate() - 45)),
+    },
+    LAST_60_DAYS: {
+      gte: new Date(new Date().setDate(new Date().getDate() - 60)),
+    },
     LAST_90_DAYS: {
       gte: new Date(new Date().setDate(new Date().getDate() - 90)),
+    },
+    LAST_4_MONTHS: {
+      gte: new Date(new Date().setDate(new Date().getDate() - 120)),
+    },
+    LAST_6_MONTHS: {
+      gte: new Date(new Date().setDate(new Date().getDate() - 180)),
+    },
+    LAST_9_MONTHS: {
+      gte: new Date(new Date().setDate(new Date().getDate() - 240)),
     },
     THIS_MONTH: {
       gte: new Date(new Date().getFullYear(), new Date().getMonth(), 1),
