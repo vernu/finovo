@@ -28,9 +28,31 @@ export const TRANSACTION_PERIOD_FILTER_OPTIONS = [
     key: 'LAST_30_DAYS',
     value: 'Last 30 Days',
   },
+
+  {
+    key: 'LAST_45_DAYS',
+    value: 'Last 45 Days',
+  },
+
+  {
+    key: 'LAST_60_DAYS',
+    value: 'Last 60 Days',
+  },
   {
     key: 'LAST_90_DAYS',
     value: 'Last 90 Days',
+  },
+  {
+    key: 'LAST_4_MONTHS',
+    value: 'Last 4 Months',
+  },
+  {
+    key: 'LAST_6_MONTHS',
+    value: 'Last 6 Months',
+  },
+  {
+    key: 'LAST_9_MONTHS',
+    value: 'Last 9 Months',
   },
   {
     key: 'THIS_MONTH',
