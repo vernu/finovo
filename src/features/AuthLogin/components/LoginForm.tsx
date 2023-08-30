@@ -28,6 +28,7 @@ import { updateAuthState } from '../../../store/slices/auth.slice'
 import { useAppDispatch } from '../../../store/hooks'
 import { Visibility, VisibilityOff } from '@mui/icons-material'
 import { useLoginMutation } from '../../../lib/graphql/generated/graphql'
+import Image from 'next/image'
 
 const LoginForm = () => {
   const theme = useTheme()
@@ -103,8 +104,8 @@ const LoginForm = () => {
             }
           >
             <Box sx={{ mr: { xs: 1, sm: 2, width: 20 } }}>
-              <img
-                src={'/icons/google.svg'}
+              <Image
+                src='/icons/google.svg'
                 alt='google'
                 width={16}
                 height={16}
