@@ -6,32 +6,31 @@ import {
   GridValueGetterParams,
 } from '@mui/x-data-grid'
 import { TransactionFilter } from './components/TransactionFilter'
-import { useMutation, useQuery } from '@apollo/client'
 import { useAppDispatch, useAppSelector } from '../../store/hooks'
 import { selectTransactions } from '../../store/slices/transaction.slice'
 import TransactionInsight from './components/TransactionInsight'
 import NewTransactionModal from './components/NewTransactionModal'
 import { Delete, Edit } from '@mui/icons-material'
-import {
-  DELETE_TRANSACTION_MUTATION,
-  TRANSACTION_LIST_QUERY,
-} from '../../lib/graphql/queries'
 import { Grid, IconButton } from '@mui/material'
 import { toast } from 'react-hot-toast'
 import { openConfirmModal } from '../../store/slices/confirmModal.slice'
 import EditTransactionModal from './components/EditTransactionModal'
 
 import { formatAmount } from '../../utils/stringFormattingUtils'
+import {
+  useDeleteTransactionMutation,
+  useTransactionsQuery,
+} from '../../lib/graphql/generated/graphql'
 
 const ManageTransactions = () => {
   const { filters } = useAppSelector(selectTransactions)
 
-  const transactionListQuery = useQuery(TRANSACTION_LIST_QUERY, {
+  const transactionListQuery = useTransactionsQuery({
     variables: filters,
   })
 
   const [deleteTransaction, { loading: deleting, error: deleteError }] =
-    useMutation(DELETE_TRANSACTION_MUTATION, {
+    useDeleteTransactionMutation({
       refetchQueries: ['transactions', 'transactionListInsight'],
     })
 

@@ -1,6 +1,6 @@
 import { gql } from '@apollo/client'
 
-export const LOGIN_MUTATION = gql`
+export const Login = gql`
   mutation Login($email: String!, $password: String!) {
     login(email: $email, password: $password) {
       user {
@@ -13,7 +13,7 @@ export const LOGIN_MUTATION = gql`
   }
 `
 
-export const REGISTER_USER_MUTATION = gql`
+export const Register = gql`
   mutation Register($name: String!, $email: String!, $password: String!) {
     createAccount(name: $name, email: $email, password: $password) {
       user {
@@ -39,8 +39,8 @@ export const Categories = gql`
   }
 `
 
-export const ADD_CATEGORY_MUTATION = gql`
-  mutation ADD_CATEGORY_MUTATION(
+export const AddCategory = gql`
+  mutation AddCategory(
     $name: String!
     $emoji: String
     $description: String
@@ -65,8 +65,8 @@ export const ADD_CATEGORY_MUTATION = gql`
   }
 `
 
-export const UPDATE_CATEGORY_MUTATION = gql`
-  mutation UPDATE_CATEGORY_MUTATION(
+export const UpdateCategory = gql`
+  mutation UpdateCategory(
     $id: String!
     $name: String!
     $emoji: String
@@ -93,8 +93,8 @@ export const UPDATE_CATEGORY_MUTATION = gql`
   }
 `
 
-export const TRANSACTION_LIST_QUERY = gql`
-  query transactions(
+export const Transactions = gql`
+  query Transactions(
     $period: String
     $currencyCodes: [String]
     $categoryIds: [String]
@@ -122,7 +122,7 @@ export const TRANSACTION_LIST_QUERY = gql`
   }
 `
 
-export const TRANSACTION_INSIGHT_QUERY = gql`
+export const TransactionListInsight = gql`
 query TransactionListInsight(
   $period: String
   $currencyCodes: [String]
@@ -148,8 +148,8 @@ query TransactionListInsight(
 }
 `
 
-export const ADD_TRANSACTION_MUTATION = gql`
-  mutation ADD_TRANSACTION_MUTATION(
+export const AddTransaction = gql`
+  mutation AddTransaction(
     $amount: Float!
     $categoryId: String!
     $currencyCode: String!
@@ -179,16 +179,16 @@ export const ADD_TRANSACTION_MUTATION = gql`
     }
   }
 `
-export const DELETE_TRANSACTION_MUTATION = gql`
-  mutation DELETE_TRANSACTION_MUTATION($id: String!) {
+export const DeleteTransaction = gql`
+  mutation DeleteTransaction($id: String!) {
     deleteTransaction(id: $id) {
       id
     }
   }
 `
 
-export const UPDATE_TRANSACTION_MUTATION = gql`
-  mutation UPDATE_TRANSACTION_MUTATION(
+export const UpdateTransaction = gql`
+  mutation UpdateTransaction(
     $id: String!
     $amount: Float!
     $categoryId: String!
@@ -221,7 +221,7 @@ export const UPDATE_TRANSACTION_MUTATION = gql`
   }
 `
 
-export const BUDGET_LIST_QUERY = gql`
+export const Budgets = gql`
   query budgets(
     $year: Int
   ) {
@@ -245,7 +245,7 @@ export const BUDGET_LIST_QUERY = gql`
   }
 `
 
-export const ADD_BUDGET_MUTATION = gql`
+export const AddBudget = gql`
 mutation AddBudget(
   $year: Int
   $categoryId: String
@@ -276,7 +276,7 @@ mutation AddBudget(
 }
 `
 
-export const UPDATE_BUDGET_MUTATION = gql`
+export const UpdateBudget = gql`
 mutation UpdateBudget(
   $id: String
   $year: Int
@@ -310,7 +310,7 @@ mutation UpdateBudget(
 }
 `
 
-export const DELETE_BUDGET_MUTATION = gql`
+export const DeleteBudget = gql`
   mutation deleteBudget($id: String!) {
     deleteBudget(id: $id) {
       id

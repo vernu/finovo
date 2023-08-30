@@ -15,12 +15,11 @@ import {
   Select,
 } from '@mui/material'
 import { toast } from 'react-hot-toast'
-import { useMutation, useQuery } from '@apollo/client'
-import {
-  UPDATE_TRANSACTION_MUTATION,
-} from '../../../lib/graphql/queries'
 import { Edit } from '@mui/icons-material'
-import { useCategoriesQuery } from '../../../lib/graphql/generated/graphql'
+import {
+  useCategoriesQuery,
+  useUpdateTransactionMutation,
+} from '../../../lib/graphql/generated/graphql'
 
 export interface EditTransactionModalProps {
   transaction: any
@@ -30,13 +29,10 @@ export default function EditTransactionModal({
 }: EditTransactionModalProps) {
   const [open, setOpen] = useState(false)
 
-  const categoriesQuery =  useCategoriesQuery()
-  const [updateTransaction, { loading, error }] = useMutation(
-    UPDATE_TRANSACTION_MUTATION,
-    {
-      refetchQueries: ['transactions', 'transactionListInsight'],
-    }
-  )
+  const categoriesQuery = useCategoriesQuery()
+  const [updateTransaction, { loading, error }] = useUpdateTransactionMutation({
+    refetchQueries: ['transactions', 'transactionListInsight'],
+  })
 
   const handleClickOpen = () => {
     setOpen(true)

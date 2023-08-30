@@ -1,13 +1,12 @@
-import { useQuery } from '@apollo/client'
 import { Grid, Paper, Typography } from '@mui/material'
 import React from 'react'
 import { useSelector } from 'react-redux'
-import { TRANSACTION_INSIGHT_QUERY } from '../../../lib/graphql/queries'
 import { selectTransactions } from '../../../store/slices/transaction.slice'
+import { useTransactionListInsightQuery } from '../../../lib/graphql/generated/graphql'
 
 export default function TransactionInsight() {
   const { filters } = useSelector(selectTransactions)
-  const transactionInsightQuery = useQuery(TRANSACTION_INSIGHT_QUERY, {
+  const transactionInsightQuery = useTransactionListInsightQuery({
     variables: filters,
   })
 
@@ -18,7 +17,7 @@ export default function TransactionInsight() {
           <Paper variant='outlined'>
             <Typography variant='body1' component='h2' padding={0.5}>
               {transactionInsightQuery.data?.transactionListInsight
-                .totalTransactions ?? '-:-'}{' '}
+                ?.totalTransactions ?? '-:-'}{' '}
               txs
               {transactionInsightQuery.data?.transactionListInsight?.currencies?.map(
                 (i: any) => (

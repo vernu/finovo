@@ -15,11 +15,10 @@ import {
   Select,
 } from '@mui/material'
 import { toast } from 'react-hot-toast'
-import { useMutation, useQuery } from '@apollo/client'
 import {
-  ADD_TRANSACTION_MUTATION,
-} from '../../../lib/graphql/queries'
-import { useCategoriesQuery } from '../../../lib/graphql/generated/graphql'
+  useAddTransactionMutation,
+  useCategoriesQuery,
+} from '../../../lib/graphql/generated/graphql'
 
 export default function NewTransactionModal() {
   const [open, setOpen] = useState(false)
@@ -69,9 +68,7 @@ export default function NewTransactionModal() {
     currencyCode: 'ETB',
   })
 
-  const [addTransaction, { loading, error }] = useMutation(
-    ADD_TRANSACTION_MUTATION
-  )
+  const [addTransaction, { loading, error }] = useAddTransactionMutation()
 
   return (
     <div>

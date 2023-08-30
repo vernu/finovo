@@ -1,4 +1,3 @@
-import { useMutation } from '@apollo/client'
 import {
   TableRow,
   TableCell,
@@ -11,13 +10,18 @@ import {
 import { useState } from 'react'
 import { toast } from 'react-hot-toast'
 import {
-  ADD_CATEGORY_MUTATION,
-  UPDATE_CATEGORY_MUTATION,
-} from '../../lib/graphql/queries'
+  Category,
+  useAddCategoryMutation,
+  useUpdateCategoryMutation,
+} from '../../lib/graphql/generated/graphql'
 
-export const CategoryRow = ({ category }: any) => {
+interface CategoryRowProps {
+  category: Category
+}
+
+export const CategoryRow = ({ category }: CategoryRowProps) => {
   const [isEditing, setIsEditing] = useState(!category.id || false)
-  const [formValue, setFormValue] = useState(category)
+  const [formValue, setFormValue] = useState<Category>(category)
 
   const handleChange = (e: any) => {
     if (e.target.name === 'active') {
@@ -32,8 +36,8 @@ export const CategoryRow = ({ category }: any) => {
       padding: '10px 5px',
     },
   }
-  const [addCategory, { loading, error }] = useMutation(ADD_CATEGORY_MUTATION)
-  const [updateCategory] = useMutation(UPDATE_CATEGORY_MUTATION)
+  const [addCategory, { loading, error }] = useAddCategoryMutation()
+  const [updateCategory] = useUpdateCategoryMutation()
 
   const handleSave = async () => {
     console.log(formValue)
@@ -46,7 +50,7 @@ export const CategoryRow = ({ category }: any) => {
 
   const handleCreateCategory = () => {
     addCategory({
-      variables: formValue,
+      variables: { ...formValue, name: formValue.name || '' },
       refetchQueries: ['categories'],
     })
       .then((res) => {
@@ -60,7 +64,7 @@ export const CategoryRow = ({ category }: any) => {
 
   const handleUpdateCategory = () => {
     updateCategory({
-      variables: formValue,
+      variables: { ...formValue, name: formValue?.name ?? '' },
       refetchQueries: ['categories'],
     })
       .then((res) => {
@@ -97,7 +101,7 @@ export const CategoryRow = ({ category }: any) => {
             <TextField
               variant='outlined'
               name='name'
-              value={formValue.name}
+              value={formValue.name ?? ''}
               size='small'
               onChange={handleChange}
               margin='none'
@@ -156,7 +160,7 @@ export const CategoryRow = ({ category }: any) => {
       <TableCell>
         <Switch
           disabled={!isEditing}
-          checked={formValue.active}
+          checked={formValue?.active ?? true}
           name='active'
           onChange={handleChange}
           inputProps={inputProps}

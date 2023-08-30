@@ -1,5 +1,4 @@
 import { useState } from 'react'
-
 import { useTheme } from '@mui/material/styles'
 import {
   Box,
@@ -26,10 +25,9 @@ import {
 import { toast } from 'react-hot-toast'
 import Router from 'next/router'
 import { updateAuthState } from '../../../store/slices/auth.slice'
-import { useMutation } from '@apollo/client'
-import { LOGIN_MUTATION } from '../../../lib/graphql/queries'
 import { useAppDispatch } from '../../../store/hooks'
 import { Visibility, VisibilityOff } from '@mui/icons-material'
+import { useLoginMutation } from '../../../lib/graphql/generated/graphql'
 
 const LoginForm = () => {
   const theme = useTheme()
@@ -48,9 +46,8 @@ const LoginForm = () => {
 
   const dispatch = useAppDispatch()
 
-  const [mutate, { error, data, loading }] = useMutation(LOGIN_MUTATION, {
+  const [mutate, { error, data, loading }] = useLoginMutation({
     onCompleted: (data) => {
-      console.log(data)
       dispatch(
         updateAuthState({
           accessToken: data.login.token,

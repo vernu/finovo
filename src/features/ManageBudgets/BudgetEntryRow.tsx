@@ -1,4 +1,3 @@
-import { useMutation, useQuery } from '@apollo/client'
 import {
   TableRow,
   TableCell,
@@ -10,20 +9,20 @@ import {
 import { useState } from 'react'
 import { toast } from 'react-hot-toast'
 import {
-  ADD_BUDGET_MUTATION,
-  DELETE_BUDGET_MUTATION,
-  UPDATE_BUDGET_MUTATION,
-} from '../../lib/graphql/queries'
-import { useCategoriesQuery } from '../../lib/graphql/generated/graphql'
+  useAddBudgetMutation,
+  useCategoriesQuery,
+  useDeleteBudgetMutation,
+  useUpdateBudgetMutation,
+} from '../../lib/graphql/generated/graphql'
 
 export const BudgetEntryRow = ({ budget }: any) => {
-  const [addBudget] = useMutation(ADD_BUDGET_MUTATION, {
+  const [addBudget] = useAddBudgetMutation({
     refetchQueries: ['budgets'],
   })
-  const [updateBudget] = useMutation(UPDATE_BUDGET_MUTATION, {
+  const [updateBudget] = useUpdateBudgetMutation({
     refetchQueries: ['budgets'],
   })
-  const [deleteBudget] = useMutation(DELETE_BUDGET_MUTATION, {
+  const [deleteBudget] = useDeleteBudgetMutation({
     refetchQueries: ['budgets'],
   })
 

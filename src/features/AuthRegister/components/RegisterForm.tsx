@@ -1,5 +1,4 @@
 import { useState } from 'react'
-
 import { useTheme } from '@mui/material/styles'
 import {
   Box,
@@ -24,10 +23,9 @@ import {
 import { toast } from 'react-hot-toast'
 import Router from 'next/router'
 import { updateAuthState } from '../../../store/slices/auth.slice'
-import { useMutation } from '@apollo/client'
-import { REGISTER_USER_MUTATION } from '../../../lib/graphql/queries'
 import { useAppDispatch } from '../../../store/hooks'
 import { Visibility, VisibilityOff } from '@mui/icons-material'
+import { useRegisterMutation } from '../../../lib/graphql/generated/graphql'
 
 const RegisterForm = () => {
   const theme = useTheme()
@@ -47,26 +45,23 @@ const RegisterForm = () => {
 
   const dispatch = useAppDispatch()
 
-  const [mutate, { error, data, loading }] = useMutation(
-    REGISTER_USER_MUTATION,
-    {
-      onCompleted: (data) => {
-        dispatch(
-          updateAuthState({
-            accessToken: data.createAccount.token,
-            currentUser: data.createAccount.user,
-          })
-        )
-        toast.success('Signup successful')
-        Router.push('/dashboard')
-      },
-      onError: (err) => {
-        toast.error(err?.graphQLErrors?.[0]?.message ?? err.message)
-        removeCurrentUser()
-        removeAccessToken()
-      },
-    }
-  )
+  const [mutate, { error, data, loading }] = useRegisterMutation({
+    onCompleted: (data) => {
+      dispatch(
+        updateAuthState({
+          accessToken: data.createAccount.token,
+          currentUser: data.createAccount.user,
+        })
+      )
+      toast.success('Signup successful')
+      Router.push('/dashboard')
+    },
+    onError: (err) => {
+      toast.error(err?.graphQLErrors?.[0]?.message ?? err.message)
+      removeCurrentUser()
+      removeAccessToken()
+    },
+  })
 
   const handleChange = (e: any) => {
     e.preventDefault()

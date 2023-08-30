@@ -6,14 +6,13 @@ import TableHead from '@mui/material/TableHead'
 import TableRow from '@mui/material/TableRow'
 import Paper from '@mui/material/Paper'
 import { Button } from '@mui/material'
-import { BUDGET_LIST_QUERY } from '../../lib/graphql/queries'
-import { useQuery } from '@apollo/client'
 import { useState } from 'react'
 import { BudgetEntryRow } from './BudgetEntryRow'
 import { FiPlus } from 'react-icons/fi'
+import { useBudgetsQuery } from '../../lib/graphql/generated/graphql'
 
 const EnterBudgets = () => {
-  const budgetsQuery = useQuery(BUDGET_LIST_QUERY)
+  const budgetsQuery = useBudgetsQuery()
 
   const [newEntries, setNewEntries] = useState<any[]>([])
 

@@ -5,7 +5,7 @@ import { RootState } from '../store'
 interface TransactionState {
   filters: {
     period: string
-    categoryIds: number[]
+    categoryIds: string[]
     currencyCodes: string[]
     descriptionContains: string | null
   }
