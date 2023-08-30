@@ -11,10 +11,10 @@ import { useState } from 'react'
 import { toast } from 'react-hot-toast'
 import {
   ADD_BUDGET_MUTATION,
-  ALL_CATEGORIES_QUERY,
   DELETE_BUDGET_MUTATION,
   UPDATE_BUDGET_MUTATION,
 } from '../../lib/graphql/queries'
+import { useCategoriesQuery } from '../../lib/graphql/generated/graphql'
 
 export const BudgetEntryRow = ({ budget }: any) => {
   const [addBudget] = useMutation(ADD_BUDGET_MUTATION, {
@@ -27,7 +27,7 @@ export const BudgetEntryRow = ({ budget }: any) => {
     refetchQueries: ['budgets'],
   })
 
-  const categoriesQuery = useQuery(ALL_CATEGORIES_QUERY)
+  const categoriesQuery = useCategoriesQuery()
   const [formValue, setFormValue] = useState({
     id: budget?.id,
     year: budget?.year || 2023,
@@ -123,7 +123,7 @@ export const BudgetEntryRow = ({ budget }: any) => {
             size='small'
             disabled={!!budget.id}
           >
-            {categoriesQuery.data?.categories.map((category: any) => (
+            {categoriesQuery.data?.categories?.map((category: any) => (
               <MenuItem key={category.id} value={category.id}>
                 {category.name}
               </MenuItem>

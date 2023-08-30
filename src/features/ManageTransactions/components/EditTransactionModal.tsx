@@ -96,7 +96,7 @@ export default function EditTransactionModal({
                   }}
                   label='Currency'
                 >
-                  {categoriesQuery.data?.categories.map((c: any) => (
+                  {categoriesQuery.data?.categories?.map((c: any) => (
                     <MenuItem value={c.id} key={c.id}>
                       {c.name}
                     </MenuItem>

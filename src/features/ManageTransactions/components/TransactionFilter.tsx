@@ -117,7 +117,7 @@ export const TransactionFilter = () => {
           </FormControl>
         </Grid>
         <Grid item xs={6} sm={3} md={2}>
-          {categoriesQuery.data?.categories?.length > 0 && (
+          {(categoriesQuery.data?.categories?.length ?? 0) > 0 && (
             <FormControl fullWidth size='small' margin='dense'>
               {/* <FormLabel>Categories</FormLabel> */}
               <Select
@@ -166,8 +166,8 @@ export const TransactionFilter = () => {
                         ) {
                           ids =
                             categoriesQuery.data?.categories?.map(
-                              (c: Category) => c.id
-                            ) ?? []
+                              (c: Category | null) => c?.id ?? null
+                            ) as string []
                         }
                         dispatch(
                           updateFilters({
