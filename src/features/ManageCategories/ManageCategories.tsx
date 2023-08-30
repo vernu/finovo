@@ -6,13 +6,15 @@ import TableHead from '@mui/material/TableHead'
 import TableRow from '@mui/material/TableRow'
 import Paper from '@mui/material/Paper'
 import { Button } from '@mui/material'
-import { ALL_CATEGORIES_QUERY } from '../../lib/graphql/queries'
-import { useQuery } from '@apollo/client'
 import { CategoryRow } from './CategoryRow'
 import { useState } from 'react'
+import {
+  Category,
+  useCategoriesQuery,
+} from '../../lib/graphql/generated/graphql'
 
 export default function ManageCategories() {
-  const categoriesQuery = useQuery(ALL_CATEGORIES_QUERY)
+  const categoriesQuery = useCategoriesQuery()
 
   const [newCategories, setNewCategories] = useState<any[]>([])
 
@@ -35,7 +37,7 @@ export default function ManageCategories() {
         </TableHead>
         <TableBody>
           {[...(categoriesQuery.data?.categories ?? []), ...newCategories].map(
-            (category: any) => (
+            (category: Category) => (
               <CategoryRow key={category.name} category={category} />
             )
           )}

@@ -18,13 +18,13 @@ import { toast } from 'react-hot-toast'
 import { useMutation, useQuery } from '@apollo/client'
 import {
   ADD_TRANSACTION_MUTATION,
-  ALL_CATEGORIES_QUERY,
 } from '../../../lib/graphql/queries'
+import { useCategoriesQuery } from '../../../lib/graphql/generated/graphql'
 
 export default function NewTransactionModal() {
   const [open, setOpen] = useState(false)
 
-  const categoriesQuery = useQuery(ALL_CATEGORIES_QUERY)
+  const categoriesQuery = useCategoriesQuery()
 
   const handleClickOpen = () => {
     setOpen(true)

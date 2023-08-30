@@ -22,6 +22,7 @@ const schema = makeSchema({
 })
 
 const server = new ApolloServer({
+  introspection: true,
   schema,
 })
 

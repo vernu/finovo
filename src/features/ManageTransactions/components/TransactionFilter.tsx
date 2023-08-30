@@ -7,32 +7,33 @@ import {
   Box,
   Button,
   Checkbox,
-  FormLabel,
   Grid,
   ListItemIcon,
   ListItemText,
   TextField,
 } from '@mui/material'
-import { gql, useQuery } from '@apollo/client'
 import { useAppDispatch, useAppSelector } from '../../../store/hooks'
 import {
   selectTransactions,
   updateFilters,
 } from '../../../store/slices/transaction.slice'
 import { TRANSACTION_PERIOD_FILTER_OPTIONS } from '../../../lib/constants/filters'
-import { ALL_CATEGORIES_QUERY } from '../../../lib/graphql/queries'
+import {
+  Category,
+  useCategoriesQuery,
+} from '../../../lib/graphql/generated/graphql'
 
 export const TransactionFilter = () => {
   const { filters } = useAppSelector(selectTransactions)
   const dispatch = useAppDispatch()
 
-  const categoriesQuery = useQuery(ALL_CATEGORIES_QUERY)
+  const categoriesQuery = useCategoriesQuery()
 
   useEffect(() => {
     if (categoriesQuery.data) {
       dispatch(
         updateFilters({
-          categoryIds: categoriesQuery.data.categories.map((c: any) => c.id),
+          categoryIds: categoriesQuery.data?.categories?.map((c: any) => c.id),
         })
       )
     }
@@ -133,7 +134,7 @@ export const TransactionFilter = () => {
                     return 'No categories selected'
                   } else if (
                     selectedValue.length >=
-                    categoriesQuery.data?.categories?.length
+                    (categoriesQuery.data?.categories?.length ?? 0)
                   ) {
                     return 'All categories'
                   } else {
@@ -154,18 +155,19 @@ export const TransactionFilter = () => {
                     <Checkbox
                       checked={
                         filters.categoryIds.length >=
-                        categoriesQuery.data?.categories?.length
+                        (categoriesQuery.data?.categories?.length ?? 0)
                       }
                       onClick={(e) => {
                         e.stopPropagation()
-                        let ids: number[] = []
+                        let ids: string[] = []
                         if (
                           filters.categoryIds.length <
-                          categoriesQuery.data?.categories?.length
+                          (categoriesQuery.data?.categories?.length ?? 0)
                         ) {
-                          ids = categoriesQuery.data?.categories?.map(
-                            (c: any) => c.id
-                          )
+                          ids =
+                            categoriesQuery.data?.categories?.map(
+                              (c: Category) => c.id
+                            ) ?? []
                         }
                         dispatch(
                           updateFilters({

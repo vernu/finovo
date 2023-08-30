@@ -17,10 +17,10 @@ import {
 import { toast } from 'react-hot-toast'
 import { useMutation, useQuery } from '@apollo/client'
 import {
-  ALL_CATEGORIES_QUERY,
   UPDATE_TRANSACTION_MUTATION,
 } from '../../../lib/graphql/queries'
 import { Edit } from '@mui/icons-material'
+import { useCategoriesQuery } from '../../../lib/graphql/generated/graphql'
 
 export interface EditTransactionModalProps {
   transaction: any
@@ -30,7 +30,7 @@ export default function EditTransactionModal({
 }: EditTransactionModalProps) {
   const [open, setOpen] = useState(false)
 
-  const categoriesQuery = useQuery(ALL_CATEGORIES_QUERY)
+  const categoriesQuery =  useCategoriesQuery()
   const [updateTransaction, { loading, error }] = useMutation(
     UPDATE_TRANSACTION_MUTATION,
     {

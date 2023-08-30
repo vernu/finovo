@@ -26,8 +26,8 @@ export const REGISTER_USER_MUTATION = gql`
   }
 `
 
-export const ALL_CATEGORIES_QUERY = gql`
-  query ALL_CATEGORIES_QUERY {
+export const Categories = gql`
+  query Categories {
     categories {
       id
       name
