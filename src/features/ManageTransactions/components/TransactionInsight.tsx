@@ -2,7 +2,10 @@ import { Grid, Paper, Typography } from '@mui/material'
 import React from 'react'
 import { useSelector } from 'react-redux'
 import { selectTransactions } from '../../../store/slices/transaction.slice'
-import { useTransactionListInsightQuery } from '../../../lib/graphql/generated/graphql'
+import {
+  TransactionListCurrencyInsight,
+  useTransactionListInsightQuery,
+} from '../../../lib/graphql/generated/graphql'
 
 export default function TransactionInsight() {
   const { filters } = useSelector(selectTransactions)
@@ -20,10 +23,10 @@ export default function TransactionInsight() {
                 ?.totalTransactions ?? '-:-'}{' '}
               txs
               {transactionInsightQuery.data?.transactionListInsight?.currencies?.map(
-                (i: any) => (
-                  <span key={i.currencyCode}>
+                (val: TransactionListCurrencyInsight | null) => (
+                  <span key={val?.currencyCode}>
                     {' | '}
-                    {i.currencyCode} {i.totalAmount?.toLocaleString()}
+                    {val?.currencyCode} {val?.totalAmount?.toLocaleString()}
                   </span>
                 )
               ) ?? '-:-'}

@@ -9,13 +9,18 @@ import {
 import { useState } from 'react'
 import { toast } from 'react-hot-toast'
 import {
+  Budget,
   useAddBudgetMutation,
   useCategoriesQuery,
   useDeleteBudgetMutation,
   useUpdateBudgetMutation,
 } from '../../lib/graphql/generated/graphql'
 
-export const BudgetEntryRow = ({ budget }: any) => {
+interface BudgetEntryRowProps {
+  budget: Budget
+}
+
+export const BudgetEntryRow = ({ budget }: BudgetEntryRowProps) => {
   const [addBudget] = useAddBudgetMutation({
     refetchQueries: ['budgets'],
   })

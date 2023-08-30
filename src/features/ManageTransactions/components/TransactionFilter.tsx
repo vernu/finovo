@@ -124,7 +124,7 @@ export const TransactionFilter = () => {
                 label='Categories'
                 name='categoryIds'
                 defaultValue={categoriesQuery.data?.categories?.map(
-                  (c: any) => c.id
+                  (c: Category | null) => c?.id ?? null
                 )}
                 value={filters.categoryIds}
                 multiple
@@ -164,10 +164,9 @@ export const TransactionFilter = () => {
                           filters.categoryIds.length <
                           (categoriesQuery.data?.categories?.length ?? 0)
                         ) {
-                          ids =
-                            categoriesQuery.data?.categories?.map(
-                              (c: Category | null) => c?.id ?? null
-                            ) as string []
+                          ids = categoriesQuery.data?.categories?.map(
+                            (c: Category | null) => c?.id ?? null
+                          ) as string[]
                         }
                         dispatch(
                           updateFilters({
@@ -181,33 +180,37 @@ export const TransactionFilter = () => {
                   <ListItemText primary={'All Categories'} />
                 </MenuItem>
 
-                {categoriesQuery.data?.categories?.map((category: any) => (
-                  <MenuItem
-                    key={category.id}
-                    value={category.id}
-                    sx={{
-                      maxHeight: '22px',
-                    }}
-                  >
-                    <ListItemIcon>
-                      <Checkbox
-                        checked={filters.categoryIds.includes(category.id)}
-                        size='small'
-                      />
-                    </ListItemIcon>
-                    <ListItemText
-                      primary={category.name}
-                      style={{
-                        color:
-                          category.type === 'INCOME'
-                            ? '#2a2'
-                            : category.type === 'EXPENSE'
-                            ? 'red'
-                            : '',
+                {categoriesQuery.data?.categories?.map(
+                  (category: Category | null) => (
+                    <MenuItem
+                      key={category?.id}
+                      value={category?.id}
+                      sx={{
+                        maxHeight: '22px',
                       }}
-                    />
-                  </MenuItem>
-                ))}
+                    >
+                      <ListItemIcon>
+                        <Checkbox
+                          checked={filters.categoryIds.includes(
+                            category?.id ?? ''
+                          )}
+                          size='small'
+                        />
+                      </ListItemIcon>
+                      <ListItemText
+                        primary={category?.name}
+                        style={{
+                          color:
+                            category?.type === 'INCOME'
+                              ? '#2a2'
+                              : category?.type === 'EXPENSE'
+                              ? 'red'
+                              : '',
+                        }}
+                      />
+                    </MenuItem>
+                  )
+                )}
               </Select>
             </FormControl>
           )}

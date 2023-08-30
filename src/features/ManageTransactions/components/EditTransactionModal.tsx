@@ -17,12 +17,14 @@ import {
 import { toast } from 'react-hot-toast'
 import { Edit } from '@mui/icons-material'
 import {
+  Category,
+  Transaction,
   useCategoriesQuery,
   useUpdateTransactionMutation,
 } from '../../../lib/graphql/generated/graphql'
 
 export interface EditTransactionModalProps {
-  transaction: any
+  transaction: Transaction
 }
 export default function EditTransactionModal({
   transaction,
@@ -48,6 +50,8 @@ export default function EditTransactionModal({
         variables: {
           ...formData,
           id: transaction.id,
+          categoryId: formData.categoryId ?? '',
+          currencyCode: formData.currencyCode ?? '',
         },
       }),
       {
@@ -92,11 +96,13 @@ export default function EditTransactionModal({
                   }}
                   label='Currency'
                 >
-                  {categoriesQuery.data?.categories?.map((c: any) => (
-                    <MenuItem value={c.id} key={c.id}>
-                      {c.name}
-                    </MenuItem>
-                  ))}
+                  {categoriesQuery.data?.categories?.map(
+                    (c: Category | null) => (
+                      <MenuItem value={c?.id} key={c?.id}>
+                        {c?.name}
+                      </MenuItem>
+                    )
+                  )}
                 </Select>
               </FormControl>
             </Grid>

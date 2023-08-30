@@ -9,7 +9,7 @@ import { Button } from '@mui/material'
 import { useState } from 'react'
 import { BudgetEntryRow } from './BudgetEntryRow'
 import { FiPlus } from 'react-icons/fi'
-import { useBudgetsQuery } from '../../lib/graphql/generated/graphql'
+import { Budget, useBudgetsQuery } from '../../lib/graphql/generated/graphql'
 
 const EnterBudgets = () => {
   const budgetsQuery = useBudgetsQuery()
@@ -35,7 +35,7 @@ const EnterBudgets = () => {
         </TableHead>
         <TableBody>
           {[...(budgetsQuery.data?.budgets ?? []), ...newEntries].map(
-            (entry: any) => (
+            (entry: Budget) => (
               <BudgetEntryRow key={Math.random()} budget={entry} />
             )
           )}
