@@ -1,9 +1,8 @@
-import {
-  ImportExport,
-  Login,
-  Money,
-  RotateLeftTwoTone,
-} from '@mui/icons-material'
+import ImportExport from '@mui/icons-material/ImportExport'
+import Login from '@mui/icons-material/Login'
+import Money from '@mui/icons-material/Money'
+import RotateLeftTwoTone from '@mui/icons-material/RotateLeftTwoTone'
+
 import { Box, Button, Typography } from '@mui/material'
 import Container from '@mui/material/Container'
 import Grid from '@mui/material/Grid'

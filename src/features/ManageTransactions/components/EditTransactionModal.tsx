@@ -15,7 +15,7 @@ import {
   Select,
 } from '@mui/material'
 import { toast } from 'react-hot-toast'
-import { Edit } from '@mui/icons-material'
+import Edit from '@mui/icons-material/Edit'
 import {
   Category,
   Transaction,
