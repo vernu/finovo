@@ -1,0 +1,118 @@
+query Transactions(
+  $period: String
+  $currencyCodes: [String]
+  $categoryIds: [String]
+  $descriptionContains: String
+) {
+  transactions(
+    period: $period
+    currencyCodes: $currencyCodes
+    categoryIds: $categoryIds
+    descriptionContains: $descriptionContains
+  ) {
+    id
+    description
+    amount
+    date
+    currency {
+      symbol
+      code
+    }
+    category {
+      id
+      name
+    }
+  }
+}
+
+query TransactionListInsight(
+  $period: String
+  $currencyCodes: [String]
+  $categoryIds: [String]
+  $descriptionContains: String
+) {
+  transactionListInsight(
+    period: $period
+    currencyCodes: $currencyCodes
+    categoryIds: $categoryIds
+    descriptionContains: $descriptionContains
+  ) {
+    totalTransactions
+    currencies {
+      currencyCode
+      totalAmount
+      totalTransactions
+      maxAmount
+      minAmount
+      avgAmount
+    }
+  }
+}
+
+mutation AddTransaction(
+  $amount: Float!
+  $categoryId: String!
+  $currencyCode: String!
+  $date: String!
+  $description: String
+) {
+  addTransaction(
+    amount: $amount
+    categoryId: $categoryId
+    currencyCode: $currencyCode
+    date: $date
+    description: $description
+  ) {
+    id
+    amount
+    description
+    category {
+      id
+      name
+    }
+    currency {
+      id
+      code
+    }
+    date
+    createdAt
+  }
+}
+
+mutation DeleteTransaction($id: String!) {
+  deleteTransaction(id: $id) {
+    id
+  }
+}
+
+mutation UpdateTransaction(
+  $id: String!
+  $amount: Float!
+  $categoryId: String!
+  $currencyCode: String!
+  $date: String!
+  $description: String
+) {
+  updateTransaction(
+    id: $id
+    amount: $amount
+    categoryId: $categoryId
+    currencyCode: $currencyCode
+    date: $date
+    description: $description
+  ) {
+    id
+    amount
+    description
+    category {
+      id
+      name
+    }
+    currency {
+      id
+      code
+    }
+    date
+    createdAt
+  }
+}

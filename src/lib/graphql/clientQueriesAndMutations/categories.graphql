@@ -1,0 +1,60 @@
+query Categories {
+  categories {
+    id
+    name
+    type
+    emoji
+    description
+    active
+  }
+}
+
+mutation AddCategory(
+  $name: String!
+  $emoji: String
+  $description: String
+  $type: String
+  $active: Boolean
+) {
+  addCategory(
+    name: $name
+    emoji: $emoji
+    description: $description
+    type: $type
+    active: $active
+  ) {
+    id
+    name
+    emoji
+    description
+    type
+    active
+    createdAt
+  }
+}
+
+mutation UpdateCategory(
+  $id: String!
+  $name: String!
+  $emoji: String
+  $description: String
+  $type: String
+  $active: Boolean
+) {
+  updateCategory(
+    id: $id
+    name: $name
+    emoji: $emoji
+    description: $description
+    type: $type
+    active: $active
+  ) {
+    id
+    name
+    emoji
+    description
+    type
+    active
+    createdAt
+  }
+}

@@ -1,0 +1,84 @@
+query budgets($year: Int) {
+  budgets(year: $year) {
+    id
+    year
+    budgetBasis
+    monthlyBudget
+    yearlyBudget
+    currency {
+      symbol
+      code
+    }
+    category {
+      id
+      name
+    }
+  }
+}
+
+mutation AddBudget(
+  $year: Int
+  $categoryId: String
+  $currencyCode: String
+  $budgetBasis: String
+  $monthlyBudget: Float
+  $yearlyBudget: Float
+) {
+  addBudget(
+    year: $year
+    categoryId: $categoryId
+    currencyCode: $currencyCode
+    budgetBasis: $budgetBasis
+    monthlyBudget: $monthlyBudget
+    yearlyBudget: $yearlyBudget
+  ) {
+    year
+    budgetBasis
+    yearlyBudget
+    monthlyBudget
+    category {
+      name
+    }
+    currency {
+      code
+    }
+  }
+}
+
+mutation UpdateBudget(
+  $id: String
+  $year: Int
+  $categoryId: String
+  $currencyCode: String
+  $budgetBasis: String
+  $monthlyBudget: Float
+  $yearlyBudget: Float
+) {
+  updateBudget(
+    id: $id
+    year: $year
+    categoryId: $categoryId
+    currencyCode: $currencyCode
+    budgetBasis: $budgetBasis
+    monthlyBudget: $monthlyBudget
+    yearlyBudget: $yearlyBudget
+  ) {
+    year
+    budgetBasis
+    yearlyBudget
+    monthlyBudget
+    category {
+      id
+      name
+    }
+    currency {
+      code
+    }
+  }
+}
+
+mutation deleteBudget($id: String!) {
+  deleteBudget(id: $id) {
+    id
+  }
+}

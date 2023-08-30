@@ -267,6 +267,45 @@ export type RegisterMutationVariables = Exact<{
 
 export type RegisterMutation = { __typename?: 'Mutation', createAccount: { __typename?: 'CreateAccountResponsePayload', token?: string | null, user?: { __typename?: 'User', id: string, name?: string | null, email?: string | null } | null } };
 
+export type BudgetsQueryVariables = Exact<{
+  year?: InputMaybe<Scalars['Int']['input']>;
+}>;
+
+
+export type BudgetsQuery = { __typename?: 'Query', budgets?: Array<{ __typename?: 'Budget', id: string, year: number, budgetBasis?: string | null, monthlyBudget?: number | null, yearlyBudget?: number | null, currency?: { __typename?: 'Currency', symbol?: string | null, code: string } | null, category?: { __typename?: 'Category', id: string, name?: string | null } | null } | null> | null };
+
+export type AddBudgetMutationVariables = Exact<{
+  year?: InputMaybe<Scalars['Int']['input']>;
+  categoryId?: InputMaybe<Scalars['String']['input']>;
+  currencyCode?: InputMaybe<Scalars['String']['input']>;
+  budgetBasis?: InputMaybe<Scalars['String']['input']>;
+  monthlyBudget?: InputMaybe<Scalars['Float']['input']>;
+  yearlyBudget?: InputMaybe<Scalars['Float']['input']>;
+}>;
+
+
+export type AddBudgetMutation = { __typename?: 'Mutation', addBudget: { __typename?: 'Budget', year: number, budgetBasis?: string | null, yearlyBudget?: number | null, monthlyBudget?: number | null, category?: { __typename?: 'Category', name?: string | null } | null, currency?: { __typename?: 'Currency', code: string } | null } };
+
+export type UpdateBudgetMutationVariables = Exact<{
+  id?: InputMaybe<Scalars['String']['input']>;
+  year?: InputMaybe<Scalars['Int']['input']>;
+  categoryId?: InputMaybe<Scalars['String']['input']>;
+  currencyCode?: InputMaybe<Scalars['String']['input']>;
+  budgetBasis?: InputMaybe<Scalars['String']['input']>;
+  monthlyBudget?: InputMaybe<Scalars['Float']['input']>;
+  yearlyBudget?: InputMaybe<Scalars['Float']['input']>;
+}>;
+
+
+export type UpdateBudgetMutation = { __typename?: 'Mutation', updateBudget: { __typename?: 'Budget', year: number, budgetBasis?: string | null, yearlyBudget?: number | null, monthlyBudget?: number | null, category?: { __typename?: 'Category', id: string, name?: string | null } | null, currency?: { __typename?: 'Currency', code: string } | null } };
+
+export type DeleteBudgetMutationVariables = Exact<{
+  id: Scalars['String']['input'];
+}>;
+
+
+export type DeleteBudgetMutation = { __typename?: 'Mutation', deleteBudget: { __typename?: 'Budget', id: string } };
+
 export type CategoriesQueryVariables = Exact<{ [key: string]: never; }>;
 
 
@@ -344,45 +383,6 @@ export type UpdateTransactionMutationVariables = Exact<{
 
 
 export type UpdateTransactionMutation = { __typename?: 'Mutation', updateTransaction: { __typename?: 'Transaction', id: string, amount: number, description?: string | null, date?: any | null, createdAt?: any | null, category?: { __typename?: 'Category', id: string, name?: string | null } | null, currency?: { __typename?: 'Currency', id: string, code: string } | null } };
-
-export type BudgetsQueryVariables = Exact<{
-  year?: InputMaybe<Scalars['Int']['input']>;
-}>;
-
-
-export type BudgetsQuery = { __typename?: 'Query', budgets?: Array<{ __typename?: 'Budget', id: string, year: number, budgetBasis?: string | null, monthlyBudget?: number | null, yearlyBudget?: number | null, currency?: { __typename?: 'Currency', symbol?: string | null, code: string } | null, category?: { __typename?: 'Category', id: string, name?: string | null } | null } | null> | null };
-
-export type AddBudgetMutationVariables = Exact<{
-  year?: InputMaybe<Scalars['Int']['input']>;
-  categoryId?: InputMaybe<Scalars['String']['input']>;
-  currencyCode?: InputMaybe<Scalars['String']['input']>;
-  budgetBasis?: InputMaybe<Scalars['String']['input']>;
-  monthlyBudget?: InputMaybe<Scalars['Float']['input']>;
-  yearlyBudget?: InputMaybe<Scalars['Float']['input']>;
-}>;
-
-
-export type AddBudgetMutation = { __typename?: 'Mutation', addBudget: { __typename?: 'Budget', year: number, budgetBasis?: string | null, yearlyBudget?: number | null, monthlyBudget?: number | null, category?: { __typename?: 'Category', name?: string | null } | null, currency?: { __typename?: 'Currency', code: string } | null } };
-
-export type UpdateBudgetMutationVariables = Exact<{
-  id?: InputMaybe<Scalars['String']['input']>;
-  year?: InputMaybe<Scalars['Int']['input']>;
-  categoryId?: InputMaybe<Scalars['String']['input']>;
-  currencyCode?: InputMaybe<Scalars['String']['input']>;
-  budgetBasis?: InputMaybe<Scalars['String']['input']>;
-  monthlyBudget?: InputMaybe<Scalars['Float']['input']>;
-  yearlyBudget?: InputMaybe<Scalars['Float']['input']>;
-}>;
-
-
-export type UpdateBudgetMutation = { __typename?: 'Mutation', updateBudget: { __typename?: 'Budget', year: number, budgetBasis?: string | null, yearlyBudget?: number | null, monthlyBudget?: number | null, category?: { __typename?: 'Category', id: string, name?: string | null } | null, currency?: { __typename?: 'Currency', code: string } | null } };
-
-export type DeleteBudgetMutationVariables = Exact<{
-  id: Scalars['String']['input'];
-}>;
-
-
-export type DeleteBudgetMutation = { __typename?: 'Mutation', deleteBudget: { __typename?: 'Budget', id: string } };
 
 
 export const LoginDocument = gql`
@@ -464,6 +464,197 @@ export function useRegisterMutation(baseOptions?: Apollo.MutationHookOptions<Reg
 export type RegisterMutationHookResult = ReturnType<typeof useRegisterMutation>;
 export type RegisterMutationResult = Apollo.MutationResult<RegisterMutation>;
 export type RegisterMutationOptions = Apollo.BaseMutationOptions<RegisterMutation, RegisterMutationVariables>;
+export const BudgetsDocument = gql`
+    query budgets($year: Int) {
+  budgets(year: $year) {
+    id
+    year
+    budgetBasis
+    monthlyBudget
+    yearlyBudget
+    currency {
+      symbol
+      code
+    }
+    category {
+      id
+      name
+    }
+  }
+}
+    `;
+
+/**
+ * __useBudgetsQuery__
+ *
+ * To run a query within a React component, call `useBudgetsQuery` and pass it any options that fit your needs.
+ * When your component renders, `useBudgetsQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useBudgetsQuery({
+ *   variables: {
+ *      year: // value for 'year'
+ *   },
+ * });
+ */
+export function useBudgetsQuery(baseOptions?: Apollo.QueryHookOptions<BudgetsQuery, BudgetsQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<BudgetsQuery, BudgetsQueryVariables>(BudgetsDocument, options);
+      }
+export function useBudgetsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<BudgetsQuery, BudgetsQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<BudgetsQuery, BudgetsQueryVariables>(BudgetsDocument, options);
+        }
+export type BudgetsQueryHookResult = ReturnType<typeof useBudgetsQuery>;
+export type BudgetsLazyQueryHookResult = ReturnType<typeof useBudgetsLazyQuery>;
+export type BudgetsQueryResult = Apollo.QueryResult<BudgetsQuery, BudgetsQueryVariables>;
+export const AddBudgetDocument = gql`
+    mutation AddBudget($year: Int, $categoryId: String, $currencyCode: String, $budgetBasis: String, $monthlyBudget: Float, $yearlyBudget: Float) {
+  addBudget(
+    year: $year
+    categoryId: $categoryId
+    currencyCode: $currencyCode
+    budgetBasis: $budgetBasis
+    monthlyBudget: $monthlyBudget
+    yearlyBudget: $yearlyBudget
+  ) {
+    year
+    budgetBasis
+    yearlyBudget
+    monthlyBudget
+    category {
+      name
+    }
+    currency {
+      code
+    }
+  }
+}
+    `;
+export type AddBudgetMutationFn = Apollo.MutationFunction<AddBudgetMutation, AddBudgetMutationVariables>;
+
+/**
+ * __useAddBudgetMutation__
+ *
+ * To run a mutation, you first call `useAddBudgetMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useAddBudgetMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [addBudgetMutation, { data, loading, error }] = useAddBudgetMutation({
+ *   variables: {
+ *      year: // value for 'year'
+ *      categoryId: // value for 'categoryId'
+ *      currencyCode: // value for 'currencyCode'
+ *      budgetBasis: // value for 'budgetBasis'
+ *      monthlyBudget: // value for 'monthlyBudget'
+ *      yearlyBudget: // value for 'yearlyBudget'
+ *   },
+ * });
+ */
+export function useAddBudgetMutation(baseOptions?: Apollo.MutationHookOptions<AddBudgetMutation, AddBudgetMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<AddBudgetMutation, AddBudgetMutationVariables>(AddBudgetDocument, options);
+      }
+export type AddBudgetMutationHookResult = ReturnType<typeof useAddBudgetMutation>;
+export type AddBudgetMutationResult = Apollo.MutationResult<AddBudgetMutation>;
+export type AddBudgetMutationOptions = Apollo.BaseMutationOptions<AddBudgetMutation, AddBudgetMutationVariables>;
+export const UpdateBudgetDocument = gql`
+    mutation UpdateBudget($id: String, $year: Int, $categoryId: String, $currencyCode: String, $budgetBasis: String, $monthlyBudget: Float, $yearlyBudget: Float) {
+  updateBudget(
+    id: $id
+    year: $year
+    categoryId: $categoryId
+    currencyCode: $currencyCode
+    budgetBasis: $budgetBasis
+    monthlyBudget: $monthlyBudget
+    yearlyBudget: $yearlyBudget
+  ) {
+    year
+    budgetBasis
+    yearlyBudget
+    monthlyBudget
+    category {
+      id
+      name
+    }
+    currency {
+      code
+    }
+  }
+}
+    `;
+export type UpdateBudgetMutationFn = Apollo.MutationFunction<UpdateBudgetMutation, UpdateBudgetMutationVariables>;
+
+/**
+ * __useUpdateBudgetMutation__
+ *
+ * To run a mutation, you first call `useUpdateBudgetMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useUpdateBudgetMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [updateBudgetMutation, { data, loading, error }] = useUpdateBudgetMutation({
+ *   variables: {
+ *      id: // value for 'id'
+ *      year: // value for 'year'
+ *      categoryId: // value for 'categoryId'
+ *      currencyCode: // value for 'currencyCode'
+ *      budgetBasis: // value for 'budgetBasis'
+ *      monthlyBudget: // value for 'monthlyBudget'
+ *      yearlyBudget: // value for 'yearlyBudget'
+ *   },
+ * });
+ */
+export function useUpdateBudgetMutation(baseOptions?: Apollo.MutationHookOptions<UpdateBudgetMutation, UpdateBudgetMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<UpdateBudgetMutation, UpdateBudgetMutationVariables>(UpdateBudgetDocument, options);
+      }
+export type UpdateBudgetMutationHookResult = ReturnType<typeof useUpdateBudgetMutation>;
+export type UpdateBudgetMutationResult = Apollo.MutationResult<UpdateBudgetMutation>;
+export type UpdateBudgetMutationOptions = Apollo.BaseMutationOptions<UpdateBudgetMutation, UpdateBudgetMutationVariables>;
+export const DeleteBudgetDocument = gql`
+    mutation deleteBudget($id: String!) {
+  deleteBudget(id: $id) {
+    id
+  }
+}
+    `;
+export type DeleteBudgetMutationFn = Apollo.MutationFunction<DeleteBudgetMutation, DeleteBudgetMutationVariables>;
+
+/**
+ * __useDeleteBudgetMutation__
+ *
+ * To run a mutation, you first call `useDeleteBudgetMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useDeleteBudgetMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [deleteBudgetMutation, { data, loading, error }] = useDeleteBudgetMutation({
+ *   variables: {
+ *      id: // value for 'id'
+ *   },
+ * });
+ */
+export function useDeleteBudgetMutation(baseOptions?: Apollo.MutationHookOptions<DeleteBudgetMutation, DeleteBudgetMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<DeleteBudgetMutation, DeleteBudgetMutationVariables>(DeleteBudgetDocument, options);
+      }
+export type DeleteBudgetMutationHookResult = ReturnType<typeof useDeleteBudgetMutation>;
+export type DeleteBudgetMutationResult = Apollo.MutationResult<DeleteBudgetMutation>;
+export type DeleteBudgetMutationOptions = Apollo.BaseMutationOptions<DeleteBudgetMutation, DeleteBudgetMutationVariables>;
 export const CategoriesDocument = gql`
     query Categories {
   categories {
@@ -853,194 +1044,3 @@ export function useUpdateTransactionMutation(baseOptions?: Apollo.MutationHookOp
 export type UpdateTransactionMutationHookResult = ReturnType<typeof useUpdateTransactionMutation>;
 export type UpdateTransactionMutationResult = Apollo.MutationResult<UpdateTransactionMutation>;
 export type UpdateTransactionMutationOptions = Apollo.BaseMutationOptions<UpdateTransactionMutation, UpdateTransactionMutationVariables>;
-export const BudgetsDocument = gql`
-    query budgets($year: Int) {
-  budgets(year: $year) {
-    id
-    year
-    budgetBasis
-    monthlyBudget
-    yearlyBudget
-    currency {
-      symbol
-      code
-    }
-    category {
-      id
-      name
-    }
-  }
-}
-    `;
-
-/**
- * __useBudgetsQuery__
- *
- * To run a query within a React component, call `useBudgetsQuery` and pass it any options that fit your needs.
- * When your component renders, `useBudgetsQuery` returns an object from Apollo Client that contains loading, error, and data properties
- * you can use to render your UI.
- *
- * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
- *
- * @example
- * const { data, loading, error } = useBudgetsQuery({
- *   variables: {
- *      year: // value for 'year'
- *   },
- * });
- */
-export function useBudgetsQuery(baseOptions?: Apollo.QueryHookOptions<BudgetsQuery, BudgetsQueryVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useQuery<BudgetsQuery, BudgetsQueryVariables>(BudgetsDocument, options);
-      }
-export function useBudgetsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<BudgetsQuery, BudgetsQueryVariables>) {
-          const options = {...defaultOptions, ...baseOptions}
-          return Apollo.useLazyQuery<BudgetsQuery, BudgetsQueryVariables>(BudgetsDocument, options);
-        }
-export type BudgetsQueryHookResult = ReturnType<typeof useBudgetsQuery>;
-export type BudgetsLazyQueryHookResult = ReturnType<typeof useBudgetsLazyQuery>;
-export type BudgetsQueryResult = Apollo.QueryResult<BudgetsQuery, BudgetsQueryVariables>;
-export const AddBudgetDocument = gql`
-    mutation AddBudget($year: Int, $categoryId: String, $currencyCode: String, $budgetBasis: String, $monthlyBudget: Float, $yearlyBudget: Float) {
-  addBudget(
-    year: $year
-    categoryId: $categoryId
-    currencyCode: $currencyCode
-    budgetBasis: $budgetBasis
-    monthlyBudget: $monthlyBudget
-    yearlyBudget: $yearlyBudget
-  ) {
-    year
-    budgetBasis
-    yearlyBudget
-    monthlyBudget
-    category {
-      name
-    }
-    currency {
-      code
-    }
-  }
-}
-    `;
-export type AddBudgetMutationFn = Apollo.MutationFunction<AddBudgetMutation, AddBudgetMutationVariables>;
-
-/**
- * __useAddBudgetMutation__
- *
- * To run a mutation, you first call `useAddBudgetMutation` within a React component and pass it any options that fit your needs.
- * When your component renders, `useAddBudgetMutation` returns a tuple that includes:
- * - A mutate function that you can call at any time to execute the mutation
- * - An object with fields that represent the current status of the mutation's execution
- *
- * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
- *
- * @example
- * const [addBudgetMutation, { data, loading, error }] = useAddBudgetMutation({
- *   variables: {
- *      year: // value for 'year'
- *      categoryId: // value for 'categoryId'
- *      currencyCode: // value for 'currencyCode'
- *      budgetBasis: // value for 'budgetBasis'
- *      monthlyBudget: // value for 'monthlyBudget'
- *      yearlyBudget: // value for 'yearlyBudget'
- *   },
- * });
- */
-export function useAddBudgetMutation(baseOptions?: Apollo.MutationHookOptions<AddBudgetMutation, AddBudgetMutationVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useMutation<AddBudgetMutation, AddBudgetMutationVariables>(AddBudgetDocument, options);
-      }
-export type AddBudgetMutationHookResult = ReturnType<typeof useAddBudgetMutation>;
-export type AddBudgetMutationResult = Apollo.MutationResult<AddBudgetMutation>;
-export type AddBudgetMutationOptions = Apollo.BaseMutationOptions<AddBudgetMutation, AddBudgetMutationVariables>;
-export const UpdateBudgetDocument = gql`
-    mutation UpdateBudget($id: String, $year: Int, $categoryId: String, $currencyCode: String, $budgetBasis: String, $monthlyBudget: Float, $yearlyBudget: Float) {
-  updateBudget(
-    id: $id
-    year: $year
-    categoryId: $categoryId
-    currencyCode: $currencyCode
-    budgetBasis: $budgetBasis
-    monthlyBudget: $monthlyBudget
-    yearlyBudget: $yearlyBudget
-  ) {
-    year
-    budgetBasis
-    yearlyBudget
-    monthlyBudget
-    category {
-      id
-      name
-    }
-    currency {
-      code
-    }
-  }
-}
-    `;
-export type UpdateBudgetMutationFn = Apollo.MutationFunction<UpdateBudgetMutation, UpdateBudgetMutationVariables>;
-
-/**
- * __useUpdateBudgetMutation__
- *
- * To run a mutation, you first call `useUpdateBudgetMutation` within a React component and pass it any options that fit your needs.
- * When your component renders, `useUpdateBudgetMutation` returns a tuple that includes:
- * - A mutate function that you can call at any time to execute the mutation
- * - An object with fields that represent the current status of the mutation's execution
- *
- * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
- *
- * @example
- * const [updateBudgetMutation, { data, loading, error }] = useUpdateBudgetMutation({
- *   variables: {
- *      id: // value for 'id'
- *      year: // value for 'year'
- *      categoryId: // value for 'categoryId'
- *      currencyCode: // value for 'currencyCode'
- *      budgetBasis: // value for 'budgetBasis'
- *      monthlyBudget: // value for 'monthlyBudget'
- *      yearlyBudget: // value for 'yearlyBudget'
- *   },
- * });
- */
-export function useUpdateBudgetMutation(baseOptions?: Apollo.MutationHookOptions<UpdateBudgetMutation, UpdateBudgetMutationVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useMutation<UpdateBudgetMutation, UpdateBudgetMutationVariables>(UpdateBudgetDocument, options);
-      }
-export type UpdateBudgetMutationHookResult = ReturnType<typeof useUpdateBudgetMutation>;
-export type UpdateBudgetMutationResult = Apollo.MutationResult<UpdateBudgetMutation>;
-export type UpdateBudgetMutationOptions = Apollo.BaseMutationOptions<UpdateBudgetMutation, UpdateBudgetMutationVariables>;
-export const DeleteBudgetDocument = gql`
-    mutation deleteBudget($id: String!) {
-  deleteBudget(id: $id) {
-    id
-  }
-}
-    `;
-export type DeleteBudgetMutationFn = Apollo.MutationFunction<DeleteBudgetMutation, DeleteBudgetMutationVariables>;
-
-/**
- * __useDeleteBudgetMutation__
- *
- * To run a mutation, you first call `useDeleteBudgetMutation` within a React component and pass it any options that fit your needs.
- * When your component renders, `useDeleteBudgetMutation` returns a tuple that includes:
- * - A mutate function that you can call at any time to execute the mutation
- * - An object with fields that represent the current status of the mutation's execution
- *
- * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
- *
- * @example
- * const [deleteBudgetMutation, { data, loading, error }] = useDeleteBudgetMutation({
- *   variables: {
- *      id: // value for 'id'
- *   },
- * });
- */
-export function useDeleteBudgetMutation(baseOptions?: Apollo.MutationHookOptions<DeleteBudgetMutation, DeleteBudgetMutationVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useMutation<DeleteBudgetMutation, DeleteBudgetMutationVariables>(DeleteBudgetDocument, options);
-      }
-export type DeleteBudgetMutationHookResult = ReturnType<typeof useDeleteBudgetMutation>;
-export type DeleteBudgetMutationResult = Apollo.MutationResult<DeleteBudgetMutation>;
-export type DeleteBudgetMutationOptions = Apollo.BaseMutationOptions<DeleteBudgetMutation, DeleteBudgetMutationVariables>;

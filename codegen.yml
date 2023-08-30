@@ -1,11 +1,11 @@
 overwrite: true
-schema: "http://localhost:3000/api/graphql"
-documents: 
-  - "./src/lib/graphql/queries.ts"
+schema:
+  - 'http://localhost:3000/api/graphql'
+documents:
+  - './src/lib/graphql/clientQueriesAndMutations/**/*.graphql'
 generates:
   src/lib/graphql/generated/graphql.ts:
     plugins:
-
       - 'typescript'
       - 'typescript-operations'
       - 'typescript-react-apollo'
@@ -18,4 +18,3 @@ generates:
   # ./graphql.schema.json:
   #   plugins:
   #     - "introspection"
-  
