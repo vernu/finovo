@@ -1,6 +1,9 @@
 import { Context } from '../shared/context'
-import * as bcrypt from 'bcrypt'
-import { generateToken } from '../utils/authUtils'
+import {
+  comparePassword,
+  generateToken,
+  hashPassword,
+} from '../utils/authUtils'
 import axios from 'axios'
 
 export const createAccountResolver = async (
@@ -8,7 +11,7 @@ export const createAccountResolver = async (
   args: { password: string; name: string; email: string },
   ctx: Context
 ) => {
-  const hashedPassword = await bcrypt.hash(args.password, 10)
+  const hashedPassword = await hashPassword(args.password)
   const user = await ctx.prisma.user.create({
     data: {
       name: args.name,
@@ -34,7 +37,7 @@ export const loginUserResolver = async (
   })
 
   const validCredentials =
-    user && (await bcrypt.compare(args.password, user.password ?? ''))
+    user && (await comparePassword(args.password, user.password ?? ''))
 
   if (!validCredentials) {
     throw new Error('Invalid credentials')
