@@ -1,6 +1,6 @@
 import React from 'react'
-import SystemAdmin from '../../features/SystemAdmin/SystemAdmin'
-import withDashboardLayout from '../../HOC/withDashboardLayout'
+import SystemAdmin from '@features/SystemAdmin/SystemAdmin'
+import withDashboardLayout from '@HOC/withDashboardLayout'
 
 const SystemAdminPage = () => {
   return (

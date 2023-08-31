@@ -22,7 +22,7 @@ import {
   Transaction,
   useCategoriesQuery,
   useUpdateTransactionMutation,
-} from '../../../lib/graphql/generated/graphql'
+} from '@lib/graphql/generated/graphql'
 
 export interface EditTransactionModalProps {
   transaction: Transaction

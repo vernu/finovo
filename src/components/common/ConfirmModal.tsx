@@ -5,8 +5,8 @@ import DialogActions from '@mui/material/DialogActions'
 import DialogContent from '@mui/material/DialogContent'
 import DialogContentText from '@mui/material/DialogContentText'
 import DialogTitle from '@mui/material/DialogTitle'
-import { useAppDispatch, useAppSelector } from '../../store/hooks'
-import { closeConfirmModal } from '../../store/slices/confirmModal.slice'
+import { useAppDispatch, useAppSelector } from '@store/hooks'
+import { closeConfirmModal } from '@store/slices/confirmModal.slice'
 
 export default function ConfirmModal() {
   const dispatch = useAppDispatch()

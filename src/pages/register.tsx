@@ -1,5 +1,5 @@
-import AuthRegister from '../features/AuthRegister/AuthRegister'
-import { withDefaultLayout } from '../HOC/withDefaultLayout'
+import AuthRegister from '@features/AuthRegister/AuthRegister'
+import { withDefaultLayout } from '@HOC/withDefaultLayout'
 const Register = () => {
   return (
     <>

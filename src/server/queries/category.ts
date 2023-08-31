@@ -7,8 +7,8 @@ import {
 import {
   categoryListResolver,
   singleCategoryResolver,
-} from '../resolvers/category'
-import { Category } from '../types'
+} from '@server/resolvers/category'
+import { Category } from '@server/types'
 
 export const CategoryQuery = extendType({
   type: 'Query',

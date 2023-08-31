@@ -1,9 +1,9 @@
-import { Context } from '../shared/context'
+import { Context } from '@server/shared/context'
 import {
   comparePassword,
   generateToken,
   hashPassword,
-} from '../utils/authUtils'
+} from '@server/utils/authUtils'
 import axios from 'axios'
 
 export const createAccountResolver = async (

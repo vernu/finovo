@@ -10,12 +10,12 @@ import Avatar from '@mui/material/Avatar'
 import Stack from '@mui/material/Stack'
 
 import NavSection from './nav-section/NavSection'
-import useResponsive from '../../../../hooks/useResponsive'
+import useResponsive from '@hooks/useResponsive'
 import SvgColor from './SvgColor'
 import { useRouter } from 'next/router'
-import { useAppDispatch, useAppSelector } from '../../../../store/hooks'
-import { Logo } from '../../../../components/nav/Logo'
-import { logout } from '../../../../store/slices/auth.slice'
+import { useAppDispatch, useAppSelector } from '@store/hooks'
+import { Logo } from '@components/nav/Logo'
+import { logout } from '@store/slices/auth.slice'
 
 const icon = (icon: string) => (
   <SvgColor src={icon} sx={{ width: 1, height: 1 }} />

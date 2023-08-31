@@ -1,7 +1,7 @@
 import {
   ACCESS_TOKEN_KEY,
   CURRENT_USER_KEY,
-} from '../../lib/constants/localStorageKeys'
+} from '@lib/constants/localStorageKeys'
 import {
   setAccessToken,
   getAccessToken,
@@ -9,7 +9,7 @@ import {
   getCurrentUser,
   setCurrentUser,
   removeCurrentUser,
-} from '../localStorageUtils'
+} from '@utils/localStorageUtils'
 
 describe('localStorage methods', () => {
   const mockToken = 'token'

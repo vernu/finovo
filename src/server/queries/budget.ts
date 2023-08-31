@@ -1,5 +1,5 @@
-import { budgetListResolver } from './../resolvers/budget'
-import { Budget, BudgetListArgs } from './../types/budget'
+import { budgetListResolver } from '@server/resolvers/budget'
+import { Budget, BudgetListArgs } from '@server/types/budget'
 import {
   extendType,
   nonNull,
@@ -7,7 +7,7 @@ import {
   stringArg,
 } from 'nexus/dist/core'
 
-import { isLoggedIn } from '../shared/authorize'
+import { isLoggedIn } from '@server/shared/authorize'
 
 export const BudgetQuery = extendType({
   type: 'Query',

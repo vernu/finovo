@@ -1,5 +1,5 @@
-import Landing from '../features/Landing/Landing'
-import { withDefaultLayout } from '../HOC/withDefaultLayout'
+import Landing from '@features/Landing/Landing'
+import { withDefaultLayout } from '@HOC/withDefaultLayout'
 
 const LandingPage = () => (
   <>

@@ -6,8 +6,8 @@ import {
   GridValueGetterParams,
 } from '@mui/x-data-grid'
 import { TransactionFilter } from './components/TransactionFilter'
-import { useAppDispatch, useAppSelector } from '../../store/hooks'
-import { selectTransactions } from '../../store/slices/transaction.slice'
+import { useAppDispatch, useAppSelector } from '@store/hooks'
+import { selectTransactions } from '@store/slices/transaction.slice'
 import TransactionInsight from './components/TransactionInsight'
 import NewTransactionModal from './components/NewTransactionModal'
 import Delete from '@mui/icons-material/Delete'
@@ -15,14 +15,14 @@ import Edit from '@mui/icons-material/Edit'
 import Grid from '@mui/material/Grid'
 import IconButton from '@mui/material/IconButton'
 import { toast } from 'react-hot-toast'
-import { openConfirmModal } from '../../store/slices/confirmModal.slice'
+import { openConfirmModal } from '@store/slices/confirmModal.slice'
 import EditTransactionModal from './components/EditTransactionModal'
 
-import { formatAmount } from '../../utils/stringFormattingUtils'
+import { formatAmount } from '@utils/stringFormattingUtils'
 import {
   useDeleteTransactionMutation,
   useTransactionsQuery,
-} from '../../lib/graphql/generated/graphql'
+} from '@lib/graphql/generated/graphql'
 
 const ManageTransactions = () => {
   const { filters } = useAppSelector(selectTransactions)

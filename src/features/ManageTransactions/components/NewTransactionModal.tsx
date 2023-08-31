@@ -18,7 +18,7 @@ import { toast } from 'react-hot-toast'
 import {
   useAddTransactionMutation,
   useCategoriesQuery,
-} from '../../../lib/graphql/generated/graphql'
+} from '@lib/graphql/generated/graphql'
 
 export default function NewTransactionModal() {
   const [open, setOpen] = useState(false)

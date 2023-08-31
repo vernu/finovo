@@ -13,7 +13,7 @@ import {
   useCategoriesQuery,
   useDeleteBudgetMutation,
   useUpdateBudgetMutation,
-} from '../../lib/graphql/generated/graphql'
+} from '@lib/graphql/generated/graphql'
 
 interface BudgetEntryRowProps {
   budget: Budget

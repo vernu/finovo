@@ -1,5 +1,5 @@
-import { Context } from '../shared/context'
-import { extractWhereClauseForTransaction } from '../utils/dbQueryUtils'
+import { Context } from '@server/shared/context'
+import { extractWhereClauseForTransaction } from '@server/utils/dbQueryUtils'
 
 export const transactionListResolver = async (
   _parent: any,

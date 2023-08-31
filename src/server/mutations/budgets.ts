@@ -2,8 +2,8 @@ import {
   createBudgetResolver,
   deleteBudgetResolver,
   updateBudgetResolver,
-} from './../resolvers/budget'
-import { Budget, CreateBudgetArgs, UpdateBudgetArgs } from './../types/budget'
+} from '@server/resolvers/budget'
+import { Budget, CreateBudgetArgs, UpdateBudgetArgs } from '@server/types/budget'
 import { extendType, stringArg } from 'nexus'
 
 export const AddBudget = extendType({

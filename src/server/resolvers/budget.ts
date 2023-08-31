@@ -1,4 +1,4 @@
-import { Context } from '../shared/context'
+import { Context } from '@server/shared/context'
 
 export const budgetListResolver = async (
   _parent: any,

@@ -5,7 +5,7 @@ import {
   objectType,
   stringArg,
 } from 'nexus/dist/core'
-import { Context } from '../shared/context'
+import { Context } from '@server/shared/context'
 
 export const Category = objectType({
   name: 'Category',

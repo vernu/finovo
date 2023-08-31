@@ -1,7 +1,7 @@
 import {
   ACCESS_TOKEN_KEY,
   CURRENT_USER_KEY,
-} from '../lib/constants/localStorageKeys'
+} from '@lib/constants/localStorageKeys'
 
 export const setAccessToken = (token: string): void => {
   localStorage.setItem(ACCESS_TOKEN_KEY, token)

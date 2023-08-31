@@ -11,7 +11,7 @@ import { useState } from 'react'
 import {
   Category,
   useCategoriesQuery,
-} from '../../lib/graphql/generated/graphql'
+} from '@lib/graphql/generated/graphql'
 
 export default function ManageCategories() {
   const categoriesQuery = useCategoriesQuery()

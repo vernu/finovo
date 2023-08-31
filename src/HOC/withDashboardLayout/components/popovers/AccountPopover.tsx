@@ -10,9 +10,9 @@ import Avatar from '@mui/material/Avatar'
 import IconButton from '@mui/material/IconButton'
 import Popover from '@mui/material/Popover'
 
-import { useAppDispatch, useAppSelector } from '../../../../store/hooks'
+import { useAppDispatch, useAppSelector } from '@store/hooks'
 import Router from 'next/router'
-import { logout } from '../../../../store/slices/auth.slice'
+import { logout } from '@store/slices/auth.slice'
 
 const MENU_OPTIONS = [
   {

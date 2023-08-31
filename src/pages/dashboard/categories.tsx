@@ -1,6 +1,6 @@
 import React from 'react'
-import ManageCategories from '../../features/ManageCategories/ManageCategories'
-import withDashboardLayout from '../../HOC/withDashboardLayout'
+import ManageCategories from '@features/ManageCategories/ManageCategories'
+import withDashboardLayout from '@HOC/withDashboardLayout'
 
 const Categories = () => {
   return (

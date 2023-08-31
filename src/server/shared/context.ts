@@ -1,6 +1,6 @@
 import { PrismaClient } from '@prisma/client'
-import prisma from '../../lib/prisma'
-import { verifyToken } from '../utils/authUtils'
+import prisma from '@lib/prisma'
+import { verifyToken } from '@server/utils/authUtils'
 
 export type Context = {
   prisma: PrismaClient

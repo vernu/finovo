@@ -12,16 +12,13 @@ import ListItemIcon from '@mui/material/ListItemIcon'
 import ListItemText from '@mui/material/ListItemText'
 import TextField from '@mui/material/TextField'
 
-import { useAppDispatch, useAppSelector } from '../../../store/hooks'
+import { useAppDispatch, useAppSelector } from '@store/hooks'
 import {
   selectTransactions,
   updateFilters,
-} from '../../../store/slices/transaction.slice'
-import { TRANSACTION_PERIOD_FILTER_OPTIONS } from '../../../lib/constants/filters'
-import {
-  Category,
-  useCategoriesQuery,
-} from '../../../lib/graphql/generated/graphql'
+} from '@store/slices/transaction.slice'
+import { TRANSACTION_PERIOD_FILTER_OPTIONS } from '@lib/constants/filters'
+import { Category, useCategoriesQuery } from '@lib/graphql/generated/graphql'
 
 export const TransactionFilter = () => {
   const { filters } = useAppSelector(selectTransactions)

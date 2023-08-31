@@ -1,13 +1,13 @@
-import { isLoggedIn } from './../shared/authorize'
+import { isLoggedIn } from '@server/shared/authorize'
 import {
   Category,
   CreateCategoryArgs,
   UpdateCategoryArgs,
-} from './../types/category'
+} from '@server/types/category'
 import {
   createCategoryResolver,
   updateCategoryResolver,
-} from './../resolvers/category'
+} from '@server/resolvers/category'
 import { extendType } from 'nexus'
 
 export const AddCategory = extendType({

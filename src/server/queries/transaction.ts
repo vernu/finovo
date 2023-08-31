@@ -8,13 +8,13 @@ import {
   singleTransactionResolver,
   transactionListInsightResolver,
   transactionListResolver,
-} from '../resolvers/transaction'
+} from '@server/resolvers/transaction'
 import {
   Transaction,
   TransactionListArgs,
   TransactionListInsight,
-} from '../types'
-import { isLoggedIn } from '../shared/authorize'
+} from '@server/types'
+import { isLoggedIn } from '@server/shared/authorize'
 
 export const TransactionQuery = extendType({
   type: 'Query',

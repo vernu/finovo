@@ -3,14 +3,14 @@ import {
   createAccountResolver,
   loginUserResolver,
   loginWithGoogleResolver,
-} from '../resolvers/auth'
+} from '@server/resolvers/auth'
 import {
   CreateAccountArgs,
   CreateAccountResponsePayload,
   LoginArgs,
   LoginResponsePayload,
   LoginWithGoogleArgs,
-} from '../types'
+} from '@server/types'
 
 export const CreateAccount = extendType({
   type: 'Mutation',

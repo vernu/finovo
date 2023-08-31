@@ -1,5 +1,5 @@
-import AuthLogin from '../features/AuthLogin/AuthLogin'
-import { withDefaultLayout } from '../HOC/withDefaultLayout'
+import AuthLogin from '@features/AuthLogin/AuthLogin'
+import { withDefaultLayout } from '@HOC/withDefaultLayout'
 const Login = () => {
   return (
     <>

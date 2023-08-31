@@ -1,5 +1,5 @@
 import * as React from 'react'
-import Navbar from '../../components/nav/Navbar'
+import Navbar from '@components/nav/Navbar'
 
 export function withDefaultLayout(Component: any) {
   const EnhancedComponent = (props: any) => {

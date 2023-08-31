@@ -1,5 +1,5 @@
-import { Context } from '../shared/context'
-import { sortCategories } from '../utils/sortingUtils'
+import { Context } from '@server/shared/context'
+import { sortCategories } from '@server/utils/sortingUtils'
 
 export const categoryListResolver = async (
   _root: any,

@@ -12,7 +12,7 @@ import {
   Category,
   useAddCategoryMutation,
   useUpdateCategoryMutation,
-} from '../../lib/graphql/generated/graphql'
+} from '@lib/graphql/generated/graphql'
 
 interface CategoryRowProps {
   category: Category

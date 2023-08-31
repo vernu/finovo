@@ -21,14 +21,14 @@ import useMediaQuery from '@mui/material/useMediaQuery'
 import {
   removeAccessToken,
   removeCurrentUser,
-} from '../../../utils/localStorageUtils'
+} from '@utils/localStorageUtils'
 import { toast } from 'react-hot-toast'
 import Router from 'next/router'
-import { updateAuthState } from '../../../store/slices/auth.slice'
-import { useAppDispatch } from '../../../store/hooks'
+import { updateAuthState } from '@store/slices/auth.slice'
+import { useAppDispatch } from '@store/hooks'
 import Visibility from '@mui/icons-material/Visibility'
 import VisibilityOff from '@mui/icons-material/VisibilityOff'
-import { useLoginMutation } from '../../../lib/graphql/generated/graphql'
+import { useLoginMutation } from '@lib/graphql/generated/graphql'
 import Image from 'next/image'
 
 const LoginForm = () => {

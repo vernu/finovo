@@ -1,6 +1,6 @@
 import Grid from '@mui/material/Grid'
 import Typography from '@mui/material/Typography'
-import { withDefaultLayout } from '../HOC/withDefaultLayout'
+import { withDefaultLayout } from '@HOC/withDefaultLayout'
 
 const Custom404 = () => {
   return (

@@ -6,8 +6,7 @@ import AppBar from '@mui/material/AppBar'
 import Toolbar from '@mui/material/Toolbar'
 import IconButton from '@mui/material/IconButton'
 
-
-import AccountPopover from '../popovers/AccountPopover'
+import AccountPopover from '@HOC/withDashboardLayout/components/popovers/AccountPopover'
 import MenuBookRounded from '@mui/icons-material/MenuBookRounded'
 import { useRouter } from 'next/router'
 import DashboardBreadcrumbs from './DashboardBreadcrumbs'

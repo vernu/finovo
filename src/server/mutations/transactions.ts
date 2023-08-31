@@ -3,12 +3,12 @@ import {
   createTransactionResolver,
   deleteTransactionResolver,
   updateTransactionResolver,
-} from '../resolvers/transaction'
+} from '@server/resolvers/transaction'
 import {
   CreateTransactionArgs,
   Transaction,
   UpdateTransactionArgs,
-} from '../types'
+} from '@server/types'
 
 export const AddTransaction = extendType({
   type: 'Mutation',

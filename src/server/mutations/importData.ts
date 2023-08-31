@@ -1,5 +1,5 @@
 import { extendType, nonNull, stringArg } from 'nexus'
-import { importDataResolver } from '../resolvers/importData'
+import { importDataResolver } from '@server/resolvers/importData'
 
 export const ImportData = extendType({
   type: 'Mutation',

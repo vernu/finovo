@@ -1,5 +1,5 @@
-import DashboardOverview from '../../features/DashboardOverview/DashboardOverview'
-import withDashboardLayout from '../../HOC/withDashboardLayout'
+import DashboardOverview from '@features/DashboardOverview/DashboardOverview'
+import withDashboardLayout from '@HOC/withDashboardLayout'
 
 const DashboardPage = () => {
   return (

@@ -9,14 +9,13 @@ import Menu from '@mui/material/Menu'
 import Container from '@mui/material/Container'
 import Button from '@mui/material/Button'
 import MenuItem from '@mui/material/MenuItem'
-
-
 import { FiMenu } from 'react-icons/fi'
 import { HiArrowSmRight } from 'react-icons/hi'
 import Link from 'next/link'
-import { useAppDispatch, useAppSelector } from '../../store/hooks'
-import { logout } from '../../store/slices/auth.slice'
+import { useAppDispatch, useAppSelector } from '@store/hooks'
+import { logout } from '@store/slices/auth.slice'
 import { Logo } from './Logo'
+
 
 export default function Navbar() {
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null)

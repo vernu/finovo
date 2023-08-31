@@ -1,4 +1,4 @@
-import { formatAmount } from '../stringFormattingUtils'
+import { formatAmount } from '@utils/stringFormattingUtils'
 
 test('formats a number with 2 decimal places', () => {
   expect(formatAmount(100)).toBe('100.00')
