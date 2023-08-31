@@ -19,3 +19,11 @@ mutation Register($name: String!, $email: String!, $password: String!) {
     token
   }
 }
+
+query GetCurrentUser {
+  currentUser {
+    id
+    name
+    email
+  }
+}

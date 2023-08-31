@@ -184,6 +184,7 @@ export interface NexusGenFieldTypes {
     budgets: Array<NexusGenRootTypes['Budget'] | null> | null; // [Budget]
     categories: Array<NexusGenRootTypes['Category'] | null> | null; // [Category]
     category: NexusGenRootTypes['Category'] | null; // Category
+    currentUser: NexusGenRootTypes['User'] | null; // User
     transaction: NexusGenRootTypes['Transaction'] | null; // Transaction
     transactionListInsight: NexusGenRootTypes['TransactionListInsight'] | null; // TransactionListInsight
     transactions: Array<NexusGenRootTypes['Transaction'] | null> | null; // [Transaction]
@@ -273,6 +274,7 @@ export interface NexusGenFieldTypeNames {
     budgets: 'Budget'
     categories: 'Category'
     category: 'Category'
+    currentUser: 'User'
     transaction: 'Transaction'
     transactionListInsight: 'TransactionListInsight'
     transactions: 'Transaction'

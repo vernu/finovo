@@ -63,6 +63,7 @@ type Query {
   budgets(year: Int): [Budget]
   categories: [Category]
   category(id: Int!): Category
+  currentUser: User
   transaction(id: String!): Transaction
   transactionListInsight(categoryIds: [String], currencyCodes: [String], descriptionContains: String, period: String): TransactionListInsight
   transactions(categoryIds: [String], currencyCodes: [String], descriptionContains: String, period: String): [Transaction]

@@ -84,3 +84,21 @@ export const loginWithGoogleResolver = async (
     token: generateToken(user.id),
   }
 }
+
+export const getCurrentUserResolver = async (
+  _root: any,
+  _args: any,
+  ctx: Context
+) => {
+  const currentUser: any = await ctx.prisma.user.findUnique({
+    where: {
+      id: ctx.user.id,
+    },
+  })
+
+  if (!currentUser) {
+    throw new Error('Unable to find user')
+  }
+
+  return currentUser
+}
