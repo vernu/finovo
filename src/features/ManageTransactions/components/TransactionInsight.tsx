@@ -1,4 +1,8 @@
-import { Grid, Paper, Typography } from '@mui/material'
+
+import Grid from '@mui/material/Grid'
+import Paper from '@mui/material/Paper'
+import Typography from '@mui/material/Typography'
+
 import React from 'react'
 import { useSelector } from 'react-redux'
 import { selectTransactions } from '../../../store/slices/transaction.slice'

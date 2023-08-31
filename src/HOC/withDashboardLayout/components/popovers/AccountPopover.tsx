@@ -1,15 +1,15 @@
 import { useState } from 'react'
 import { alpha } from '@mui/material/styles'
-import {
-  Box,
-  Divider,
-  Typography,
-  Stack,
-  MenuItem,
-  Avatar,
-  IconButton,
-  Popover,
-} from '@mui/material'
+
+import Box from '@mui/material/Box'
+import Divider from '@mui/material/Divider'
+import Typography from '@mui/material/Typography'
+import Stack from '@mui/material/Stack'
+import MenuItem from '@mui/material/MenuItem'
+import Avatar from '@mui/material/Avatar'
+import IconButton from '@mui/material/IconButton'
+import Popover from '@mui/material/Popover'
+
 import { useAppDispatch, useAppSelector } from '../../../../store/hooks'
 import Router from 'next/router'
 import { logout } from '../../../../store/slices/auth.slice'

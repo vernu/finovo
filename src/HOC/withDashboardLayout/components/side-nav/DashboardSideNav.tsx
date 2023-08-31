@@ -1,14 +1,13 @@
 import { useEffect } from 'react'
 import { styled, alpha } from '@mui/material/styles'
-import {
-  Box,
-  Link,
-  Button,
-  Drawer,
-  Typography,
-  Avatar,
-  Stack,
-} from '@mui/material'
+
+import Box from '@mui/material/Box'
+import Link from '@mui/material/Link'
+import Button from '@mui/material/Button'
+import Drawer from '@mui/material/Drawer'
+import Typography from '@mui/material/Typography'
+import Avatar from '@mui/material/Avatar'
+import Stack from '@mui/material/Stack'
 
 import NavSection from './nav-section/NavSection'
 import useResponsive from '../../../../hooks/useResponsive'

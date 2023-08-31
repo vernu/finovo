@@ -1,5 +1,7 @@
-import { styled } from '@mui/material/styles';
-import { ListItemIcon, ListItemButton } from '@mui/material';
+import { styled } from '@mui/material/styles'
+
+import ListItemIcon from '@mui/material/ListItemIcon'
+import ListItemButton from '@mui/material/ListItemButton'
 
 export const StyledNavItem = styled(ListItemButton)(({ theme }) => ({
   ...theme.typography.body2,
@@ -8,7 +10,7 @@ export const StyledNavItem = styled(ListItemButton)(({ theme }) => ({
   textTransform: 'capitalize',
   color: theme.palette.text.secondary,
   borderRadius: theme.shape.borderRadius,
-}));
+}))
 
 export const StyledNavItemIcon = styled(ListItemIcon)({
   width: 22,
@@ -17,4 +19,4 @@ export const StyledNavItemIcon = styled(ListItemIcon)({
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'center',
-});
+})

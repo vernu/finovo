@@ -1,11 +1,10 @@
-import {
-  TableRow,
-  TableCell,
-  FormControl,
-  TextField,
-  MenuItem,
-  Select,
-} from '@mui/material'
+import TableRow from '@mui/material/TableRow'
+import TableCell from '@mui/material/TableCell'
+import FormControl from '@mui/material/FormControl'
+import TextField from '@mui/material/TextField'
+import MenuItem from '@mui/material/MenuItem'
+import Select from '@mui/material/Select'
+
 import { useState } from 'react'
 import { toast } from 'react-hot-toast'
 import {

@@ -1,4 +1,7 @@
-import { Divider, Grid, Stack } from '@mui/material'
+import Divider from '@mui/material/Divider'
+import Grid from '@mui/material/Grid'
+import Stack from '@mui/material/Stack'
+
 import Link from 'next/link'
 import LoginForm from './components/LoginForm'
 
