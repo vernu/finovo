@@ -74,6 +74,11 @@ export interface NexusGenObjects {
     slug?: string | null; // String
     type?: string | null; // String
   }
+  CategoryStat: { // root type
+    amount?: number | null; // Float
+    categoryName: string; // String!
+    count: number; // Int!
+  }
   CreateAccountResponsePayload: { // root type
     token?: string | null; // String
     user?: NexusGenRootTypes['User'] | null; // User
@@ -83,6 +88,24 @@ export interface NexusGenObjects {
     id: string; // String!
     name?: string | null; // String
     symbol?: string | null; // String
+  }
+  CurrencyStat: { // root type
+    currencyCode: string; // String!
+    expenseByCategory: Array<NexusGenRootTypes['CategoryStat'] | null>; // [CategoryStat]!
+    incomeByCategory: Array<NexusGenRootTypes['CategoryStat'] | null>; // [CategoryStat]!
+  }
+  CurrencyTotalStat: { // root type
+    currencyCode: string; // String!
+    expenseAmount?: number | null; // Float
+    expenseCount: number; // Int!
+    incomeAmount?: number | null; // Float
+    incomeCount: number; // Int!
+    totalAmount?: number | null; // Float
+    totalCount: number; // Int!
+  }
+  DashboardStat: { // root type
+    currencies: Array<NexusGenRootTypes['CurrencyStat'] | null>; // [CurrencyStat]!
+    totals: Array<NexusGenRootTypes['CurrencyTotalStat'] | null>; // [CurrencyTotalStat]!
   }
   LoginResponsePayload: { // root type
     token?: string | null; // String
@@ -152,6 +175,11 @@ export interface NexusGenFieldTypes {
     transactions: Array<NexusGenRootTypes['Transaction'] | null> | null; // [Transaction]
     type: string | null; // String
   }
+  CategoryStat: { // field return type
+    amount: number | null; // Float
+    categoryName: string; // String!
+    count: number; // Int!
+  }
   CreateAccountResponsePayload: { // field return type
     token: string | null; // String
     user: NexusGenRootTypes['User'] | null; // User
@@ -161,6 +189,24 @@ export interface NexusGenFieldTypes {
     id: string; // String!
     name: string | null; // String
     symbol: string | null; // String
+  }
+  CurrencyStat: { // field return type
+    currencyCode: string; // String!
+    expenseByCategory: Array<NexusGenRootTypes['CategoryStat'] | null>; // [CategoryStat]!
+    incomeByCategory: Array<NexusGenRootTypes['CategoryStat'] | null>; // [CategoryStat]!
+  }
+  CurrencyTotalStat: { // field return type
+    currencyCode: string; // String!
+    expenseAmount: number | null; // Float
+    expenseCount: number; // Int!
+    incomeAmount: number | null; // Float
+    incomeCount: number; // Int!
+    totalAmount: number | null; // Float
+    totalCount: number; // Int!
+  }
+  DashboardStat: { // field return type
+    currencies: Array<NexusGenRootTypes['CurrencyStat'] | null>; // [CurrencyStat]!
+    totals: Array<NexusGenRootTypes['CurrencyTotalStat'] | null>; // [CurrencyTotalStat]!
   }
   LoginResponsePayload: { // field return type
     token: string | null; // String
@@ -185,6 +231,7 @@ export interface NexusGenFieldTypes {
     categories: Array<NexusGenRootTypes['Category'] | null> | null; // [Category]
     category: NexusGenRootTypes['Category'] | null; // Category
     currentUser: NexusGenRootTypes['User'] | null; // User
+    dashboardStat: NexusGenRootTypes['DashboardStat'] | null; // DashboardStat
     transaction: NexusGenRootTypes['Transaction'] | null; // Transaction
     transactionListInsight: NexusGenRootTypes['TransactionListInsight'] | null; // TransactionListInsight
     transactions: Array<NexusGenRootTypes['Transaction'] | null> | null; // [Transaction]
@@ -242,6 +289,11 @@ export interface NexusGenFieldTypeNames {
     transactions: 'Transaction'
     type: 'String'
   }
+  CategoryStat: { // field return type name
+    amount: 'Float'
+    categoryName: 'String'
+    count: 'Int'
+  }
   CreateAccountResponsePayload: { // field return type name
     token: 'String'
     user: 'User'
@@ -251,6 +303,24 @@ export interface NexusGenFieldTypeNames {
     id: 'String'
     name: 'String'
     symbol: 'String'
+  }
+  CurrencyStat: { // field return type name
+    currencyCode: 'String'
+    expenseByCategory: 'CategoryStat'
+    incomeByCategory: 'CategoryStat'
+  }
+  CurrencyTotalStat: { // field return type name
+    currencyCode: 'String'
+    expenseAmount: 'Float'
+    expenseCount: 'Int'
+    incomeAmount: 'Float'
+    incomeCount: 'Int'
+    totalAmount: 'Float'
+    totalCount: 'Int'
+  }
+  DashboardStat: { // field return type name
+    currencies: 'CurrencyStat'
+    totals: 'CurrencyTotalStat'
   }
   LoginResponsePayload: { // field return type name
     token: 'String'
@@ -275,6 +345,7 @@ export interface NexusGenFieldTypeNames {
     categories: 'Category'
     category: 'Category'
     currentUser: 'User'
+    dashboardStat: 'DashboardStat'
     transaction: 'Transaction'
     transactionListInsight: 'TransactionListInsight'
     transactions: 'Transaction'

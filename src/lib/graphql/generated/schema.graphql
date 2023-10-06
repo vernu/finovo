@@ -27,6 +27,12 @@ type Category {
   type: String
 }
 
+type CategoryStat {
+  amount: Float
+  categoryName: String!
+  count: Int!
+}
+
 type CreateAccountResponsePayload {
   token: String
   user: User
@@ -37,6 +43,27 @@ type Currency {
   id: String!
   name: String
   symbol: String
+}
+
+type CurrencyStat {
+  currencyCode: String!
+  expenseByCategory: [CategoryStat]!
+  incomeByCategory: [CategoryStat]!
+}
+
+type CurrencyTotalStat {
+  currencyCode: String!
+  expenseAmount: Float
+  expenseCount: Int!
+  incomeAmount: Float
+  incomeCount: Int!
+  totalAmount: Float
+  totalCount: Int!
+}
+
+type DashboardStat {
+  currencies: [CurrencyStat]!
+  totals: [CurrencyTotalStat]!
 }
 
 type LoginResponsePayload {
@@ -64,6 +91,7 @@ type Query {
   categories: [Category]
   category(id: Int!): Category
   currentUser: User
+  dashboardStat: DashboardStat
   transaction(id: String!): Transaction
   transactionListInsight(categoryIds: [String], currencyCodes: [String], descriptionContains: String, period: String): TransactionListInsight
   transactions(categoryIds: [String], currencyCodes: [String], descriptionContains: String, period: String): [Transaction]

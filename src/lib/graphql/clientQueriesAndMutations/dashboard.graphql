@@ -1,0 +1,25 @@
+query DashboardStat {
+  dashboardStat {
+    totals {
+      currencyCode
+      totalAmount
+      incomeAmount
+      incomeCount
+      expenseAmount
+      expenseCount
+    }
+    currencies {
+      currencyCode
+      expenseByCategory {
+        categoryName
+        amount
+        count
+      }
+      incomeByCategory {
+        categoryName
+        amount
+        count
+      }
+    }
+  }
+}

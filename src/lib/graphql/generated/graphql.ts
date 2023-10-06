@@ -46,6 +46,13 @@ export type Category = {
   type?: Maybe<Scalars['String']['output']>;
 };
 
+export type CategoryStat = {
+  __typename?: 'CategoryStat';
+  amount?: Maybe<Scalars['Float']['output']>;
+  categoryName: Scalars['String']['output'];
+  count: Scalars['Int']['output'];
+};
+
 export type CreateAccountResponsePayload = {
   __typename?: 'CreateAccountResponsePayload';
   token?: Maybe<Scalars['String']['output']>;
@@ -58,6 +65,30 @@ export type Currency = {
   id: Scalars['String']['output'];
   name?: Maybe<Scalars['String']['output']>;
   symbol?: Maybe<Scalars['String']['output']>;
+};
+
+export type CurrencyStat = {
+  __typename?: 'CurrencyStat';
+  currencyCode: Scalars['String']['output'];
+  expenseByCategory: Array<Maybe<CategoryStat>>;
+  incomeByCategory: Array<Maybe<CategoryStat>>;
+};
+
+export type CurrencyTotalStat = {
+  __typename?: 'CurrencyTotalStat';
+  currencyCode: Scalars['String']['output'];
+  expenseAmount?: Maybe<Scalars['Float']['output']>;
+  expenseCount: Scalars['Int']['output'];
+  incomeAmount?: Maybe<Scalars['Float']['output']>;
+  incomeCount: Scalars['Int']['output'];
+  totalAmount?: Maybe<Scalars['Float']['output']>;
+  totalCount: Scalars['Int']['output'];
+};
+
+export type DashboardStat = {
+  __typename?: 'DashboardStat';
+  currencies: Array<Maybe<CurrencyStat>>;
+  totals: Array<Maybe<CurrencyTotalStat>>;
 };
 
 export type LoginResponsePayload = {
@@ -180,6 +211,7 @@ export type Query = {
   categories?: Maybe<Array<Maybe<Category>>>;
   category?: Maybe<Category>;
   currentUser?: Maybe<User>;
+  dashboardStat?: Maybe<DashboardStat>;
   transaction?: Maybe<Transaction>;
   transactionListInsight?: Maybe<TransactionListInsight>;
   transactions?: Maybe<Array<Maybe<Transaction>>>;
@@ -339,6 +371,11 @@ export type UpdateCategoryMutationVariables = Exact<{
 
 
 export type UpdateCategoryMutation = { __typename?: 'Mutation', updateCategory: { __typename?: 'Category', id: string, name?: string | null, emoji?: string | null, description?: string | null, type?: string | null, active?: boolean | null, createdAt?: any | null } };
+
+export type DashboardStatQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type DashboardStatQuery = { __typename?: 'Query', dashboardStat?: { __typename?: 'DashboardStat', totals: Array<{ __typename?: 'CurrencyTotalStat', currencyCode: string, totalAmount?: number | null, incomeAmount?: number | null, incomeCount: number, expenseAmount?: number | null, expenseCount: number } | null>, currencies: Array<{ __typename?: 'CurrencyStat', currencyCode: string, expenseByCategory: Array<{ __typename?: 'CategoryStat', categoryName: string, amount?: number | null, count: number } | null>, incomeByCategory: Array<{ __typename?: 'CategoryStat', categoryName: string, amount?: number | null, count: number } | null> } | null> } | null };
 
 export type TransactionsQueryVariables = Exact<{
   period?: InputMaybe<Scalars['String']['input']>;
@@ -836,6 +873,60 @@ export function useUpdateCategoryMutation(baseOptions?: Apollo.MutationHookOptio
 export type UpdateCategoryMutationHookResult = ReturnType<typeof useUpdateCategoryMutation>;
 export type UpdateCategoryMutationResult = Apollo.MutationResult<UpdateCategoryMutation>;
 export type UpdateCategoryMutationOptions = Apollo.BaseMutationOptions<UpdateCategoryMutation, UpdateCategoryMutationVariables>;
+export const DashboardStatDocument = gql`
+    query DashboardStat {
+  dashboardStat {
+    totals {
+      currencyCode
+      totalAmount
+      incomeAmount
+      incomeCount
+      expenseAmount
+      expenseCount
+    }
+    currencies {
+      currencyCode
+      expenseByCategory {
+        categoryName
+        amount
+        count
+      }
+      incomeByCategory {
+        categoryName
+        amount
+        count
+      }
+    }
+  }
+}
+    `;
+
+/**
+ * __useDashboardStatQuery__
+ *
+ * To run a query within a React component, call `useDashboardStatQuery` and pass it any options that fit your needs.
+ * When your component renders, `useDashboardStatQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useDashboardStatQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useDashboardStatQuery(baseOptions?: Apollo.QueryHookOptions<DashboardStatQuery, DashboardStatQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<DashboardStatQuery, DashboardStatQueryVariables>(DashboardStatDocument, options);
+      }
+export function useDashboardStatLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<DashboardStatQuery, DashboardStatQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<DashboardStatQuery, DashboardStatQueryVariables>(DashboardStatDocument, options);
+        }
+export type DashboardStatQueryHookResult = ReturnType<typeof useDashboardStatQuery>;
+export type DashboardStatLazyQueryHookResult = ReturnType<typeof useDashboardStatLazyQuery>;
+export type DashboardStatQueryResult = Apollo.QueryResult<DashboardStatQuery, DashboardStatQueryVariables>;
 export const TransactionsDocument = gql`
     query Transactions($period: String, $currencyCodes: [String], $categoryIds: [String], $descriptionContains: String) {
   transactions(
